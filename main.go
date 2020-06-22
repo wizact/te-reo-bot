@@ -2,15 +2,20 @@ package main
 
 import (
 	"context"
- 	"github.com/wizact/yacli"
+	"fmt"
+	"github.com/wizact/yacli"
+	"te-reo-bot/version"
 )
 
 func main() {
+	fmt.Printf("Te Reo Bot, Version: %s, Hash: %s", version.VERSION, version.GITCOMMIT)
+	fmt.Println()
+
 	app := yacli.NewApplication()
 
 	app.Name = "te reo bot"
 	app.Description = "Te Reo Twitter bot"
-	app.Version = "0.0.0"
+	app.Version = version.VERSION
 
 	app.AddCommand(&StartServerCommand{})
 
