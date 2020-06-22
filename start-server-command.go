@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// FooCommand is foo command
+// StartServerCommand is struct for info required to start an http server
 type StartServerCommand struct {
 	port    string
 	address string
@@ -69,6 +69,7 @@ func CommonMiddleware(next http.Handler) http.Handler {
 
 type appHandler func(http.ResponseWriter, *http.Request) *AppError
 
+// ServeHTTP to serve requests but respond with a friendly error message if any
 func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if e := fn(w, r); e != nil { // e is *appError, not os.Error.
 		ee := json.NewEncoder(w).Encode(&friendlyError{Message: e.Message})
