@@ -3,12 +3,21 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
+)
+
+const (
+	healthCheckRoute = "/__health-check"
+	messagesRoute    = "/messages"
+
+	apiKeyValue = "placeholder"
 )
 
 // StartServerCommand is struct for info required to start an http server
@@ -53,7 +62,8 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	router := mux.NewRouter()
 	router.Use(CommonMiddleware)
 
-	router.Handle("/__health-check", appHandler(GetHealthCheck)).Methods("GET")
+	router.Handle(healthCheckRoute, appHandler(GetHealthCheck)).Methods("GET")
+	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(serverAddress, router))
 
@@ -63,8 +73,39 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 // CommonMiddleware the generic middleware
 func CommonMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
+			rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
+
+			if err != nil {
+				http.Error(w, "authentication failed", 401)
+				return
+			}
+
+			if rak != apiKeyValue {
+				http.Error(w, "authentication failed", 401)
+				return
+			}
+		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+func findCaseInsensitiveHeader(headerName string, r *http.Request) (string, error) {
+	if strings.Trim(headerName, "") == "" {
+		return "", errors.New("auth header is missing")
+	}
+
+	for s := range r.Header {
+		if strings.ToLower(s) == strings.ToLower(headerName) {
+			apiKeyHeader := r.Header[headerName]
+			if len(apiKeyHeader) > 0 {
+				return apiKeyHeader[0], nil
+			}
+		}
+	}
+
+	return "", errors.New("auth header is missing")
+
 }
 
 type appHandler func(http.ResponseWriter, *http.Request) *AppError
