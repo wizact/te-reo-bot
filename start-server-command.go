@@ -11,13 +11,12 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/kelseyhightower/envconfig"
 )
 
 const (
 	healthCheckRoute = "/__health-check"
 	messagesRoute    = "/messages"
-
-	apiKeyValue = "placeholder"
 )
 
 // StartServerCommand is struct for info required to start an http server
@@ -72,6 +71,13 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 
 // CommonMiddleware the generic middleware
 func CommonMiddleware(next http.Handler) http.Handler {
+	var s ServerConfig
+	err := envconfig.Process("tereobot", &s)
+
+	if err != nil {
+		panic("Cannot read configuration")
+	}
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
 			rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
@@ -81,7 +87,7 @@ func CommonMiddleware(next http.Handler) http.Handler {
 				return
 			}
 
-			if rak != apiKeyValue {
+			if rak != s.ApiKey {
 				http.Error(w, "authentication failed", 401)
 				return
 			}
@@ -130,4 +136,9 @@ type AppError struct {
 // friendlyError is sanitised error message sent back to the user
 type friendlyError struct {
 	Message string `json:"message"`
+}
+
+// ServerConfig to wrap configuration
+type ServerConfig struct {
+	ApiKey string
 }
