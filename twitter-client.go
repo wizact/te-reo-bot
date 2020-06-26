@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
+	"net/http"
 )
 
 // TwitterClient is a wrapper for twitter client implementation
@@ -28,6 +29,7 @@ func (tc *TwitterClient) authenticate(credential *TwitterCredential) {
 }
 
 // SendTweet updates the authenticated account with a new tweet
-func (tc *TwitterClient) SendTweet(message string) {
-	tc.client.Statuses.Update(message, nil)
+func (tc *TwitterClient) SendTweet(message string) (*twitter.Tweet, *http.Response, error) {
+	t, r ,e := tc.client.Statuses.Update(message, nil)
+	return t, r, e
 }
