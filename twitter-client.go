@@ -30,6 +30,6 @@ func (tc *TwitterClient) authenticate(credential *TwitterCredential) {
 
 // SendTweet updates the authenticated account with a new tweet
 func (tc *TwitterClient) SendTweet(message string) (*twitter.Tweet, *http.Response, error) {
-	t, r ,e := tc.client.Statuses.Update(message, nil)
+	t, r, e := tc.client.Statuses.Update(message, nil)
 	return t, r, e
 }
