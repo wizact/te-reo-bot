@@ -8,7 +8,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
-// PostMessage post a message to a specific social channel
+//PostMessage post a message to a specific social channel
 func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 	var c TwitterCredential
 	envconfig.Process("tereobot", &c)

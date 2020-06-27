@@ -23,6 +23,7 @@ const (
 type StartServerCommand struct {
 	port    string
 	address string
+	tls     bool
 }
 
 // Flags returns the flag sets
@@ -31,6 +32,7 @@ func (fc *StartServerCommand) Flags() *flag.FlagSet {
 
 	f.StringVar(&fc.address, "address", "localhost", "-address=localhost")
 	f.StringVar(&fc.port, "port", "8080", "-port=8080")
+	f.BoolVar(&fc.tls, "tls", false, "-tls=true")
 
 	return f
 }
@@ -55,7 +57,9 @@ func (fc *StartServerCommand) HelpString() string {
 
 // Run a command
 func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
-	serverAddress := fmt.Sprintf("%s:%s", fc.address, fc.port)
+	var serverAddress string
+	serverAddress = fmt.Sprintf("%s:%s", fc.address, fc.port)
+
 	fmt.Println("Listening to requests from: " + serverAddress)
 
 	router := mux.NewRouter()
@@ -64,7 +68,14 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	router.Handle(healthCheckRoute, appHandler(GetHealthCheck)).Methods("GET")
 	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(serverAddress, router))
+	if fc.tls {
+		log.Fatal(http.ListenAndServeTLS(serverAddress,
+			"certs/server.crt",
+			"certs/server.key",
+			router))
+	} else {
+		log.Fatal(http.ListenAndServe(serverAddress, router))
+	}
 
 	return nil
 }

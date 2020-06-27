@@ -203,3 +203,6 @@ modules.xml
 
 # Sonarlint plugin
 .idea/sonarlint
+
+server.key
+server.crt
