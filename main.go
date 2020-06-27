@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Printf("Te Reo Bot, Version: %s, Hash: %s", version.VERSION, version.GITCOMMIT)
+	fmt.Printf("Te Reo Bot, Version: %s, Hash: %s", version.GetVersion(), version.GetGitCommit())
 	fmt.Println()
 
 	app := yacli.NewApplication()
