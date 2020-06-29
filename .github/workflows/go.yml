@@ -33,5 +33,10 @@ jobs:
     - name: Build
       run: make build-static
 
+    - uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        path: out/
+
     - name: Test
       run: go test -v .
