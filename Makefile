@@ -7,6 +7,7 @@ PREFIX?=$(shell pwd)
 OUTDIR := ${PREFIX}/out
 
 VERSION := $(shell cat VERSION.txt)
+REGISTRY := "docker.pkg.github.com/wizact/te-reo-bot/"
 
 GITCOMMIT := $(shell git rev-parse --short HEAD)
 GITUNTRACKEDCHANGES := $(shell git status --porcelain --untracked-files=no)
@@ -35,5 +36,10 @@ clean:
 version:
 	@echo "+ $@"
 	echo $(VERSION) > VERSION.txt
+
+.PHONY: docker-build
+docker-build:
+	@echo "+ $@"
+	@docker build --rm -t $(REGISTRY)$(NAME):$(GITCOMMIT) .
 
 
