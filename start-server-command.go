@@ -58,6 +58,10 @@ func (fc *StartServerCommand) HelpString() string {
 // Run a command
 func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	var serverAddress string
+	if fc.address == "localhost" {
+		fc.address = ""
+	}
+
 	serverAddress = fmt.Sprintf("%s:%s", fc.address, fc.port)
 
 	fmt.Println("Listening to requests from: " + serverAddress)
