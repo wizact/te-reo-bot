@@ -97,9 +97,6 @@ func CommonMiddleware(next http.Handler) http.Handler {
 		if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
 			rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
 
-			fmt.Println(rak)
-			fmt.Println(s.ApiKey)
-
 			if err != nil {
 				http.Error(w, "authentication failed", 401)
 				return
@@ -137,6 +134,10 @@ type appHandler func(http.ResponseWriter, *http.Request) *AppError
 // ServeHTTP to serve requests but respond with a friendly error message if any
 func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if e := fn(w, r); e != nil { // e is *appError, not os.Error.
+
+		fmt.Println(e.Error)
+
+		w.WriteHeader(e.Code)
 		ee := json.NewEncoder(w).Encode(&friendlyError{Message: e.Message})
 		if ee != nil {
 			log.Fatal(ee.Error())
