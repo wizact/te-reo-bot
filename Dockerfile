@@ -21,10 +21,10 @@ LABEL maintainer="amir.mohtasebi@gmail.com"
 RUN set -x \
     && apk --update add ca-certificates wget gnupg && rm -rf /var/cache/apk/
 
-EXPOSE 2020
+EXPOSE 8080
 
 WORKDIR /app/
 COPY --from=build /build/out/ .
 
 ENTRYPOINT ["./te-reo-bot"]
-CMD ["start-server", "-address=localhost", "-port=2020", "-tls=false"]
+CMD ["start-server", "-address=localhost", "-port=8080", "-tls=false"]
