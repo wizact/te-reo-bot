@@ -97,6 +97,9 @@ func CommonMiddleware(next http.Handler) http.Handler {
 		if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
 			rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
 
+			fmt.Println(rak)
+			fmt.Println(s.ApiKey)
+
 			if err != nil {
 				http.Error(w, "authentication failed", 401)
 				return
