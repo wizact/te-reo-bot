@@ -82,6 +82,16 @@
     { "index":	81	, "word": "hui", "meaning": "gathering, meeting", "link": "", "photo": ""},
     { "index":	82	, "word": "hīkoi", "meaning": "walk", "link": "", "photo": ""},
     { "index":	83	, "word": "hapu", "meaning": "clan, sub-tribe; to be born", "link": "", "photo": ""},
-    { "index":	84	, "word": "awa", "meaning": "river", "link": "", "photo": ""}
+    { "index":	84	, "word": "awa", "meaning": "river", "link": "", "photo": ""},
+    { "index":	85	, "word": "Tangaroa", "meaning": "God of the sea and fish", "link": "", "photo": ""},
+    { "index":	86	, "word": "Ngaio", "meaning": "Clever, professional", "link": "", "photo": ""},
+    { "index":	87	, "word": "Marama", "meaning": "Moon, brightness", "link": "", "photo": ""},
+    { "index":	88	, "word": "Tāne", "meaning": "Man. Name given to the Māori and Polynesian god of the forests", "link": "", "photo": ""},
+    { "index":	89	, "word": "Haere rā", "meaning": "Goodbye, farewell", "link": "", "photo": ""},
+    { "index":	90	, "word": "Manaakitanga", "meaning": "Hospitality, taking good care of others.", "link": "", "photo": ""},
+    { "index":	91	, "word": "Ta moko", "meaning": "Māori tattooing designs on the face or body.", "link": "", "photo": ""},
+    { "index":	92	, "word": "Kare", "meaning": "Used to address a close friend affectionately", "link": "", "photo": ""},
+    { "index":	93	, "word": "Aotearoa", "meaning": "Land of the Long White Cloud. New Zealand.", "link": "", "photo": ""},
+    { "index":	94	, "word": "Aroha mai, aroha atu", "meaning": "Love received demands love returned", "link": "", "photo": ""}
   ]
 }
