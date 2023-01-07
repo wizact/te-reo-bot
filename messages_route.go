@@ -25,6 +25,8 @@ func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 	dest := r.URL.Query().Get("dest")
 	if strings.ToLower(dest) == "twitter" {
 		return tweet(wo, w)
+	} else if strings.ToLower(dest) == "mastodon" {
+		return toot(wo, w)
 	} else {
 		json.NewEncoder(w).Encode(&PostResponse{Message: "No destination has been selected"})
 		return nil
@@ -34,5 +36,6 @@ func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 // PostResponse is the tweet/mastodon Id after a successful update operation
 type PostResponse struct {
 	TwitterId string `json:"tweetId"`
+	TootId    string `json:"tootId"`
 	Message   string `json:"message"`
 }
