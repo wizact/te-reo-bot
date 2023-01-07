@@ -1,10 +1,13 @@
 package main
 
 import (
-	"github.com/dghubble/go-twitter/twitter"
-	"github.com/dghubble/oauth1"
+	"encoding/json"
 	"log"
 	"net/http"
+
+	"github.com/dghubble/go-twitter/twitter"
+	"github.com/dghubble/oauth1"
+	"github.com/kelseyhightower/envconfig"
 )
 
 // TwitterClient is a wrapper for twitter client implementation
@@ -18,6 +21,29 @@ func NewTwitterClient(credential *TwitterCredential) *TwitterClient {
 	tc.authenticate(credential)
 
 	return tc
+}
+
+func tweet(wo *Word, w http.ResponseWriter) *AppError {
+	var c TwitterCredential
+	envconfig.Process("tereobot", &c)
+	tc := NewTwitterClient(&c)
+
+	t, tr, e := tc.SendTweet(wo.Word + " : " + wo.Meaning)
+
+	if e == nil {
+		json.NewEncoder(w).Encode(&PostResponse{TwitterId: t.IDStr})
+		return nil
+	} else {
+		return &AppError{Error: e, Code: tr.StatusCode, Message: "Failed sending the tweet"}
+	}
+}
+
+// TwitterCredential is a wrapper for consumer and access secrets
+type TwitterCredential struct {
+	ConsumerKey    string
+	ConsumerSecret string
+	AccessToken    string
+	AccessSecret   string
 }
 
 func (tc *TwitterClient) authenticate(credential *TwitterCredential) {
