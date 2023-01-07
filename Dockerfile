@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine AS build
+FROM golang:1.17-alpine AS build
 
 RUN apk add --no-cache \
 	bash \
