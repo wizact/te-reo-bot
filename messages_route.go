@@ -23,7 +23,7 @@ func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 
 	var wo *Word
 	wordIndex := r.URL.Query().Get("wordIndex")
-	if wind, eind := strconv.Atoi(wordIndex); eind != nil {
+	if wind, eind := strconv.Atoi(wordIndex); eind == nil {
 		wo = ws.SelectWordByIndex(d.Words, wind)
 	} else {
 		wo = ws.SelectWordByDay(d.Words)
