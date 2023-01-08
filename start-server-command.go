@@ -71,6 +71,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 
 	router.Handle(healthCheckRoute, appHandler(GetHealthCheck)).Methods("GET")
 	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
+	router.Handle(messagesRoute, appHandler(GetImage)).Methods("GET")
 
 	if fc.tls {
 		log.Fatal(http.ListenAndServeTLS(serverAddress,
