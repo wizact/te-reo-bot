@@ -21,6 +21,16 @@ func (ws *WordSelector) SelectWordByDay(words []Word) *Word {
 	}
 }
 
+//SelectWordByIndex selects a word from the provided array based on the day of the year
+func (ws *WordSelector) SelectWordByIndex(words []Word, index int) *Word {
+	low := len(words)
+	if index <= low {
+		return &words[index-1]
+	} else {
+		return &words[(index-((index/low)*low))-1]
+	}
+}
+
 //ParseFile unmarshal a json string to the struct type
 func (ws *WordSelector) ParseFile(f []byte) (*Dictionary, error) {
 	wd := Dictionary{}

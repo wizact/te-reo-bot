@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -20,7 +21,13 @@ func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 		return &AppError{Error: epf, Code: 500, Message: "Failed sending the word of the day"}
 	}
 
-	wo := ws.SelectWordByDay(d.Words)
+	var wo *Word
+	wordIndex := r.URL.Query().Get("wordIndex")
+	if wind, eind := strconv.Atoi(wordIndex); eind != nil {
+		wo = ws.SelectWordByIndex(d.Words, wind)
+	} else {
+		wo = ws.SelectWordByDay(d.Words)
+	}
 
 	dest := r.URL.Query().Get("dest")
 	if strings.ToLower(dest) == "twitter" {
@@ -33,6 +40,7 @@ func PostMessage(w http.ResponseWriter, r *http.Request) *AppError {
 	}
 }
 
+// GetImage gets the image based on the provided name from the cloud storage
 func GetImage(w http.ResponseWriter, r *http.Request) *AppError {
 	fn := r.URL.Query().Get("fn")
 	gsc, err := newCloudStorageClient()

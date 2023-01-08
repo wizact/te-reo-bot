@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 
 	"cloud.google.com/go/storage"
+	"github.com/kelseyhightower/envconfig"
 )
 
 func newCloudStorageClient() (*storage.Client, *AppError) {
@@ -19,7 +20,12 @@ func newCloudStorageClient() (*storage.Client, *AppError) {
 }
 
 func getObject(gsc *storage.Client, fn string) ([]byte, *AppError) {
-	bkt := gsc.Bucket("te-reo-bot-images")
+	mbc, e := getMediaBucketName()
+	if e != nil {
+		return nil, e
+	}
+
+	bkt := gsc.Bucket(mbc)
 
 	rc, err := bkt.Object(fn).NewReader(context.Background())
 
@@ -35,4 +41,18 @@ func getObject(gsc *storage.Client, fn string) ([]byte, *AppError) {
 	}
 
 	return file, nil
+}
+
+func getMediaBucketName() (string, *AppError) {
+	var s StorageConfig
+	err := envconfig.Process("tereobot", &s)
+	if err != nil {
+		return "nil", &AppError{Error: err, Code: 500, Message: "Failed to acquire image"}
+	}
+
+	return s.BucketName, nil
+}
+
+type StorageConfig struct {
+	BucketName string
 }
