@@ -34,6 +34,5 @@ func TestReadFile(t *testing.T) {
 
 	assert.Nil(e, "Failed reading dictionary file")
 	assert.NotNil(f)
-	assert.True(f != nil && len(f) > 0)
-
+	assert.True(len(f) > 0)
 }

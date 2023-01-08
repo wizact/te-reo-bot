@@ -27,10 +27,29 @@ func newMastodonClient() *mastodon.Client {
 }
 
 func toot(wo *Word, w http.ResponseWriter) *AppError {
-
+	var att *mastodon.Attachment
+	mids := []mastodon.ID{}
 	tc := newMastodonClient()
 
-	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning})
+	// check if the wo has a photo
+	if hasMedia(wo) {
+		media, err := acquireMedia(wo.Photo)
+		if err != nil {
+			return err
+		}
+
+		var e error
+		att, e = tc.UploadMediaFromBytes(context.Background(), media)
+		if e != nil {
+			return &AppError{Error: e, Code: 500, Message: "Failed sending the toot with media"}
+		}
+	}
+
+	if len(att.ID) > 0 {
+		mids = []mastodon.ID{att.ID}
+	}
+
+	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning, MediaIDs: mids})
 
 	if e == nil {
 		json.NewEncoder(w).Encode(&PostResponse{TootId: string(ms.ID)})
@@ -38,6 +57,26 @@ func toot(wo *Word, w http.ResponseWriter) *AppError {
 	} else {
 		return &AppError{Error: e, Code: 500, Message: "Failed sending the toot"}
 	}
+}
+
+func acquireMedia(fn string) ([]byte, *AppError) {
+	gsc, err := newCloudStorageClient()
+
+	if err != nil {
+		return nil, err
+	}
+
+	media, err := getObject(gsc, fn)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return media, nil
+}
+
+func hasMedia(wo *Word) bool {
+	return len(wo.Photo) > 0
 }
 
 // MastodonCredential is a wrapper for consumer and access secrets

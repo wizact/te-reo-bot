@@ -53,9 +53,10 @@ type Dictionary struct {
 
 //Word is the wrapper around each word and it's meaning
 type Word struct {
-	Index   int    `json:"index"`
-	Word    string `json:"word"`
-	Meaning string `json:"meaning"`
-	Link    string `json:"link"`
-	Photo   string `json:"photo"`
+	Index       int    `json:"index"`
+	Word        string `json:"word"`
+	Meaning     string `json:"meaning"`
+	Link        string `json:"link"`
+	Photo       string `json:"photo"`
+	Attribution string `json:"photo_attribution"`
 }
