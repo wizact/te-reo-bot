@@ -45,7 +45,7 @@ func toot(wo *Word, w http.ResponseWriter) *AppError {
 		}
 	}
 
-	if len(att.ID) > 0 {
+	if att != nil && len(att.ID) > 0 {
 		mids = []mastodon.ID{att.ID}
 	}
 
