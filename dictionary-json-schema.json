@@ -1,54 +1,57 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "$ref": "#/definitions/Dic",
-  "definitions": {
-      "Dic": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "dictionary": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/Dictionary"
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/dictionary.json",
+  "title": "Root Schema",
+  "type": "object",
+  "default": {},
+  "required": [
+      "dictionary"
+  ],
+  "additionalProperties": true,
+  "properties": {
+      "dictionary": {
+          "title": "The dictionary Schema",
+          "type": "array",
+          "default": [],
+          "additionalItems": true,
+          "items": {
+              "title": "A Schema",
+              "type": "object",
+              "required": [
+                  "index",
+                  "word",
+                  "meaning",
+                  "link",
+                  "photo"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                  "index": {
+                      "title": "The index Schema",
+                      "type": "integer"
+                  },
+                  "word": {
+                      "title": "The word Schema",
+                      "type": "string"
+                  },
+                  "meaning": {
+                      "title": "The meaning Schema",
+                      "type": "string"
+                  },
+                  "link": {
+                      "title": "The link Schema",
+                      "type": "string"
+                  },
+                  "photo": {
+                      "title": "The photo Schema",
+                      "type": "string"
+                  },
+                  "photo_attribution": {
+                      "title": "The photo_attribution Schema",
+                      "type": "string"
                   }
               }
-          },
-          "required": [
-              "dictionary"
-          ],
-          "title": "Dic"
-      },
-      "Dictionary": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "index": {
-                  "type": "integer"
-              },
-              "word": {
-                  "type": "string"
-              },
-              "meaning": {
-                  "type": "string"
-              },
-              "link": {
-                  "type": "string"
-              },
-              "photo": {
-                  "type": "string"
-              },
-              "photo_attribution": {
-                  "type": "string"
-              }
-          },
-          "required": [
-              "index",
-              "link",
-              "meaning",
-              "photo",
-              "word"
-          ],
-          "title": "Dictionary"
+          }
       }
   }
 }
