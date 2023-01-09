@@ -49,7 +49,7 @@ func toot(wo *Word, w http.ResponseWriter) *AppError {
 		mids = []mastodon.ID{att.ID}
 	}
 
-	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning, MediaIDs: mids})
+	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning + " #aotearoa #nz", MediaIDs: mids})
 
 	if e == nil {
 		json.NewEncoder(w).Encode(&PostResponse{TootId: string(ms.ID)})

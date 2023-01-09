@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "dictionary": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "integer"
+            },
+            "word": {
+              "type": "string"
+            },
+            "meaning": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string"
+            },
+            "photo_attribution": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "index",
+            "word",
+            "meaning",
+            "link",
+            "photo"
+          ]
+        },
+        "additionalItems": true
+      }
+    },
+    "additionalProperties": true,
+    "required": [
+      "dictionary"
+    ]
+  }

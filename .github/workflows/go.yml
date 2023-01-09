@@ -7,6 +7,16 @@ on:
     branches: [ master ]
 
 jobs:
+  verify-json-validation:
+      name: Validate Dictionary Json
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Validate JSON
+          uses: docker://orrosenblatt/validate-json-action:latest
+          env:
+            INPUT_SCHEMA: ./dictionary-json-schema.json
+            INPUT_JSONS: ./dictionary.json
 
   build:
     name: Build
