@@ -19,6 +19,7 @@ jobs:
             INPUT_JSONS: ./dictionary.json
 
   build:
+    needs: verify-json-validation
     name: Build
     runs-on: ubuntu-latest
     steps:
