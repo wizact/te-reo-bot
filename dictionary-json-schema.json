@@ -1,46 +1,54 @@
 {
-    "$id": "http://json-schema.org/draft-04/schema#",
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "dictionary": {
-        "type": "array",
-        "items": {
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Dic",
+  "definitions": {
+      "Dic": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
-            "index": {
-              "type": "integer"
-            },
-            "word": {
-              "type": "string"
-            },
-            "meaning": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            },
-            "photo": {
-              "type": "string"
-            },
-            "photo_attribution": {
-              "type": "string"
-            }
+              "dictionary": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/Dictionary"
+                  }
+              }
           },
-          "additionalProperties": true,
           "required": [
-            "index",
-            "word",
-            "meaning",
-            "link",
-            "photo"
-          ]
-        },
-        "additionalItems": true
+              "dictionary"
+          ],
+          "title": "Dic"
+      },
+      "Dictionary": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "index": {
+                  "type": "integer"
+              },
+              "word": {
+                  "type": "string"
+              },
+              "meaning": {
+                  "type": "string"
+              },
+              "link": {
+                  "type": "string"
+              },
+              "photo": {
+                  "type": "string"
+              },
+              "photo_attribution": {
+                  "type": "string"
+              }
+          },
+          "required": [
+              "index",
+              "link",
+              "meaning",
+              "photo",
+              "word"
+          ],
+          "title": "Dictionary"
       }
-    },
-    "additionalProperties": true,
-    "required": [
-      "dictionary"
-    ]
   }
+}
