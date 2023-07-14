@@ -73,7 +73,7 @@
     { "index":	72	, "word": "mana", "meaning": "prestige, reputation", "link": "", "photo": ""},
     { "index":	73	, "word": "mahi", "meaning": "work or activity", "link": "", "photo": ""},
     { "index":	74	, "word": "koha", "meaning": "gift, present (usually money, can be food or precious items, given by guest to hosts)", "link": "", "photo": ""},
-    { "index":	75	, "word": "kauri", "meaning": "large native conifer", "link": "", "photo": ""},
+    { "index":	75	, "word": "Mānawatia a Matariki", "meaning": "Happy Māori New Year", "link": "", "photo": ""},
     { "index":	76	, "word": "kaumatua", "meaning": "elder", "link": "", "photo": ""},
     { "index":	77	, "word": "karakia", "meaning": "prayer", "link": "", "photo": ""},
     { "index":	78	, "word": "kai", "meaning": "food", "link": "", "photo": ""},
@@ -120,6 +120,7 @@
     { "index":	119	, "word": "Titiro", "meaning": "Look", "link": "", "photo": ""},
     { "index":	120	, "word": "Whakarongo", "meaning": "Listen", "link": "", "photo": ""},
     { "index":	121	, "word": "Kanikani", "meaning": "Dance", "link": "", "photo": ""},
-    { "index":	122	, "word": "Pakipaki", "meaning": "Clap", "link": "", "photo": ""}
+    { "index":	122	, "word": "Pakipaki", "meaning": "Clap", "link": "", "photo": ""},
+    { "index":	123	, "word": "kauri", "meaning": "large native conifer", "link": "", "photo": ""}
   ]
 }
