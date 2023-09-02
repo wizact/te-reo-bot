@@ -121,6 +121,15 @@
     { "index":	120	, "word": "Whakarongo", "meaning": "Listen", "link": "", "photo": ""},
     { "index":	121	, "word": "Kanikani", "meaning": "Dance", "link": "", "photo": ""},
     { "index":	122	, "word": "Pakipaki", "meaning": "Clap", "link": "", "photo": ""},
-    { "index":	123	, "word": "kauri", "meaning": "large native conifer", "link": "", "photo": ""}
+    { "index":	123	, "word": "kauri", "meaning": "large native conifer", "link": "", "photo": ""},
+    { "index":	124	, "word": "tau", "meaning": "to land, alight, come to rest, settle on", "link": "", "photo": ""},
+    { "index":	125	, "word": "me te rearea", "meaning": "how beautiful, how stunning", "link": "", "photo": ""},
+    { "index":	126	, "word": "ātaahua", "meaning": "be beautiful, handsome, pleasant, pretty", "link": "", "photo": ""},
+    { "index":	127	, "word": "hūmārie", "meaning": "to be handsome, pleasant, beautiful, peaceful, gentle, amiable", "link": "", "photo": ""},
+    { "index":	128	, "word": "whakapaipai", "meaning": "to decorate, ornament, beautify, tidy up, adorn", "link": "", "photo": ""},
+    { "index":	129	, "word": "nōku te whiwhi", "meaning": "my gain, lucky me, I've got a beauty, I am fortunate", "link": "", "photo": ""},
+    { "index":	130	, "word": "ātanga", "meaning": "to adorn, embellish, enhance", "link": "", "photo": ""},
+    { "index":	131	, "word": "huatau", "meaning": "be comely, suitable, elegant, graceful", "link": "", "photo": ""},
+    { "index":	132	, "word": "maitai", "meaning": "iron, steel, cutlery, metal", "link": "", "photo": ""}
   ]
 }
