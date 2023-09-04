@@ -17,38 +17,21 @@ jobs:
       with:
         go-version: ^1.13
       id: go
-    
-    - name: Debug
-      run: |
-        pwd
-        echo ${HOME}
-        echo ${GITHUB_WORKSPACE}
-        echo ${GOPATH}
-        echo ${GOROOT}
-
+  
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 1
-        path: /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
 
     - name: Get dependencies
       run: |
-        cd /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
         go get -v -t -d .
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
-      env:
-        GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Build
       run: |
-        cd /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
         make build-static
-      env:
-        GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2

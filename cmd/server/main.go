@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"te-reo-bot/version"
+	"github.com/wizact/te-reo-bot/version"
 
-	_wodt "github.com/wizact/te-reo-bot/pkg/wodt"
+	_wodt "github.com/wizact/te-reo-bot/pkg/wotd"
 	"github.com/wizact/yacli"
 )
 
@@ -25,4 +25,5 @@ func main() {
 	ctx := context.Background()
 
 	app.Run(ctx)
+
 }
