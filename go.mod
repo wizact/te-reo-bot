@@ -12,7 +12,7 @@ require (
 	github.com/mattn/go-mastodon v0.0.6
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/stretchr/testify v1.8.1
-	github.com/wizact/yacli v0.0.0-20200621092021-be57780af79a // indirect
+	github.com/wizact/yacli v0.0.0-20200621092021-be57780af79a
 	golang.org/x/sys v0.4.0 // indirect
 
 )

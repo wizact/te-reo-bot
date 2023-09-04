@@ -110,7 +110,6 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/go,react,linux,macos,windows
 
-pkg/
 bin/
 out/
 cross/
