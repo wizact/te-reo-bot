@@ -34,6 +34,7 @@ jobs:
 
     - name: Get dependencies
       run: |
+        cd $GOPATH/src/github.com/wizact/te-reo-bot
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
