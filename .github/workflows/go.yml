@@ -39,6 +39,8 @@ jobs:
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
+      env:
+        GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Build
       run: make build-static
