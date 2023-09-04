@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+
 	"te-reo-bot/version"
 
 	"github.com/wizact/yacli"
@@ -18,7 +19,7 @@ func main() {
 	app.Description = "Te Reo Twitter & Mastodon bot"
 	app.Version = version.VERSION
 
-	app.AddCommand(&StartServerCommand{})
+	app.AddCommand(&wodt.StartServerCommand{})
 
 	ctx := context.Background()
 
