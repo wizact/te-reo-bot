@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}",
+            "program": "${workspaceFolder}/cmd/server",
             "args": ["start-server", "-address=localhost", "-port=9000", "-tls=false"],
             "env": { "TEREOBOT_APIKEY": "testapikey" }
         }
