@@ -44,7 +44,12 @@ jobs:
     #     GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Build
-      run: make build-static
+      run: |
+        cd /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
+        ls
+        make build-static
+      env:
+        GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
