@@ -1,10 +1,3 @@
-env:
-  GOPATH: ${{ github.workspace }}
-  GOBIN: ${{ github.workspace }}/bin
-defaults:
-  run:
-    working-directory: $env.GOPATH/src/te-reo-bot  
-
 name: Go
 
 on:
@@ -24,11 +17,20 @@ jobs:
       with:
         go-version: ^1.13
       id: go
+    
+    - name: Debug
+      run: |
+        pwd
+        echo ${HOME}
+        echo ${GITHUB_WORKSPACE}
+        echo ${GOPATH}
+        echo ${GOROOT}
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
       with:
-        path: $env.GOPATH/src/te-reo-bot  
+        fetch-depth: 1
+        path: go/src/github.com/wizact/te-reo-bot
 
     - name: Get dependencies
       run: |
