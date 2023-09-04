@@ -24,6 +24,8 @@ jobs:
     - name: Get dependencies
       run: |
         cd /home/runner/work/te-reo-bot/te-reo-bot/
+        ls
+        tree
         go get -v -t -d .
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
