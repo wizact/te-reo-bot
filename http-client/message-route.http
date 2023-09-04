@@ -1,0 +1,5 @@
+@baseUri= messages
+
+# @name postMessageToMastodon
+POST http://{{hostname}}/{{baseUri}}?dest=mastodon HTTP/1.1
+X-Api-Key: testapikey

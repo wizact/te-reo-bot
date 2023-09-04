@@ -1,0 +1,4 @@
+@baseUri= __health-check
+
+# @name getHealtCheck
+GET http://{{hostname}}/{{baseUri}} HTTP/1.1
