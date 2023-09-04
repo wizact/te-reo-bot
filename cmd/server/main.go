@@ -6,6 +6,8 @@ import (
 
 	"te-reo-bot/version"
 
+	wodt "te-reo-bot/pkg/wotd"
+
 	"github.com/wizact/yacli"
 )
 

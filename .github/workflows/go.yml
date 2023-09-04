@@ -39,4 +39,4 @@ jobs:
         path: out/
 
     - name: Test
-      run: go test -v .
+      run: cd pkg && go test -v ./**

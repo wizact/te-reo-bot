@@ -24,7 +24,7 @@ GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
 
 .PHONY: build-static
 build-static:
-	$(GO) build \
+	cd ./cmd/server/ && $(GO) build \
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .
 
