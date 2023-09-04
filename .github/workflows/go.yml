@@ -30,18 +30,18 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-        path: /home/runner/go/src/github.com/wizact/te-reo-bot
+        path: /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
 
     - name: Get dependencies
       run: |
-        cd /home/runner/go/src/github.com/wizact/te-reo-bot
+        cd /home/runner/work/te-reo-bot/te-reo-bot/go/src/github.com/wizact/te-reo-bot
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
       env:
-        GOPATH: /home/runner/go
+        GOPATH: /home/runner/work/te-reo-bot/te-reo-bot/go/
 
     - name: Build
       run: make build-static
