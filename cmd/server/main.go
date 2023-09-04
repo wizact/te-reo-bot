@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"te-reo-bot/version"
-
 	wodt "te-reo-bot/pkg/wotd"
+	"te-reo-bot/version"
 
 	"github.com/wizact/yacli"
 )
