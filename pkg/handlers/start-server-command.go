@@ -1,4 +1,4 @@
-package wotd
+package handlers
 
 import (
 	"context"
@@ -12,6 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/kelseyhightower/envconfig"
+	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 const (
@@ -69,7 +70,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	router := mux.NewRouter()
 	router.Use(CommonMiddleware)
 
-	router.Handle(healthCheckRoute, appHandler(GetHealthCheck)).Methods("GET")
+	router.Handle(healthCheckRoute, appHandler(GetHealthCheck())).Methods("GET")
 	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
 	router.Handle(messagesRoute, appHandler(GetImage)).Methods("GET")
 
@@ -130,7 +131,7 @@ func findCaseInsensitiveHeader(headerName string, r *http.Request) (string, erro
 
 }
 
-type appHandler func(http.ResponseWriter, *http.Request) *AppError
+type appHandler func(http.ResponseWriter, *http.Request) *ent.AppError
 
 // ServeHTTP to serve requests but respond with a friendly error message if any
 func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -144,13 +145,6 @@ func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(ee.Error())
 		}
 	}
-}
-
-// AppError as app error container
-type AppError struct {
-	Error   error  `json:"error"`
-	Message string `json:"message"`
-	Code    int    `json:"code"`
 }
 
 // friendlyError is sanitised error message sent back to the user

@@ -6,7 +6,7 @@ import (
 
 	"github.com/wizact/te-reo-bot/version"
 
-	_wodt "github.com/wizact/te-reo-bot/pkg/wotd"
+	_hndl "github.com/wizact/te-reo-bot/pkg/handlers"
 	"github.com/wizact/yacli"
 )
 
@@ -20,7 +20,7 @@ func main() {
 	app.Description = "Te Reo Twitter & Mastodon bot"
 	app.Version = version.VERSION
 
-	app.AddCommand(&_wodt.StartServerCommand{})
+	app.AddCommand(&_hndl.StartServerCommand{})
 
 	ctx := context.Background()
 

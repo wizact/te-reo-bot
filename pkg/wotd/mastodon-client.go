@@ -7,6 +7,7 @@ import (
 
 	"github.com/kelseyhightower/envconfig"
 	"github.com/mattn/go-mastodon"
+	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 func newMastodonClient() *mastodon.Client {
@@ -26,7 +27,7 @@ func newMastodonClient() *mastodon.Client {
 	return c
 }
 
-func toot(wo *Word, w http.ResponseWriter) *AppError {
+func Toot(wo *Word, w http.ResponseWriter) *ent.AppError {
 	var att *mastodon.Attachment
 	mids := []mastodon.ID{}
 	tc := newMastodonClient()
@@ -41,7 +42,7 @@ func toot(wo *Word, w http.ResponseWriter) *AppError {
 		var e error
 		att, e = tc.UploadMediaFromBytes(context.Background(), media)
 		if e != nil {
-			return &AppError{Error: e, Code: 500, Message: "Failed sending the toot with media"}
+			return &ent.AppError{Error: e, Code: 500, Message: "Failed sending the toot with media"}
 		}
 	}
 
@@ -52,21 +53,21 @@ func toot(wo *Word, w http.ResponseWriter) *AppError {
 	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning + " #aotearoa #newzealand", MediaIDs: mids})
 
 	if e == nil {
-		json.NewEncoder(w).Encode(&PostResponse{TootId: string(ms.ID)})
+		json.NewEncoder(w).Encode(&ent.PostResponse{TootId: string(ms.ID)})
 		return nil
 	} else {
-		return &AppError{Error: e, Code: 500, Message: "Failed sending the toot"}
+		return &ent.AppError{Error: e, Code: 500, Message: "Failed sending the toot"}
 	}
 }
 
-func acquireMedia(fn string) ([]byte, *AppError) {
-	gsc, err := newCloudStorageClient()
+func acquireMedia(fn string) ([]byte, *ent.AppError) {
+	gsc, err := NewCloudStorageClient()
 
 	if err != nil {
 		return nil, err
 	}
 
-	media, err := getObject(gsc, fn)
+	media, err := GetObject(gsc, fn)
 
 	if err != nil {
 		return nil, err
