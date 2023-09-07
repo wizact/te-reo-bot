@@ -1,4 +1,4 @@
-package wotd
+package storage
 
 import (
 	"context"
@@ -7,11 +7,11 @@ import (
 	"cloud.google.com/go/storage"
 )
 
-type CloudStorageClientWrapper struct {
+type GoogleCloudStorageClientWrapper struct {
 	client *storage.Client
 }
 
-func (csc *CloudStorageClientWrapper) Client(ctx context.Context) error {
+func (csc *GoogleCloudStorageClientWrapper) Client(ctx context.Context) error {
 	c, err := storage.NewClient(ctx)
 
 	if err != nil {
@@ -22,7 +22,7 @@ func (csc *CloudStorageClientWrapper) Client(ctx context.Context) error {
 	return nil
 }
 
-func (csc *CloudStorageClientWrapper) GetObject(ctx context.Context, bucketName, fn string) ([]byte, error) {
+func (csc *GoogleCloudStorageClientWrapper) GetObject(ctx context.Context, bucketName, fn string) ([]byte, error) {
 	bkt := csc.client.Bucket(bucketName)
 
 	rc, err := bkt.Object(fn).NewReader(ctx)

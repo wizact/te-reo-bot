@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
+	gcs "github.com/wizact/te-reo-bot/pkg/storage"
 	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
@@ -64,7 +65,7 @@ func (m MessagesRoute) PostMessage() appHandler {
 func (m MessagesRoute) GetImage() appHandler {
 	fn := func(w http.ResponseWriter, r *http.Request) *ent.AppError {
 		fn := r.URL.Query().Get("fn")
-		var cscw wotd.CloudStorageClientWrapper
+		var cscw gcs.GoogleCloudStorageClientWrapper
 		err := cscw.Client(context.Background())
 
 		if err != nil {

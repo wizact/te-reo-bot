@@ -8,6 +8,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"github.com/mattn/go-mastodon"
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
+	gcs "github.com/wizact/te-reo-bot/pkg/storage"
 )
 
 type MastodonClient struct {
@@ -70,7 +71,7 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 
 func acquireMedia(bucketName, objectName string) ([]byte, *ent.AppError) {
 
-	var cscw CloudStorageClientWrapper
+	var cscw gcs.GoogleCloudStorageClientWrapper
 	err := cscw.Client(context.Background())
 
 	if err != nil {
