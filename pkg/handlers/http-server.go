@@ -1,10 +1,8 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -20,50 +18,8 @@ const (
 	messagesRoute    = "/messages"
 )
 
-// StartServerCommand is struct for info required to start an http server
-type StartServerCommand struct {
-	port    string
-	address string
-	tls     bool
-}
-
-// Flags returns the flag sets
-func (fc *StartServerCommand) Flags() *flag.FlagSet {
-	f := &flag.FlagSet{}
-
-	f.StringVar(&fc.address, "address", "localhost", "-address=localhost")
-	f.StringVar(&fc.port, "port", "8080", "-port=8080")
-	f.BoolVar(&fc.tls, "tls", false, "-tls=true")
-
-	return f
-}
-
-func (fc *StartServerCommand) Port() string {
-	return fc.port
-}
-
-func (fc *StartServerCommand) Address() string {
-	return fc.address
-}
-
-// Name of the command
-func (fc *StartServerCommand) Name() string {
-	return "start-server"
-}
-
-// HelpString is the string shown as usage
-func (fc *StartServerCommand) HelpString() string {
-	return "Start the server using provided address and port"
-}
-
-// Run a command
-func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
-	var serverAddress string
-	if fc.address == "localhost" {
-		fc.address = ""
-	}
-
-	serverAddress = fmt.Sprintf("%s:%s", fc.address, fc.port)
+func StartServer(address, port string, tls bool) {
+	serverAddress := fmt.Sprintf("%s:%s", address, port)
 
 	fmt.Println("Listening to requests from: " + serverAddress)
 
@@ -83,7 +39,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	mr := MessagesRoute{bucketName: bn}
 	mr.SetupRoutes(messagesRoute, router)
 
-	if fc.tls {
+	if tls {
 		log.Fatal(http.ListenAndServeTLS(serverAddress,
 			"certs/server.crt",
 			"certs/server.key",
@@ -91,8 +47,6 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	} else {
 		log.Fatal(http.ListenAndServe(serverAddress, router))
 	}
-
-	return nil
 }
 
 // CommonMiddleware the generic middleware

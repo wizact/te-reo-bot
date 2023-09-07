@@ -18,8 +18,8 @@ type MessagesRoute struct {
 }
 
 func (m MessagesRoute) SetupRoutes(routePath string, router *mux.Router) {
-	router.Handle(messagesRoute, appHandler(m.PostMessage())).Methods("POST")
-	router.Handle(messagesRoute, appHandler(m.GetImage())).Methods("GET")
+	router.Handle(routePath, appHandler(m.PostMessage())).Methods("POST")
+	router.Handle(routePath, appHandler(m.GetImage())).Methods("GET")
 }
 
 // PostMessage post a message to a specific social channel
