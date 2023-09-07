@@ -17,13 +17,15 @@ type MastodonClient struct {
 	mastodonAccessToken string
 }
 
-func (mclient *MastodonClient) NewClient() {
+func (mclient *MastodonClient) NewClient() *MastodonClient {
 	var mc MastodonCredential
 	envconfig.Process("tereobot", &mc)
 
 	mclient.mastodonServerName = mc.MastodonServerName
 	mclient.mastodonClientID = mc.MastodonClientID
 	mclient.mastodonAccessToken = mc.MastodonAccessToken
+
+	return mclient
 }
 
 func (mclient *MastodonClient) client() *mastodon.Client {

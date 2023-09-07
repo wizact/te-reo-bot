@@ -51,7 +51,7 @@ func (m MessagesRoute) PostMessage() appHandler {
 			return wotd.Tweet(wo, w)
 		} else if strings.ToLower(dest) == "mastodon" {
 			mastodonClient := wotd.MastodonClient{}
-			return mastodonClient.Toot(wo, w, m.bucketName)
+			return mastodonClient.NewClient().Toot(wo, w, m.bucketName)
 		} else {
 			json.NewEncoder(w).Encode(&ent.PostResponse{Message: "No destination has been selected"})
 			return nil
