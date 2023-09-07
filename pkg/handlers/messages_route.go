@@ -27,7 +27,7 @@ func (m MessagesRoute) SetupRoutes(routePath string, router *mux.Router) {
 func (m MessagesRoute) PostMessage() appHandler {
 	fn := func(w http.ResponseWriter, r *http.Request) *ent.AppError {
 		ws := wotd.WordSelector{}
-		f, erf := ws.ReadFile()
+		f, erf := ws.ReadFile("./dictionary.json")
 
 		if erf != nil {
 			return &ent.AppError{Error: erf, Code: 500, Message: "Failed sending the word of the day"}

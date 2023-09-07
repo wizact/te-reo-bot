@@ -2,9 +2,7 @@ package wotd
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
-	"os"
 	"time"
 )
 
@@ -48,10 +46,8 @@ func (ws *WordSelector) ParseFile(f []byte) (*Dictionary, error) {
 }
 
 // ReadFile reads dictionary json file
-func (ws *WordSelector) ReadFile() ([]byte, error) {
-	path, _ := os.Getwd()
-	fmt.Println(path)
-	f, err := ioutil.ReadFile("./dictionary.json")
+func (ws *WordSelector) ReadFile(filePath string) ([]byte, error) {
+	f, err := ioutil.ReadFile(filePath)
 
 	if err != nil {
 		return nil, err

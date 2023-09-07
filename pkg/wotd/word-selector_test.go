@@ -32,7 +32,7 @@ func TestReadFile(t *testing.T) {
 
 	ws := wotd.WordSelector{}
 
-	f, e := ws.ReadFile()
+	f, e := ws.ReadFile("../../cmd/server/dictionary.json")
 
 	assert.Nil(e, "Failed reading dictionary file")
 	assert.NotNil(f)
