@@ -1,4 +1,4 @@
-package wotd
+package handlers
 
 import (
 	"context"
@@ -12,6 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/kelseyhightower/envconfig"
+	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 const (
@@ -69,9 +70,18 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	router := mux.NewRouter()
 	router.Use(CommonMiddleware)
 
-	router.Handle(healthCheckRoute, appHandler(GetHealthCheck)).Methods("GET")
-	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
-	router.Handle(messagesRoute, appHandler(GetImage)).Methods("GET")
+	// HealthCheck route setup
+	hcr := HealthCheckRoute{}
+	hcr.SetupRoutes(healthCheckRoute, router)
+
+	// MessageRoute route setup
+	bn, err := getMediaBucketName()
+	if err != nil {
+		log.Fatal("Cannot get the bucket name from environment variables")
+	}
+
+	mr := MessagesRoute{bucketName: bn}
+	mr.SetupRoutes(messagesRoute, router)
 
 	if fc.tls {
 		log.Fatal(http.ListenAndServeTLS(serverAddress,
@@ -130,7 +140,7 @@ func findCaseInsensitiveHeader(headerName string, r *http.Request) (string, erro
 
 }
 
-type appHandler func(http.ResponseWriter, *http.Request) *AppError
+type appHandler func(http.ResponseWriter, *http.Request) *ent.AppError
 
 // ServeHTTP to serve requests but respond with a friendly error message if any
 func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -146,13 +156,6 @@ func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// AppError as app error container
-type AppError struct {
-	Error   error  `json:"error"`
-	Message string `json:"message"`
-	Code    int    `json:"code"`
-}
-
 // friendlyError is sanitised error message sent back to the user
 type friendlyError struct {
 	Message string `json:"message"`
@@ -161,4 +164,19 @@ type friendlyError struct {
 // ServerConfig to wrap configuration
 type ServerConfig struct {
 	ApiKey string
+}
+
+// StorageConfig stores information required for storage service
+type StorageConfig struct {
+	BucketName string
+}
+
+func getMediaBucketName() (string, error) {
+	var s StorageConfig
+	err := envconfig.Process("tereobot", &s)
+	if err != nil {
+		return "nil", err
+	}
+
+	return s.BucketName, nil
 }

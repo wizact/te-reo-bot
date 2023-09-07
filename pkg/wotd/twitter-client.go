@@ -8,6 +8,7 @@ import (
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 	"github.com/kelseyhightower/envconfig"
+	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 // TwitterClient is a wrapper for twitter client implementation
@@ -23,7 +24,7 @@ func NewTwitterClient(credential *TwitterCredential) *TwitterClient {
 	return tc
 }
 
-func tweet(wo *Word, w http.ResponseWriter) *AppError {
+func Tweet(wo *Word, w http.ResponseWriter) *ent.AppError {
 	var c TwitterCredential
 	envconfig.Process("tereobot", &c)
 	tc := NewTwitterClient(&c)
@@ -31,10 +32,10 @@ func tweet(wo *Word, w http.ResponseWriter) *AppError {
 	t, tr, e := tc.SendTweet(wo.Word + " : " + wo.Meaning)
 
 	if e == nil {
-		json.NewEncoder(w).Encode(&PostResponse{TwitterId: t.IDStr})
+		json.NewEncoder(w).Encode(&ent.PostResponse{TwitterId: t.IDStr})
 		return nil
 	} else {
-		return &AppError{Error: e, Code: tr.StatusCode, Message: "Failed sending the tweet"}
+		return &ent.AppError{Error: e, Code: tr.StatusCode, Message: "Failed sending the tweet"}
 	}
 }
 
