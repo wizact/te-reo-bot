@@ -10,31 +10,39 @@ import (
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
-func newMastodonClient() *mastodon.Client {
+type MastodonClient struct {
+	mastodonServerName  string
+	mastodonClientID    string
+	mastodonAccessToken string
+}
+
+func (mclient *MastodonClient) NewClient() {
 	var mc MastodonCredential
 	envconfig.Process("tereobot", &mc)
 
-	var serverName string = mc.MastodonServerName
-	var clientName string = mc.MastodonClientID
-	var accessToken string = mc.MastodonAccessToken
+	mclient.mastodonServerName = mc.MastodonServerName
+	mclient.mastodonClientID = mc.MastodonClientID
+	mclient.mastodonAccessToken = mc.MastodonAccessToken
+}
 
+func (mclient *MastodonClient) client() *mastodon.Client {
 	c := mastodon.NewClient(&mastodon.Config{
-		Server:      serverName,
-		ClientID:    clientName,
-		AccessToken: accessToken,
+		Server:      mclient.mastodonServerName,
+		ClientID:    mclient.mastodonClientID,
+		AccessToken: mclient.mastodonAccessToken,
 	})
 
 	return c
 }
 
-func Toot(wo *Word, w http.ResponseWriter) *ent.AppError {
+func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName string) *ent.AppError {
 	var att *mastodon.Attachment
 	mids := []mastodon.ID{}
-	tc := newMastodonClient()
+	tc := mclient.client()
 
 	// check if the wo has a photo
 	if hasMedia(wo) {
-		media, err := acquireMedia(wo.Photo)
+		media, err := acquireMedia(wo.Photo, bucketName)
 		if err != nil {
 			return err
 		}
@@ -60,17 +68,19 @@ func Toot(wo *Word, w http.ResponseWriter) *ent.AppError {
 	}
 }
 
-func acquireMedia(fn string) ([]byte, *ent.AppError) {
-	gsc, err := NewCloudStorageClient()
+func acquireMedia(bucketName, objectName string) ([]byte, *ent.AppError) {
+
+	var cscw CloudStorageClientWrapper
+	err := cscw.Client(context.Background())
 
 	if err != nil {
-		return nil, err
+		return nil, &ent.AppError{Error: err, Code: 500, Message: "Failed to acquire image"}
 	}
 
-	media, err := GetObject(gsc, fn)
+	media, err := cscw.GetObject(context.Background(), bucketName, objectName)
 
 	if err != nil {
-		return nil, err
+		return nil, &ent.AppError{Error: err, Code: 500, Message: "Failed to acquire image"}
 	}
 
 	return media, nil

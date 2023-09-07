@@ -70,9 +70,19 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	router := mux.NewRouter()
 	router.Use(CommonMiddleware)
 
-	router.Handle(healthCheckRoute, appHandler(GetHealthCheck())).Methods("GET")
-	router.Handle(messagesRoute, appHandler(PostMessage)).Methods("POST")
-	router.Handle(messagesRoute, appHandler(GetImage)).Methods("GET")
+	// HealthCheck route setup
+	hcr := HealthCheckRoute{}
+	router.Handle(healthCheckRoute, appHandler(hcr.GetHealthCheck())).Methods("GET")
+
+	// MessageRoute route setup
+	bn, err := getMediaBucketName()
+	if err != nil {
+		log.Fatal("Cannot get the bucket name from environment variables")
+	}
+
+	mr := MessagesRoute{bucketName: bn}
+	router.Handle(messagesRoute, appHandler(mr.PostMessage())).Methods("POST")
+	router.Handle(messagesRoute, appHandler(mr.GetImage())).Methods("GET")
 
 	if fc.tls {
 		log.Fatal(http.ListenAndServeTLS(serverAddress,
@@ -155,4 +165,19 @@ type friendlyError struct {
 // ServerConfig to wrap configuration
 type ServerConfig struct {
 	ApiKey string
+}
+
+// StorageConfig stores information required for storage service
+type StorageConfig struct {
+	BucketName string
+}
+
+func getMediaBucketName() (string, error) {
+	var s StorageConfig
+	err := envconfig.Process("tereobot", &s)
+	if err != nil {
+		return "nil", err
+	}
+
+	return s.BucketName, nil
 }
