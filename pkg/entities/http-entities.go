@@ -13,3 +13,8 @@ type PostResponse struct {
 	TootId    string `json:"tootId"`
 	Message   string `json:"message"`
 }
+
+// FriendlyError is sanitised error message sent back to the user
+type FriendlyError struct {
+	Message string `json:"message"`
+}

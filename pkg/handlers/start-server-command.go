@@ -75,7 +75,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	hcr.SetupRoutes(healthCheckRoute, router)
 
 	// MessageRoute route setup
-	bn, err := getMediaBucketName()
+	bn, err := (&StorageConfig{}).BucketName()
 	if err != nil {
 		log.Fatal("Cannot get the bucket name from environment variables")
 	}
@@ -149,16 +149,11 @@ func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(e.Error)
 
 		w.WriteHeader(e.Code)
-		ee := json.NewEncoder(w).Encode(&friendlyError{Message: e.Message})
+		ee := json.NewEncoder(w).Encode(&ent.FriendlyError{Message: e.Message})
 		if ee != nil {
 			log.Fatal(ee.Error())
 		}
 	}
-}
-
-// friendlyError is sanitised error message sent back to the user
-type friendlyError struct {
-	Message string `json:"message"`
 }
 
 // ServerConfig to wrap configuration
@@ -168,15 +163,14 @@ type ServerConfig struct {
 
 // StorageConfig stores information required for storage service
 type StorageConfig struct {
-	BucketName string
+	bucketName string
 }
 
-func getMediaBucketName() (string, error) {
-	var s StorageConfig
-	err := envconfig.Process("tereobot", &s)
+func (s *StorageConfig) BucketName() (string, error) {
+	err := envconfig.Process("tereobot", s)
 	if err != nil {
 		return "nil", err
 	}
 
-	return s.BucketName, nil
+	return s.bucketName, nil
 }
