@@ -1,8 +1,8 @@
-name: Go
+name: Go Build
 
 on:
   push:
-    branches: [ master ]
+    branches: '*' 
   pull_request:
     branches: [ master ]
 
@@ -42,3 +42,4 @@ jobs:
 
     - name: Test
       run: cd pkg && go test -v ./**
+      
