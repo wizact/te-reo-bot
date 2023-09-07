@@ -101,7 +101,7 @@ type appHandler func(http.ResponseWriter, *http.Request) *ent.AppError
 func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if e := fn(w, r); e != nil { // e is *appError, not os.Error.
 
-		fmt.Println(e.Error)
+		log.Println(e.Error)
 
 		w.WriteHeader(e.Code)
 		ee := json.NewEncoder(w).Encode(&ent.FriendlyError{Message: e.Message})
