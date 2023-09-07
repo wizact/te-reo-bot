@@ -4,10 +4,16 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/gorilla/mux"
+
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 type HealthCheckRoute struct {
+}
+
+func (hcr HealthCheckRoute) SetupRoutes(routePath string, router *mux.Router) {
+	router.Handle(routePath, appHandler(hcr.GetHealthCheck())).Methods("GET")
 }
 
 // GetHealthCheck returns OK when is called

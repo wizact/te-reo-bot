@@ -72,7 +72,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 
 	// HealthCheck route setup
 	hcr := HealthCheckRoute{}
-	router.Handle(healthCheckRoute, appHandler(hcr.GetHealthCheck())).Methods("GET")
+	hcr.SetupRoutes(healthCheckRoute, router)
 
 	// MessageRoute route setup
 	bn, err := getMediaBucketName()
@@ -81,8 +81,7 @@ func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	}
 
 	mr := MessagesRoute{bucketName: bn}
-	router.Handle(messagesRoute, appHandler(mr.PostMessage())).Methods("POST")
-	router.Handle(messagesRoute, appHandler(mr.GetImage())).Methods("GET")
+	mr.SetupRoutes(messagesRoute, router)
 
 	if fc.tls {
 		log.Fatal(http.ListenAndServeTLS(serverAddress,

@@ -7,12 +7,19 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gorilla/mux"
+
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
 type MessagesRoute struct {
 	bucketName string
+}
+
+func (m MessagesRoute) SetupRoutes(routePath string, router *mux.Router) {
+	router.Handle(messagesRoute, appHandler(m.PostMessage())).Methods("POST")
+	router.Handle(messagesRoute, appHandler(m.GetImage())).Methods("GET")
 }
 
 // PostMessage post a message to a specific social channel
