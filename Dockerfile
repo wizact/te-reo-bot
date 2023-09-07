@@ -25,7 +25,7 @@ EXPOSE 8080
 
 WORKDIR /app/
 COPY --from=build /build/out/ .
-COPY --from=build /build/pkg/wotd/dictionary.json .
+COPY --from=build /build/cmd/dictionary.json .
 
 ENTRYPOINT ["./te-reo-bot"]
 CMD ["start-server", "-address=localhost", "-port=8080", "-tls=false"]
