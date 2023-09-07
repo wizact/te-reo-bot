@@ -18,13 +18,14 @@ const (
 	messagesRoute    = "/messages"
 )
 
+// StartServer starts the http server
 func StartServer(address, port string, tls bool) {
 	serverAddress := fmt.Sprintf("%s:%s", address, port)
 
 	fmt.Println("Listening to requests from: " + serverAddress)
 
 	router := mux.NewRouter()
-	router.Use(CommonMiddleware)
+	router.Use(commonMiddleware)
 
 	// HealthCheck route setup
 	hcr := HealthCheckRoute{}
@@ -49,8 +50,8 @@ func StartServer(address, port string, tls bool) {
 	}
 }
 
-// CommonMiddleware the generic middleware
-func CommonMiddleware(next http.Handler) http.Handler {
+// commonMiddleware the generic middleware
+func commonMiddleware(next http.Handler) http.Handler {
 	var s ServerConfig
 	err := envconfig.Process("tereobot", &s)
 

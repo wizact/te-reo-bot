@@ -25,29 +25,32 @@ func (fc *StartServerCommand) Flags() *flag.FlagSet {
 	return f
 }
 
+// Port gets the http server port
 func (fc *StartServerCommand) Port() string {
 	return fc.port
 }
 
+// Address gets the server address
 func (fc *StartServerCommand) Address() string {
 	return fc.address
 }
 
+// Tls gets the flag whether the server should run on TLS
 func (fc *StartServerCommand) Tls() bool {
 	return fc.tls
 }
 
-// Name of the command
+// Name gets the name of the command used in yacli package
 func (fc *StartServerCommand) Name() string {
 	return "start-server"
 }
 
-// HelpString is the string shown as usage
+// HelpString gets the string shown as usage in cli
 func (fc *StartServerCommand) HelpString() string {
 	return "Start the server using provided address and port"
 }
 
-// Run a command
+// Run the start server command
 func (fc *StartServerCommand) Run(ctx context.Context, args []string) error {
 	if fc.Address() == "localhost" {
 		fc.address = ""
