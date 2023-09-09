@@ -528,57 +528,57 @@
 		},
 		{
 			"index": 76,
-			"word": "kaumatua",
-			"meaning": "elder",
+			"word": "Koanga. Mahuru.",
+			"meaning": "Spring",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 77,
-			"word": "karakia",
-			"meaning": "prayer",
+			"word": "Rāhina",
+			"meaning": "Monday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 78,
-			"word": "kai",
-			"meaning": "food",
+			"word": "Rātu",
+			"meaning": "Tuesday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 79,
-			"word": "iwi",
-			"meaning": "tribe",
+			"word": "Rāapa",
+			"meaning": "Wednesday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 80,
-			"word": "iti",
-			"meaning": "small",
+			"word": "Rāpare",
+			"meaning": "Thursday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 81,
-			"word": "hui",
-			"meaning": "gathering, meeting",
+			"word": "Rāmere",
+			"meaning": "Friday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 82,
-			"word": "hīkoi",
-			"meaning": "walk",
+			"word": "Rāhoroi",
+			"meaning": "Saturday",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 83,
-			"word": "hapu",
-			"meaning": "clan, sub-tribe; to be born",
+			"word": "Rātapu",
+			"meaning": "Sunday",
 			"link": "",
 			"photo": ""
 		},
@@ -997,8 +997,8 @@
 		},
 		{
 			"index": 143,
-			"word": "Koanga. Mahuru.",
-			"meaning": "Spring",
+			"word": "kaumatua",
+			"meaning": "elder",
 			"link": "",
 			"photo": ""
 		},
@@ -1018,50 +1018,50 @@
 		},
 		{
 			"index": 146,
-			"word": "Rāhina",
-			"meaning": "Monday",
+			"word": "karakia",
+			"meaning": "prayer",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 147,
-			"word": "Rātu",
-			"meaning": "Tuesday",
+			"word": "kai",
+			"meaning": "food",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 148,
-			"word": "Rāapa",
-			"meaning": "Wednesday",
+			"word": "iwi",
+			"meaning": "tribe",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 149,
-			"word": "Rāpare",
-			"meaning": "Thursday",
+			"word": "iti",
+			"meaning": "small",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 150,
-			"word": "Rāmere",
-			"meaning": "Friday",
+			"word": "hui",
+			"meaning": "gathering, meeting",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 151,
-			"word": "Rāhoroi",
-			"meaning": "Saturday",
+			"word": "hīkoi",
+			"meaning": "walk",
 			"link": "",
 			"photo": ""
 		},
 		{
 			"index": 152,
-			"word": "Rātapu",
-			"meaning": "Sunday",
+			"word": "hapu",
+			"meaning": "clan, sub-tribe; to be born",
 			"link": "",
 			"photo": ""
 		},
