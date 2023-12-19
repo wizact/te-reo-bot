@@ -2834,14 +2834,6 @@
         },
         {
             "index": 355,
-            "word": "Raumati",
-            "meaning": "Summer",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 356,
             "word": "kāri Kirihimete",
             "meaning": "Christmas card",
             "link": "",
@@ -2849,7 +2841,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 357,
+            "index": 356,
             "word": "hutukawa",
             "meaning": "pōhutukawa, New Zealand Christmas tree",
             "link": "",
@@ -2857,7 +2849,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 358,
+            "index": 357,
             "word": "Kirihimete",
             "meaning": "Christmas",
             "link": "",
@@ -2865,9 +2857,17 @@
             "photo_attribution": ""
         },
         {
-            "index": 359,
+            "index": 358,
             "word": "Meri Kirihimete",
             "meaning": "Merry Christmas",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 359,
+            "word": "Raumati",
+            "meaning": "Summer",
             "link": "",
             "photo": "",
             "photo_attribution": ""
