@@ -170,10 +170,10 @@
         },
         {
             "index": 22,
-            "word": "Weka",
-            "meaning": "A large, brown flightless bird that has a famously feisty and curious personality.",
+            "word": "Te Whanganui a Tara",
+            "meaning": "The Māori name for Wellington Harbour or the great Harbour of Tara.",
             "link": "",
-            "photo": "weka.jpg",
+            "photo": "",
             "photo_attribution": ""
         },
         {
@@ -202,10 +202,10 @@
         },
         {
             "index": 26,
-            "word": "Kāinga",
-            "meaning": "Home, abode, dwelling",
+            "word": "Weka",
+            "meaning": "A large, brown flightless bird that has a famously feisty and curious personality.",
             "link": "",
-            "photo": "",
+            "photo": "weka.jpg",
             "photo_attribution": ""
         },
         {
@@ -218,16 +218,16 @@
         },
         {
             "index": 28,
-            "word": "Kawa",
-            "meaning": "Ceremonial rituals, protocol",
+            "word": "Whakatū",
+            "meaning": "Nelson. A New Zealand city on the eastern shores of Tasman Bay at the top of the South Island.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 29,
-            "word": "Manāki tangata",
-            "meaning": "Practise reciprocity and generosity",
+            "word": "Tāmaki Makaurau",
+            "meaning": "The Māori name for Auckland, means Tāmaki desired by many. This name refers to the abundance of natural resources, strategic vantage points, portage routes, and mahinga kai which first attracted Māori, and then other settlers.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -298,24 +298,24 @@
         },
         {
             "index": 38,
-            "word": "awa",
-            "meaning": "river",
+            "word": "Manāki tangata",
+            "meaning": "Practise reciprocity and generosity",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 39,
-            "word": "Tangaroa",
-            "meaning": "God of the sea and fish",
+            "word": "Kāinga",
+            "meaning": "Home, abode, dwelling",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 40,
-            "word": "Ngaio",
-            "meaning": "Clever, professional",
+            "word": "Kawa",
+            "meaning": "Ceremonial rituals, protocol",
             "link": "",
             "photo": "",
             "photo_attribution": ""
