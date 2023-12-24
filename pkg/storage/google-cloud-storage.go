@@ -3,6 +3,7 @@ package storage
 import (
 	"context"
 	"io"
+	"log"
 
 	"cloud.google.com/go/storage"
 )
@@ -23,11 +24,13 @@ func (csc *GoogleCloudStorageClientWrapper) Client(ctx context.Context) error {
 }
 
 func (csc *GoogleCloudStorageClientWrapper) GetObject(ctx context.Context, bucketName, fn string) ([]byte, error) {
+	log.Printf("getting object %v from bucket %v", fn, bucketName)
 	bkt := csc.client.Bucket(bucketName)
 
 	rc, err := bkt.Object(fn).NewReader(ctx)
 
 	if err != nil {
+		log.Printf("failed getting object: %v, %v", fn, err)
 		return nil, err
 	}
 
@@ -35,6 +38,7 @@ func (csc *GoogleCloudStorageClientWrapper) GetObject(ctx context.Context, bucke
 
 	file, err := io.ReadAll(rc)
 	if err != nil {
+		log.Printf("failed reading object: %v, %v", fn, err)
 		return nil, err
 	}
 
