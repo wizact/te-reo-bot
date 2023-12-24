@@ -45,7 +45,7 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 
 	// check if the wo has a photo
 	if hasMedia(wo) {
-		media, err := acquireMedia(wo.Photo, bucketName)
+		media, err := acquireMedia(bucketName, wo.Photo)
 		if err != nil {
 			return err
 		}
