@@ -32,7 +32,7 @@ func StartServer(address, port string, tls bool) {
 	hcr.SetupRoutes(healthCheckRoute, router)
 
 	// MessageRoute route setup
-	bn, err := (&StorageConfig{}).BucketName()
+	bn, err := (&StorageConfig{}).GetBucketName()
 	if err != nil {
 		log.Fatal("Cannot get the bucket name from environment variables")
 	}
@@ -118,14 +118,14 @@ type ServerConfig struct {
 
 // StorageConfig stores information required for storage service
 type StorageConfig struct {
-	bucketName string
+	BucketName string
 }
 
-func (s *StorageConfig) BucketName() (string, error) {
+func (s *StorageConfig) GetBucketName() (string, error) {
 	err := envconfig.Process("tereobot", s)
 	if err != nil {
-		return "nil", err
+		return "", err
 	}
 
-	return s.bucketName, nil
+	return s.BucketName, nil
 }

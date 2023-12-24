@@ -1,0 +1,5 @@
+@baseUri= messages
+
+# @name getImage
+GET http://{{hostname}}/messages?fn=tane.jpg HTTP/1.1
+X-Api-Key: testapikey

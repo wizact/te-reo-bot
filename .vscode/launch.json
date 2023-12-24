@@ -11,7 +11,7 @@
             "mode": "debug",
             "program": "${workspaceFolder}/cmd/server",
             "args": ["start-server", "-address=localhost", "-port=9000", "-tls=false"],
-            "env": { "TEREOBOT_APIKEY": "testapikey" }
+            "env": { "TEREOBOT_APIKEY": "testapikey", "TEREOBOT_BUCKETNAME": "test" }
         }
     ]
 }
