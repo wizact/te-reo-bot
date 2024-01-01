@@ -1,14 +1,6 @@
 {
     "dictionary": [
         {
-            "index": 1,
-            "word": "ngā mihi o te tau hou",
-            "meaning": "happy new year, greetings for the new year",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
             "index": 2,
             "word": "Korimako",
             "meaning": "The New Zealand bellbird. Also known by its other Māori names makomako, and kōmako, is a passerine bird endemic to New Zealand.",
@@ -2916,6 +2908,14 @@
             "index": 365,
             "word": "hararei",
             "meaning": "to have a holiday, go on holiday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 1,
+            "word": "ngā mihi o te tau hou",
+            "meaning": "happy new year, greetings for the new year",
             "link": "",
             "photo": "",
             "photo_attribution": ""
