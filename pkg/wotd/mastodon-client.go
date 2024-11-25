@@ -58,6 +58,9 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 	}
 
 	if att != nil && len(att.ID) > 0 {
+		if wo.Attribution != "" {
+			att.Description = wo.Attribution
+		}
 		mids = []mastodon.ID{att.ID}
 	}
 
