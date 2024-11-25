@@ -1,6 +1,7 @@
 package wotd
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -51,16 +52,18 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		}
 
 		var e error
-		att, e = tc.UploadMediaFromBytes(context.Background(), media)
+		if wo.Attribution != "" {
+			att, e = tc.UploadMediaFromMedia(context.Background(), &mastodon.Media{File: bytes.NewReader(media), Description: wo.Attribution})
+		} else {
+			att, e = tc.UploadMediaFromBytes(context.Background(), media)
+		}
+
 		if e != nil {
 			return &ent.AppError{Error: e, Code: 500, Message: "Failed sending the toot with media"}
 		}
 	}
 
 	if att != nil && len(att.ID) > 0 {
-		if wo.Attribution != "" {
-			att.Description = wo.Attribution
-		}
 		mids = []mastodon.ID{att.ID}
 	}
 
