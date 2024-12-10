@@ -2778,37 +2778,37 @@
         },
         {
             "index": 349,
-            "word": "mokopuna",
-            "meaning": "grandchild",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "word": "harakeke/wharariki",
+            "meaning": "Common flax (harakeke) and mountain flax (wharariki) - There are two identified species of flax in New Zealand.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/harakeke-flax/",
+            "photo": "red-flax-flowers-phormium-tenax-1920.jpeg",
+            "photo_attribution": "Common flax/harakeke Image: Jimmy Johnson"
         },
         {
             "index": 350,
-            "word": "taokete",
-            "meaning": "brother- / sister-in-law (of same gender)",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "word": "Kākābeak/ngutukākā",
+            "meaning": "Ngutukākā is a plant of special significance to New Zealand. Ngutukākā is named for its beautiful red flowers, which hang in clusters of 15-20 blooms and are shaped liked kaka's a beak. Hence Ngutu meaning beak/lips and Kākā meaning the native parrot of the same name.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/kakabeak/",
+            "photo": "kakabeak-1920.jpeg",
+            "photo_attribution": "Kākābeak Image: Dick Veitch"
         },
         {
             "index": 351,
-            "word": "hungarei",
-            "meaning": "mother- / father-in-law",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "word": "Kauri",
+            "meaning": "Kauri are among the world's mightiest trees, growing to over 50 m tall, with trunk girths up to 16 m, and living for over 2,000 years.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/kauri/",
+            "photo": "tane-mahuta-hero.jpeg",
+            "photo_attribution": "Tāne Mahuta, also called 'God of the Forest', is a giant kauri tree (Agathis australis) in the Waipoua Forest of Northland Region, New Zealand. Image: Scott Benjamin"
         },
         {
             "index": 352,
-            "word": "ingoa",
-            "meaning": "name",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "word": "Kōwhai",
+            "meaning": "The kōwhai is one of the best known native trees in New Zealand and it’s our unofficial national flower.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/kowhai/",
+            "photo": "kowhai-flowers-alex-schwab-1920.jpeg",
+            "photo_attribution": "Kōwhai flowers Image: Alex Schwab"
         },
-		{
+		    {
             "index": 353,
             "word": "renetia",
             "meaning": "reindeer",
