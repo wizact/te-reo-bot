@@ -2821,8 +2821,8 @@
             "word": "Hana Kōkō",
             "meaning": "Santa Claus",
             "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "photo": "santa.jpeg",
+            "photo_attribution": "Coloured postcard of the Farmers Trading Company, 1970s, Sir George Grey Special Collections, Auckland Libraries, 9-1."
         },
         {
             "index": 355,
@@ -2836,9 +2836,9 @@
             "index": 356,
             "word": "hutukawa",
             "meaning": "pōhutukawa, New Zealand Christmas tree",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "link": "https://en.wikipedia.org/wiki/Metrosideros_excelsa",
+            "photo": "PohutukawaCornwallis.jpeg",
+            "photo_attribution": "pōhutukawa, New Zealand Christmas tree. Image: Ed323 at English Wikipedia, Public domain, via Wikimedia Commons"
         },
         {
             "index": 357,
