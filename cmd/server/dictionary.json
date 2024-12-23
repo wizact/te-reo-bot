@@ -2850,6 +2850,14 @@
         },
         {
             "index": 358,
+            "word": "waiata",
+            "meaning": "song or chant https://youtu.be/HWso5ZshPX8",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 359,
             "word": "Meri Kirihimete",
             "meaning": "Merry Christmas",
             "link": "",
@@ -2857,17 +2865,9 @@
             "photo_attribution": ""
         },
         {
-            "index": 359,
+            "index": 360,
             "word": "Raumati",
             "meaning": "Summer",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 360,
-            "word": "waiata",
-            "meaning": "song or chant https://youtu.be/HWso5ZshPX8",
             "link": "",
             "photo": "",
             "photo_attribution": ""
