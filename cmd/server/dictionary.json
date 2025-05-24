@@ -1130,62 +1130,6 @@
         },
         {
             "index": 143,
-            "word": "Rāhina",
-            "meaning": "Monday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 144,
-            "word": "Rātu",
-            "meaning": "Tuesday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 145,
-            "word": "Rāapa",
-            "meaning": "Wednesday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 146,
-            "word": "Rāpare",
-            "meaning": "Thursday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 147,
-            "word": "Rāmere",
-            "meaning": "Friday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 148,
-            "word": "Rāhoroi",
-            "meaning": "Saturday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 149,
-            "word": "Rātapu",
-            "meaning": "Sunday",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 150,
             "word": "awa",
             "meaning": "river",
             "link": "",
@@ -1193,7 +1137,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 151,
+            "index": 144,
             "word": "Tangaroa",
             "meaning": "God of the sea and fish",
             "link": "",
@@ -1201,105 +1145,161 @@
             "photo_attribution": ""
         },
         {
+            "index": 145,
+            "word": "Rātapu",
+            "meaning": "Sunday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 146,
+            "word": "Rāhina",
+            "meaning": "Monday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 147,
+            "word": "Rātu",
+            "meaning": "Tuesday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 148,
+            "word": "Rāapa",
+            "meaning": "Wednesday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 149,
+            "word": "Rāpare",
+            "meaning": "Thursday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 150,
+            "word": "Rāmere",
+            "meaning": "Friday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 151,
+            "word": "Rāhoroi",
+            "meaning": "Saturday",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
             "index": 152,
-            "word": "Ngaio",
-            "meaning": "Clever, professional",
+            "word": "Red",
+            "meaning": "Whero",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 153,
-            "word": "Marama",
-            "meaning": "Moon, brightness",
+            "word": "Orange (color)",
+            "meaning": "Karaka",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 154,
-            "word": "Tāne",
-            "meaning": "Man. Name given to the Māori and Polynesian god of the forests",
+            "word": "Yellow",
+            "meaning": "Kōwhai",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 155,
-            "word": "Haere rā",
-            "meaning": "Goodbye, farewell",
+            "word": "Green",
+            "meaning": "Kākāriki",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 156,
-            "word": "Manaakitanga",
-            "meaning": "Hospitality, taking good care of others.",
+            "word": "Blue",
+            "meaning": "Kikorangi",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 157,
-            "word": "Ta moko",
-            "meaning": "Māori tattooing designs on the face or body.",
+            "word": "Purple",
+            "meaning": "Waiporoporo",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 158,
-            "word": "Kare",
-            "meaning": "Used to address a close friend affectionately",
+            "word": "Black (color)",
+            "meaning": "Mangu",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 159,
-            "word": "Aroha mai, aroha atu",
-            "meaning": "Love received demands love returned",
+            "word": "Brown",
+            "meaning": "Parauri",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 160,
-            "word": "Hei kona rā",
-            "meaning": "Goodbye (said to someone staying)",
+            "word": "Light blue",
+            "meaning": "Kikorangi māmā (or Kikorangi angaanga)",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 161,
-            "word": "Mā te wā",
-            "meaning": "See you next time",
+            "word": "Pink",
+            "meaning": "Māwhero",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 162,
-            "word": "Ka kite anō",
-            "meaning": "See you later",
+            "word": "White",
+            "meaning": "Mā",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 163,
-            "word": "Kei te pēhea koe?",
-            "meaning": "How are you?",
+            "word": "ia weherua-kore",
+            "meaning": "non-binary gender",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 164,
-            "word": "Tino pai",
-            "meaning": "Really good",
+            "word": "iakē",
+            "meaning": "genderqueer, queer",
             "link": "",
             "photo": "",
             "photo_attribution": ""
