@@ -1307,14 +1307,14 @@
         {
             "index": 165,
             "word": "Kei te pai",
-            "meaning": "Good",
+            "meaning": "It's Good. It's fine.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 166,
-            "word": "Kei te pehea koe?",
+            "word": "Kei te pēhea koe?",
             "meaning": "How’s it going?",
             "link": "",
             "photo": "",
@@ -1331,7 +1331,7 @@
         {
             "index": 168,
             "word": "Haere mai",
-            "meaning": "Welcome",
+            "meaning": "Come; Welcome. Often paired with 'nau mai' to create a more emphatic greeting.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1339,7 +1339,7 @@
         {
             "index": 169,
             "word": "Tena koutou",
-            "meaning": "Greetings to you all",
+            "meaning": "Hello! Greetings to you all.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1353,15 +1353,23 @@
             "photo_attribution": ""
         },
         {
-            "index": 171,
-            "word": "Takurua. Hotoke.",
-            "meaning": "Winter",
+            "index": 181,
+            "word": "Mānawatia a Matariki",
+            "meaning": "Happy Māori New Year",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 172,
+            "word": "Takurua. Hotoke.",
+            "meaning": "Winter; Second month of the Māori lunar calendar, approximately equivalent to July",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 173,
             "word": "Waitī",
             "meaning": "One of nine stars of Matariki. Waitī watches over our freshwater environments. Our awa (rivers), roto (lakes), kūkūwai (wetlands), and waipuna (springs)",
             "link": "",
@@ -1369,7 +1377,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 173,
+            "index": 174,
             "word": "Waitā",
             "meaning": "One of nine stars of Matariki. Waitā surveys our vast oceans, Te Moana-nui-o-Kiwa (the Pacific Ocean) and Te Tai-o-Rehua (the Tasman Sea)",
             "link": "",
@@ -1377,7 +1385,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 174,
+            "index": 175,
             "word": "Waipuna-ā-rangi",
             "meaning": "One of nine stars of Matariki. She welcomes the winter sky waters in all their forms – ua (rain) ua nganga (hail) and hukarere (snow) included.",
             "link": "",
@@ -1385,7 +1393,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 175,
+            "index": 176,
             "word": "Tupu-ā-nuku",
             "meaning": "One of nine stars of Matariki. Tupu-ā-nuku has a special interest in our edible plants. This includes the natives pūhā (sowthistle), kawakawa (pepper tree), kōkihi (NZ spinach), and tī kōuka (cabbage tree)",
             "link": "",
@@ -1393,7 +1401,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 176,
+            "index": 177,
             "word": "Tupu-ā-rangi",
             "meaning": "One of nine stars of Matariki. Tupu-ā-rangi has long looked out for the ngahere (forests), and he is deeply concerned by the collapse he is witnessing.",
             "link": "",
@@ -1401,7 +1409,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 177,
+            "index": 178,
             "word": "Ururangi",
             "meaning": "One of nine stars of Matariki. Ururangi is close friends with te whānau puhi (the wind family) – including Hauraro (the north wind), Tonga (the south wind), Hauāuru (the west wind), and Marangai (the east wind)",
             "link": "",
@@ -1409,7 +1417,7 @@
             "photo_attribution": ""
         },
         {
-            "index": 178,
+            "index": 179,
             "word": "Pōhutukawa",
             "meaning": "One of nine stars of Matariki. Pōhutukawa holds tight to our memories of treasured people who have passed on.",
             "link": "",
@@ -1417,17 +1425,9 @@
             "photo_attribution": ""
         },
         {
-            "index": 179,
+            "index": 180,
             "word": "Hiwai-te-rangi",
             "meaning": "One of nine stars of Matariki. Hiwai-i-te-rangi is a wishing star, who helps us to recognise our hopes, dreams and aspirations for the coming year.",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
-            "index": 180,
-            "word": "Mānawatia a Matariki",
-            "meaning": "Happy Māori New Year",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1450,64 +1450,64 @@
         },
         {
             "index": 183,
-            "word": "Rāhina",
-            "meaning": "Monday",
+            "word": "Hauhunga",
+            "meaning": "Frost, frosty",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 184,
-            "word": "Rātu",
-            "meaning": "Tuesday",
+            "word": "Makariri",
+            "meaning": "Cold, coldness, be cold.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 185,
-            "word": "Rāapa",
-            "meaning": "Wednesday",
+            "word": "Huka",
+            "meaning": "Snow, foam, froth - also a general term for any of the other white forms of precipitation, i.e hail and frost.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 186,
-            "word": "Rāpare",
-            "meaning": "Thursday",
+            "word": "Anu",
+            "meaning": "Cold, chilly",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 187,
-            "word": "Rāmere",
-            "meaning": "Friday",
+            "word": "Huka papa",
+            "meaning": "Snow lying on the ground, snow-covered ground",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 188,
-            "word": "Rāhoroi",
-            "meaning": "Saturday",
+            "word": "Puna",
+            "meaning": "Spring (of water), flow.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 189,
-            "word": "Rātapu",
-            "meaning": "Sunday",
-            "link": "",
+            "word": "",
+            "meaning": "Retihuka",
+            "link": "Ski; Skiiing.",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 190,
-            "word": "awa",
-            "meaning": "river",
+            "word": "Awa",
+            "meaning": "River, stream, creek, canal.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1619,7 +1619,7 @@
         {
             "index": 204,
             "word": "Tino pai",
-            "meaning": "Really good",
+            "meaning": "Really good, excellent.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1627,14 +1627,14 @@
         {
             "index": 205,
             "word": "Kei te pai",
-            "meaning": "Good",
+            "meaning": "Tha's good; It's fine.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 206,
-            "word": "Kei te pehea koe?",
+            "word": "Kei te pēhea koe?",
             "meaning": "How’s it going?",
             "link": "",
             "photo": "",
@@ -1651,15 +1651,15 @@
         {
             "index": 208,
             "word": "Haere mai",
-            "meaning": "Welcome",
+            "meaning": "Come; Welcome. Often paired with 'nau mai' to create a more emphatic greeting.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 209,
-            "word": "Tena koutou",
-            "meaning": "Greetings to you all",
+            "word": "Tēnā koutou",
+            "meaning": "Hello!; Greetings to you all.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1667,7 +1667,7 @@
         {
             "index": 210,
             "word": "One",
-            "meaning": "Sand, earth",
+            "meaning": "Beach, sand, mud, earth, soil.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1682,8 +1682,8 @@
         },
         {
             "index": 212,
-            "word": "Papa",
-            "meaning": "Flat",
+            "word": "Te Papa Tongarewa",
+            "meaning": "Container of treasures (Museum of New Zealand)",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1691,7 +1691,7 @@
         {
             "index": 213,
             "word": "Puke",
-            "meaning": "Hill",
+            "meaning": "Hill, hillock, mound.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
@@ -1699,7 +1699,7 @@
         {
             "index": 214,
             "word": "Mānia",
-            "meaning": "Plain",
+            "meaning": "Plain, levelled, plateau.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
