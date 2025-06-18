@@ -1338,7 +1338,7 @@
         },
         {
             "index": 169,
-            "word": "Tena koutou",
+            "word": "tēnā koutou",
             "meaning": "Hello! Greetings to you all.",
             "link": "",
             "photo": "",
@@ -1357,8 +1357,8 @@
             "word": "Mānawatia a Matariki",
             "meaning": "Happy Māori New Year",
             "link": "",
-            "photo": "",
-            "photo_attribution": ""
+            "photo": "matariki.png",
+            "photo_attribution": "A postcard representing nine stars of Matariki (Māori new year). Disclaimer: AI-generated."
         },
         {
             "index": 172,
