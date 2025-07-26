@@ -1650,38 +1650,46 @@
         },
         {
             "index": 208,
-            "word": "Haere mai",
-            "meaning": "Come; Welcome. Often paired with 'nau mai' to create a more emphatic greeting.",
+            "word": "Ākarana",
+            "meaning": "Auckland",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 209,
-            "word": "Tēnā koutou",
-            "meaning": "Hello!; Greetings to you all.",
+            "word": "Ōtautahi",
+            "meaning": "Christchurch",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 210,
-            "word": "One",
-            "meaning": "Beach, sand, mud, earth, soil.",
+            "word": "Tauranga",
+            "meaning": "Harbour in the Bay of Plenty; Resting place, anchorage, fishing ground.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 211,
-            "word": "Pae",
-            "meaning": "Ridge, range",
+            "word": "Ōtepoti",
+            "meaning": "Dunedin",
             "link": "",
             "photo": "",
             "photo_attribution": ""
         },
         {
             "index": 212,
+            "word": "Kirikiriroa",
+            "meaning": "Hamilton (city)",
+            "link": "",
+            "photo": "",
+            "photo_attribution": ""
+        },
+        {
+            "index": 213,
             "word": "Te Papa Tongarewa",
             "meaning": "Container of treasures (Museum of New Zealand)",
             "link": "",
@@ -1689,17 +1697,9 @@
             "photo_attribution": ""
         },
         {
-            "index": 213,
-            "word": "Puke",
-            "meaning": "Hill, hillock, mound.",
-            "link": "",
-            "photo": "",
-            "photo_attribution": ""
-        },
-        {
             "index": 214,
-            "word": "Mānia",
-            "meaning": "Plain, levelled, plateau.",
+            "word": "Mauao",
+            "meaning": "Mount Maunganui is a 232 metre volcanic dome at the end of a peninsula in the Tauranga.",
             "link": "",
             "photo": "",
             "photo_attribution": ""
