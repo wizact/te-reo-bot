@@ -53,7 +53,7 @@ repos:
       - id: dictionary-lint
         name: Dictionary JSON Lint
         description: Additional JSON linting specifically for dictionary.json
-        entry: bash -c "node -e 'const fs = require(\"fs\"); const path = \"cmd/server/dictionary.json\"; try { const data = JSON.parse(fs.readFileSync(path, \"utf8\")); if (!data.dictionary || !Array.isArray(data.dictionary)) { console.error(\"Dictionary must have a dictionary array at root\"); process.exit(1); } console.log(\"✅ Dictionary JSON structure is valid\"); } catch (e) { console.error(\"❌ Dictionary JSON is invalid:\", e.message); process.exit(1); }'"
+        entry: node scripts/validate-dictionary-structure.js
         language: system
         files: ^cmd/server/dictionary\.json$
         pass_filenames: false
