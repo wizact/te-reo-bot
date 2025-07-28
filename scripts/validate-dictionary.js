@@ -4,6 +4,10 @@
  *
  * This script validates the structure and content of dictionary.json
  * to ensure data integrity for the Te Reo Māori bot.
+ * 
+ * Validation Rules:
+ * - Required fields: index (unique integer), word (string, can be duplicate), meaning (string, can be duplicate)
+ * - Optional fields: link, photo, photo_attribution (all strings)
  */
 
 const fs = require('fs');
@@ -45,13 +49,12 @@ function validateDictionaryStructure(data) {
 
   log(colors.blue, `Found ${data.dictionary.length} dictionary entries`);
 
-  // Track duplicates
+  // Track duplicate indices (must be unique)
   const seenIndices = new Set();
-  const seenWords = new Set();
 
   // Validate each entry
   data.dictionary.forEach((entry, index) => {
-    const result = validateDictionaryEntry(entry, index, seenIndices, seenWords);
+    const result = validateDictionaryEntry(entry, index, seenIndices);
     errors.push(...result.errors);
     warnings.push(...result.warnings);
   });
@@ -59,7 +62,7 @@ function validateDictionaryStructure(data) {
   return { errors, warnings };
 }
 
-function validateDictionaryEntry(entry, position, seenIndices, seenWords) {
+function validateDictionaryEntry(entry, position, seenIndices) {
   const errors = [];
   const warnings = [];
   const entryPrefix = `Entry ${position + 1}`;
@@ -87,9 +90,9 @@ function validateDictionaryEntry(entry, position, seenIndices, seenWords) {
     } else if (entry.index <= 0) {
       errors.push(`${entryPrefix}: Field "index" must be a positive integer (got: ${entry.index})`);
     } else {
-      // Check for duplicate indices - treat as warnings for existing data
+      // Check for duplicate indices - these must be unique
       if (seenIndices.has(entry.index)) {
-        warnings.push(`${entryPrefix}: Duplicate index "${entry.index}" found`);
+        errors.push(`${entryPrefix}: Duplicate index "${entry.index}" found - indices must be unique`);
       }
       seenIndices.add(entry.index);
     }
@@ -100,14 +103,8 @@ function validateDictionaryEntry(entry, position, seenIndices, seenWords) {
       errors.push(`${entryPrefix}: Field "word" must be a string (got: ${typeof entry.word})`);
     } else if (entry.word.trim() === '') {
       errors.push(`${entryPrefix}: Field "word" cannot be empty`);
-    } else {
-      // Check for duplicate words - treat as warnings for existing data
-      const normalizedWord = entry.word.trim().toLowerCase();
-      if (seenWords.has(normalizedWord)) {
-        warnings.push(`${entryPrefix}: Duplicate word "${entry.word}" found`);
-      }
-      seenWords.add(normalizedWord);
     }
+    // Note: Words are allowed to be duplicates per requirements
   }
 
   if (entry.hasOwnProperty('meaning')) {
@@ -191,8 +188,8 @@ function main() {
     log(colors.yellow, '\n💡 Common fixes:');
     log(colors.yellow, '   • Ensure all entries have index, word, and meaning fields');
     log(colors.yellow, '   • Check that indices are unique positive integers');
-    log(colors.yellow, '   • Verify no duplicate words exist');
-    log(colors.yellow, '   • Confirm all required fields are non-empty strings');
+    log(colors.yellow, '   • Words and meanings can be duplicates');
+    log(colors.yellow, '   • Confirm all required fields are non-empty strings (except index which is integer)');
 
     process.exit(1);
   }

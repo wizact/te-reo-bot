@@ -134,6 +134,46 @@ const tests = [
       ]
     },
     expectSuccess: true
+  },
+
+  // Duplicate words should be allowed
+  {
+    name: "Duplicate Words Allowed",
+    data: {
+      dictionary: [
+        {
+          index: 1,
+          word: "Kia ora",
+          meaning: "Hello, greetings"
+        },
+        {
+          index: 2,
+          word: "Kia ora", 
+          meaning: "Farewell, goodbye"
+        }
+      ]
+    },
+    expectSuccess: true
+  },
+
+  // Duplicate indices should fail
+  {
+    name: "Duplicate Indices Not Allowed",
+    data: {
+      dictionary: [
+        {
+          index: 1,
+          word: "Hello",
+          meaning: "Greeting"
+        },
+        {
+          index: 1,
+          word: "Goodbye", 
+          meaning: "Farewell"
+        }
+      ]
+    },
+    expectSuccess: false
   }
 ];
 

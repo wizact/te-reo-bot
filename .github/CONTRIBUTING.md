@@ -64,10 +64,10 @@ The dictionary validation checks for:
 - **Structure**: Must have a "dictionary" array at the root level
 - **Required fields**: Each entry must have `index`, `word`, and `meaning`
 - **Data types**: 
-  - `index` must be a positive integer
-  - `word` and `meaning` must be non-empty strings
+  - `index` must be a unique positive integer
+  - `word` and `meaning` must be non-empty strings (duplicates allowed)
 - **Optional fields**: `link`, `photo`, and `photo_attribution` can be empty strings
-- **Duplicates**: Warns about duplicate indices or words (but doesn't block validation)
+- **Uniqueness**: Index values must be unique across all entries
 
 #### Troubleshooting
 
@@ -89,7 +89,12 @@ The dictionary validation checks for:
    - Verify data types match the requirements
    - Numbers should not be quoted, strings should be quoted
 
-5. **Pre-commit hooks failing**
+5. **"Duplicate index found"**
+   - Each entry must have a unique index value
+   - Find the highest existing index and use the next sequential number
+   - Words and meanings can be duplicates
+
+6. **Pre-commit hooks failing**
    - Run `npm run validate-dictionary` to see detailed errors
    - Fix validation issues before committing
    - Use `git commit --no-verify` only in emergencies (not recommended)
