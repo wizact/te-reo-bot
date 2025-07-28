@@ -1,0 +1,25 @@
+{
+  "name": "te-reo-bot",
+  "version": "1.0.0",
+  "description": "Te Reo Māori word of the day bot - JSON validation tools",
+  "private": true,
+  "scripts": {
+    "validate-dictionary": "node scripts/validate-dictionary.js",
+    "validate-json": "jsonlint cmd/server/dictionary.json",
+    "format-json": "prettier --write cmd/server/dictionary.json",
+    "test-validation": "node scripts/test-validation.js"
+  },
+  "devDependencies": {
+    "jsonlint": "^1.6.3",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "te-reo-maori",
+    "maori-language",
+    "dictionary",
+    "json-validation"
+  ]
+}

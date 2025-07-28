@@ -1,0 +1,73 @@
+# Pre-commit hooks for Te Reo Māori Bot
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      # JSON validation and formatting
+      - id: check-json
+        name: Check JSON syntax
+        description: Validates JSON syntax in all .json files
+        files: \.(json)$
+
+      - id: pretty-format-json
+        name: Format JSON files
+        description: Formats JSON files with consistent indentation
+        files: \.(json)$
+        args: [--autofix, --indent=4]
+
+      # General file checks
+      - id: check-yaml
+        name: Check YAML syntax
+        description: Validates YAML syntax
+
+      - id: end-of-file-fixer
+        name: Fix end of files
+        description: Ensures files end with a newline
+
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        description: Trims trailing whitespace
+
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+        description: Checks for merge conflict markers
+
+      - id: check-case-conflict
+        name: Check for case conflicts
+        description: Checks for files with case conflicts
+
+  # Custom Te Reo Māori dictionary validation
+  - repo: local
+    hooks:
+      - id: validate-dictionary
+        name: Validate Te Reo Dictionary
+        description: Validates the structure and content of dictionary.json
+        entry: node scripts/validate-dictionary.js
+        language: system
+        files: ^cmd/server/dictionary\.json$
+        pass_filenames: false
+
+      - id: dictionary-lint
+        name: Dictionary JSON Lint
+        description: Additional JSON linting specifically for dictionary.json
+        entry: bash -c "node -e 'const fs = require(\"fs\"); const path = \"cmd/server/dictionary.json\"; try { const data = JSON.parse(fs.readFileSync(path, \"utf8\")); if (!data.dictionary || !Array.isArray(data.dictionary)) { console.error(\"Dictionary must have a dictionary array at root\"); process.exit(1); } console.log(\"✅ Dictionary JSON structure is valid\"); } catch (e) { console.error(\"❌ Dictionary JSON is invalid:\", e.message); process.exit(1); }'"
+        language: system
+        files: ^cmd/server/dictionary\.json$
+        pass_filenames: false
+
+# Global settings
+default_language_version:
+  node: system
+
+# Configure which files to include/exclude
+files: ^(cmd/server/dictionary\.json|scripts/.*\.js|\..*\.ya?ml)$
+exclude: ^(\.git/|node_modules/|out/|\.vscode/|\.devcontainer/)
+
+# Fail fast - stop running hooks after first failure
+fail_fast: false
+
+# Minimum pre-commit version
+minimum_pre_commit_version: "3.0.0"
