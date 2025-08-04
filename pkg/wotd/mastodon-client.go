@@ -67,7 +67,7 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		mids = []mastodon.ID{att.ID}
 	}
 
-	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning + " #aotearoa #newzealand", MediaIDs: mids})
+	ms, e := tc.PostStatus(context.Background(), &mastodon.Toot{Status: wo.Word + ": " + wo.Meaning, MediaIDs: mids})
 
 	if e == nil {
 		json.NewEncoder(w).Encode(&ent.PostResponse{TootId: string(ms.ID)})
