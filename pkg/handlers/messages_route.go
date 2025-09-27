@@ -26,24 +26,42 @@ func (m MessagesRoute) SetupRoutes(routePath string, router *mux.Router) {
 // PostMessage post a message to a specific social channel
 func (m MessagesRoute) PostMessage() appHandler {
 	fn := func(w http.ResponseWriter, r *http.Request) *ent.AppError {
-		ws := wotd.WordSelector{}
+		// Create WordSelector
+		ws := wotd.NewWordSelector()
 		f, erf := ws.ReadFile("./dictionary.json")
 
 		if erf != nil {
-			return &ent.AppError{Error: erf, Code: 500, Message: "Failed sending the word of the day"}
+			// Check if it's already an AppError, if not wrap it
+			if appErr, ok := erf.(*ent.AppError); ok {
+				return appErr
+			}
+			return &ent.AppError{Err: erf, Code: 500, Message: "Failed sending the word of the day"}
 		}
 
-		d, epf := ws.ParseFile(f)
+		d, epf := ws.ParseFile(f, "./dictionary.json")
 		if epf != nil {
-			return &ent.AppError{Error: epf, Code: 500, Message: "Failed sending the word of the day"}
+			// Check if it's already an AppError, if not wrap it
+			if appErr, ok := epf.(*ent.AppError); ok {
+				return appErr
+			}
+			return &ent.AppError{Err: epf, Code: 500, Message: "Failed sending the word of the day"}
 		}
 
 		var wo *wotd.Word
+		var err error
 		wordIndex := r.URL.Query().Get("wordIndex")
 		if wind, eind := strconv.Atoi(wordIndex); eind == nil {
-			wo = ws.SelectWordByIndex(d.Words, wind)
+			wo, err = ws.SelectWordByIndex(d.Words, wind)
 		} else {
-			wo = ws.SelectWordByDay(d.Words)
+			wo, err = ws.SelectWordByDay(d.Words)
+		}
+
+		if err != nil {
+			// Check if it's already an AppError, if not wrap it
+			if appErr, ok := err.(*ent.AppError); ok {
+				return appErr
+			}
+			return &ent.AppError{Err: err, Code: 500, Message: "Failed selecting word of the day"}
 		}
 
 		dest := r.URL.Query().Get("dest")
@@ -65,17 +83,25 @@ func (m MessagesRoute) PostMessage() appHandler {
 func (m MessagesRoute) GetImage() appHandler {
 	fn := func(w http.ResponseWriter, r *http.Request) *ent.AppError {
 		fn := r.URL.Query().Get("fn")
-		var cscw gcs.GoogleCloudStorageClientWrapper
+		cscw := gcs.NewGoogleCloudStorageClientWrapper(getLogger())
 		err := cscw.Client(context.Background())
 
 		if err != nil {
-			return &ent.AppError{Error: err, Code: 500, Message: "Failed to acquire image"}
+			// Check if it's already an AppError, if not wrap it
+			if appErr, ok := err.(*ent.AppError); ok {
+				return appErr
+			}
+			return &ent.AppError{Err: err, Code: 500, Message: "Failed to acquire image"}
 		}
 
 		b, err := cscw.GetObject(context.Background(), m.bucketName, fn)
 
 		if err != nil {
-			return &ent.AppError{Error: err, Code: 500, Message: "Failed to acquire image"}
+			// Check if it's already an AppError, if not wrap it
+			if appErr, ok := err.(*ent.AppError); ok {
+				return appErr
+			}
+			return &ent.AppError{Err: err, Code: 500, Message: "Failed to acquire image"}
 		}
 
 		w.WriteHeader(http.StatusOK)
