@@ -205,3 +205,6 @@ modules.xml
 
 server.key
 server.crt
+
+# Claude analysis files
+.claude/
