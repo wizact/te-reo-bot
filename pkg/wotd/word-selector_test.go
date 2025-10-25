@@ -6,23 +6,15 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/wizact/te-reo-bot/pkg/entities"
-	"github.com/wizact/te-reo-bot/pkg/logger"
+	"github.com/wizact/te-reo-bot/pkg/testutils"
 	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
 func TestParseFile(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	jc := `{
@@ -41,16 +33,8 @@ func TestParseFile(t *testing.T) {
 func TestReadFile(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	f, e := ws.ReadFile("../../cmd/server/dictionary.json")
@@ -65,16 +49,8 @@ func TestReadFile(t *testing.T) {
 func TestParseFile_InvalidJSON(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Invalid JSON content
@@ -115,16 +91,8 @@ func TestParseFile_InvalidJSON(t *testing.T) {
 func TestReadFile_NonExistentFile(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Try to read a non-existent file
@@ -156,16 +124,8 @@ func TestReadFile_NonExistentFile(t *testing.T) {
 func TestSelectWordByDay_EmptyDictionary(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Empty words slice
@@ -198,16 +158,8 @@ func TestSelectWordByDay_EmptyDictionary(t *testing.T) {
 func TestSelectWordByIndex_EmptyDictionary(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Empty words slice
@@ -244,16 +196,8 @@ func TestSelectWordByIndex_EmptyDictionary(t *testing.T) {
 func TestSelectWordByIndex_InvalidIndex(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Valid words slice
@@ -298,16 +242,8 @@ func TestSelectWordByIndex_InvalidIndex(t *testing.T) {
 func TestSelectWordByIndex_ValidIndex(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Valid words slice
@@ -328,16 +264,8 @@ func TestSelectWordByIndex_ValidIndex(t *testing.T) {
 func TestSelectWordByDay_ValidWords(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Valid words slice
@@ -358,16 +286,8 @@ func TestSelectWordByDay_ValidWords(t *testing.T) {
 func TestReadAndParseFile_Integration(t *testing.T) {
 	assert := assert.New(t)
 
-	// Create logger config for testing
-	config := &logger.LoggerConfig{
-		EnableStackTraces: true,
-		LogLevel:          "debug",
-		Environment:       "test",
-		LogFormat:         "json",
-	}
-	testLogger := logger.NewLogger(config)
-	logger.SetGlobalLogger(testLogger)
-	defer logger.ResetGlobalLogger()
+	cleanup := testutils.SetupGlobalTestLogger()
+	defer cleanup()
 	ws := wotd.NewWordSelector()
 
 	// Test successful read and parse

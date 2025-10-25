@@ -23,10 +23,9 @@ func NewGoogleCloudStorageClientWrapper(logger logger.Logger) *GoogleCloudStorag
 
 func (csc *GoogleCloudStorageClientWrapper) Client(ctx context.Context) error {
 	c, err := storage.NewClient(ctx)
-
 	if err != nil {
-		appErr := entities.NewAppError(err, 500, "Failed to create Google Cloud Storage client").
-			WithContext("operation", "client_initialization")
+		appErr := entities.NewAppError(err, 500, "Failed to create Google Cloud Storage client")
+		appErr = appErr.WithContext("operation", "client_initialization")
 
 		csc.logger.ErrorWithStack(appErr, "Google Cloud Storage client initialization failed",
 			logger.String("operation", "client_initialization"),
@@ -53,10 +52,10 @@ func (csc *GoogleCloudStorageClientWrapper) GetObject(ctx context.Context, bucke
 	rc, err := bkt.Object(fn).NewReader(ctx)
 
 	if err != nil {
-		appErr := entities.NewAppError(err, 404, "Failed to get object from Google Cloud Storage").
-			WithContext("operation", "get_object").
-			WithContext("bucket_name", bucketName).
-			WithContext("object_name", fn)
+		appErr := entities.NewAppError(err, 404, "Failed to get object from Google Cloud Storage")
+		appErr = appErr.WithContext("operation", "get_object")
+		appErr = appErr.WithContext("bucket_name", bucketName)
+		appErr = appErr.WithContext("object_name", fn)
 
 		csc.logger.ErrorWithStack(appErr, "Failed to create object reader",
 			logger.String("operation", "get_object"),
@@ -71,10 +70,10 @@ func (csc *GoogleCloudStorageClientWrapper) GetObject(ctx context.Context, bucke
 
 	file, err := io.ReadAll(rc)
 	if err != nil {
-		appErr := entities.NewAppError(err, 500, "Failed to read object data from Google Cloud Storage").
-			WithContext("operation", "read_object_data").
-			WithContext("bucket_name", bucketName).
-			WithContext("object_name", fn)
+		appErr := entities.NewAppError(err, 500, "Failed to read object data from Google Cloud Storage")
+		appErr = appErr.WithContext("operation", "read_object_data")
+		appErr = appErr.WithContext("bucket_name", bucketName)
+		appErr = appErr.WithContext("object_name", fn)
 
 		csc.logger.ErrorWithStack(appErr, "Failed to read object data",
 			logger.String("operation", "read_object_data"),
