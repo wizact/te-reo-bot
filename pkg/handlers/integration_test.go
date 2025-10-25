@@ -487,7 +487,7 @@ func TestMiddlewareErrorHandling(t *testing.T) {
 			commonMiddleware := func(next http.Handler) http.Handler {
 				return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 					// Skip health check route
-					if strings.Index(r.RequestURI, "/__health-check") != 0 {
+					if !strings.HasPrefix(r.RequestURI, "/__health-check") {
 						// Check for API key header
 						apiKey := r.Header.Get("X-Api-Key")
 						if apiKey == "" {

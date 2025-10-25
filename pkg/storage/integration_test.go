@@ -75,10 +75,10 @@ func TestGoogleCloudStorageIntegrationErrors(t *testing.T) {
 						err,
 						404,
 						"Failed to get object from Google Cloud Storage",
-					).
-						WithContext("operation", "get_object").
-						WithContext("bucket_name", "non-existent-bucket").
-						WithContext("object_name", "test-object.jpg")
+					)
+					appErr = appErr.WithContext("operation", "get_object")
+					appErr = appErr.WithContext("bucket_name", "non-existent-bucket")
+					appErr = appErr.WithContext("object_name", "test-object.jpg")
 
 					return appErr
 				}
@@ -120,10 +120,10 @@ func TestGoogleCloudStorageIntegrationErrors(t *testing.T) {
 						err,
 						404,
 						"Failed to get object from Google Cloud Storage",
-					).
-						WithContext("operation", "get_object").
-						WithContext("bucket_name", "test-bucket").
-						WithContext("object_name", "non-existent-object.jpg")
+					)
+					appErr = appErr.WithContext("operation", "get_object")
+					appErr = appErr.WithContext("bucket_name", "test-bucket")
+					appErr = appErr.WithContext("object_name", "non-existent-object.jpg")
 
 					return appErr
 				}
