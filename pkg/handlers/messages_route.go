@@ -35,7 +35,8 @@ func (m MessagesRoute) PostMessage() appHandler {
 			if appErr, ok := erf.(*ent.AppError); ok {
 				return appErr
 			}
-			return &ent.AppError{Err: erf, Code: 500, Message: "Failed sending the word of the day"}
+			return ent.NewAppError(erf, 500, "Failed sending the word of the day")
+
 		}
 
 		d, epf := ws.ParseFile(f, "./dictionary.json")
@@ -44,7 +45,7 @@ func (m MessagesRoute) PostMessage() appHandler {
 			if appErr, ok := epf.(*ent.AppError); ok {
 				return appErr
 			}
-			return &ent.AppError{Err: epf, Code: 500, Message: "Failed sending the word of the day"}
+			return ent.NewAppError(epf, 500, "Failed sending the word of the day")
 		}
 
 		var wo *wotd.Word
@@ -61,7 +62,7 @@ func (m MessagesRoute) PostMessage() appHandler {
 			if appErr, ok := err.(*ent.AppError); ok {
 				return appErr
 			}
-			return &ent.AppError{Err: err, Code: 500, Message: "Failed selecting word of the day"}
+			return ent.NewAppError(err, 500, "Failed selecting word of the day")
 		}
 
 		dest := r.URL.Query().Get("dest")
@@ -91,7 +92,7 @@ func (m MessagesRoute) GetImage() appHandler {
 			if appErr, ok := err.(*ent.AppError); ok {
 				return appErr
 			}
-			return &ent.AppError{Err: err, Code: 500, Message: "Failed to acquire image"}
+			return ent.NewAppError(err, 500, "Failed to acquire image")
 		}
 
 		b, err := cscw.GetObject(context.Background(), m.bucketName, fn)
@@ -101,7 +102,7 @@ func (m MessagesRoute) GetImage() appHandler {
 			if appErr, ok := err.(*ent.AppError); ok {
 				return appErr
 			}
-			return &ent.AppError{Err: err, Code: 500, Message: "Failed to acquire image"}
+			return ent.NewAppError(err, 500, "Failed to acquire image")
 		}
 
 		w.WriteHeader(http.StatusOK)

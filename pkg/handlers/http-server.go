@@ -229,14 +229,10 @@ func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		// Log error with stack trace if available, otherwise log without stack trace
-		if e.HasStackTrace() {
-			// Use the stack trace from the AppError instead of capturing a new one
-			getLogger().Error(e.Err, "HTTP handler error occurred", logFields...)
-		} else {
-			// Capture stack trace at this point since the AppError doesn't have one
-			getLogger().ErrorWithStack(e.Err, "HTTP handler error occurred", logFields...)
-		}
+		// Always capture stack trace at the handler level for consistent logging
+		// This ensures we always have debugging information, regardless of
+		// whether the AppError was created with NewAppError() or manually
+		getLogger().ErrorWithStack(e.Err, "HTTP handler error occurred", logFields...)
 
 		// Return friendly error response to client (never include stack traces or internal details)
 		w.WriteHeader(e.Code)
