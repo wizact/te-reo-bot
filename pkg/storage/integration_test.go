@@ -3,6 +3,7 @@ package storage_test
 import (
 	"bytes"
 	"context"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,8 +12,20 @@ import (
 	"github.com/wizact/te-reo-bot/pkg/storage"
 )
 
+// skipIfNoCredentials skips the test if Google Cloud credentials are not available
+func skipIfNoCredentials(t *testing.T) {
+	// Check for common Google Cloud credential environment variables
+	if os.Getenv("GOOGLE_APPLICATION_CREDENTIALS") == "" &&
+		os.Getenv("GCLOUD_PROJECT") == "" &&
+		os.Getenv("GOOGLE_CLOUD_PROJECT") == "" {
+		t.Skip("Skipping Google Cloud Storage integration test - no credentials available")
+	}
+}
+
 // TestGoogleCloudStorageIntegrationErrors tests Google Cloud Storage error scenarios
 func TestGoogleCloudStorageIntegrationErrors(t *testing.T) {
+	skipIfNoCredentials(t)
+
 	tests := []struct {
 		name             string
 		setupTest        func() (*storage.GoogleCloudStorageClientWrapper, *bytes.Buffer)
@@ -186,6 +199,8 @@ func TestGoogleCloudStorageIntegrationErrors(t *testing.T) {
 
 // TestStorageContextPropagation tests that context information is properly propagated through storage operations
 func TestStorageContextPropagation(t *testing.T) {
+	skipIfNoCredentials(t)
+
 	var logBuffer bytes.Buffer
 	config := &logger.LoggerConfig{
 		EnableStackTraces: true,
@@ -252,6 +267,8 @@ func TestStorageContextPropagation(t *testing.T) {
 
 // TestStorageErrorWrapping tests that storage errors are properly wrapped with context
 func TestStorageErrorWrapping(t *testing.T) {
+	skipIfNoCredentials(t)
+
 	var logBuffer bytes.Buffer
 	config := &logger.LoggerConfig{
 		EnableStackTraces: true,
