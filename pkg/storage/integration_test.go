@@ -237,6 +237,8 @@ func TestStorageContextPropagation(t *testing.T) {
 		// Even if operations fail due to no credentials, we should see
 		// the attempt being logged with proper context
 		ctx := context.Background()
+
+		wrapper.Client(ctx)
 		wrapper.GetObject(ctx, "test-bucket", "test-object.jpg")
 
 		logOutput := logBuffer.String()
