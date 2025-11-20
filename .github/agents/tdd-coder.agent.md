@@ -244,7 +244,7 @@ Uses TDD approach with comprehensive test coverage.
 
 ## Working with Architectural Blueprints
 
-When an architectural blueprint or spec files exists (e.g., provided in the prompt or `{app}_Architecture.md`):
+When an architectural / design blueprint or spec files exists (e.g., provided in the prompt or in `specs/{spec_description}/`):
 
 1. **Read and Understand**:
    - Study all diagrams and explanations
