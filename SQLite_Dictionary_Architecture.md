@@ -23,7 +23,7 @@ graph TB
     User[Content Manager] -->|Manual Edit| JSON[dictionary.json]
     JSON -->|Git Hooks| Validate[JS Validation Scripts]
     Validate -->|Valid| Repo[Git Repository]
-    Scheduler[GitHub Actions/Cron] -->|HTTP POST| API[/api/v1/messages]
+    Scheduler[GitHub Actions/Cron] -->|HTTP POST| API["HTTP Server<br/>/api/v1/messages"]
     API -->|Read| JSON
     API -->|Select Word by Day| Logic[WordSelector]
     Logic -->|Post| Twitter[Twitter API]
@@ -43,7 +43,7 @@ graph TB
     Val -->|Generate| JSON[dictionary.json]
     JSON -->|Git Commit| Repo[Git Repository]
     
-    Scheduler[GitHub Actions/Cron] -->|HTTP POST| API[/api/v1/messages]
+    Scheduler[GitHub Actions/Cron] -->|HTTP POST| API["HTTP Server<br/>/api/v1/messages"]
     API -->|Read| JSON
     API -->|Select Word by Day| Logic[WordSelector]
     Logic -->|Post| Twitter[Twitter API]
