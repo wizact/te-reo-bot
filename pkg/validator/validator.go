@@ -1,0 +1,155 @@
+package validator
+
+import (
+	"fmt"
+	"sort"
+
+	"github.com/wizact/te-reo-bot/pkg/repository"
+)
+
+const requiredWordCount = 366
+
+// Validator handles validation of dictionary data
+type Validator struct {
+	repo repository.WordRepository
+}
+
+// NewValidator creates a new Validator
+func NewValidator(repo repository.WordRepository) *Validator {
+	return &Validator{repo: repo}
+}
+
+// ValidationReport contains the results of validation
+type ValidationReport struct {
+	IsValid          bool     `json:"is_valid"`
+	TotalWords       int      `json:"total_words"`
+	MissingIndexes   []int    `json:"missing_indexes,omitempty"`
+	DuplicateIndexes []int    `json:"duplicate_indexes,omitempty"`
+	Errors           []string `json:"errors,omitempty"`
+}
+
+// Validate checks if the database contains exactly 366 unique day indexes (1-366)
+func (v *Validator) Validate() (*ValidationReport, error) {
+	report := &ValidationReport{
+		IsValid:          true,
+		MissingIndexes:   []int{},
+		DuplicateIndexes: []int{},
+		Errors:           []string{},
+	}
+
+	// Get all words by day index
+	wordsByDay, err := v.repo.GetWordsByDayIndex()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get words by day index: %w", err)
+	}
+
+	report.TotalWords = len(wordsByDay)
+
+	// Check total count
+	if report.TotalWords != requiredWordCount {
+		report.IsValid = false
+		report.Errors = append(report.Errors,
+			fmt.Sprintf("Expected %d words with day_index, but found %d",
+				requiredWordCount, report.TotalWords))
+	}
+
+	// Find missing indexes (1-366)
+	for i := 1; i <= requiredWordCount; i++ {
+		if _, exists := wordsByDay[i]; !exists {
+			report.MissingIndexes = append(report.MissingIndexes, i)
+		}
+	}
+
+	if len(report.MissingIndexes) > 0 {
+		report.IsValid = false
+		if len(report.MissingIndexes) <= 20 {
+			report.Errors = append(report.Errors,
+				fmt.Sprintf("Missing day indexes: %v", report.MissingIndexes))
+		} else {
+			report.Errors = append(report.Errors,
+				fmt.Sprintf("Missing %d day indexes (showing first 20): %v",
+					len(report.MissingIndexes), report.MissingIndexes[:20]))
+		}
+	}
+
+	// Note: Duplicates are prevented by UNIQUE constraint in database,
+	// but we check here for completeness
+	if len(report.DuplicateIndexes) > 0 {
+		report.IsValid = false
+		report.Errors = append(report.Errors,
+			fmt.Sprintf("Duplicate day indexes found: %v", report.DuplicateIndexes))
+	}
+
+	return report, nil
+}
+
+// ValidateAndReport validates and returns a human-readable summary
+func (v *Validator) ValidateAndReport() (string, error) {
+	report, err := v.Validate()
+	if err != nil {
+		return "", err
+	}
+
+	if report.IsValid {
+		return fmt.Sprintf("✓ Validation passed: %d words with unique day indexes (1-366)",
+			report.TotalWords), nil
+	}
+
+	summary := fmt.Sprintf("✗ Validation failed:\n")
+	summary += fmt.Sprintf("  Total words: %d (expected %d)\n",
+		report.TotalWords, requiredWordCount)
+
+	if len(report.MissingIndexes) > 0 {
+		summary += fmt.Sprintf("  Missing indexes: %d\n", len(report.MissingIndexes))
+		if len(report.MissingIndexes) <= 20 {
+			summary += fmt.Sprintf("    %v\n", report.MissingIndexes)
+		} else {
+			summary += fmt.Sprintf("    First 20: %v\n", report.MissingIndexes[:20])
+		}
+	}
+
+	if len(report.DuplicateIndexes) > 0 {
+		summary += fmt.Sprintf("  Duplicate indexes: %v\n", report.DuplicateIndexes)
+	}
+
+	return summary, nil
+}
+
+// GetMissingIndexesRange returns missing indexes in a more compact format
+func (r *ValidationReport) GetMissingIndexesRange() []string {
+	if len(r.MissingIndexes) == 0 {
+		return []string{}
+	}
+
+	// Sort indexes
+	sorted := make([]int, len(r.MissingIndexes))
+	copy(sorted, r.MissingIndexes)
+	sort.Ints(sorted)
+
+	ranges := []string{}
+	start := sorted[0]
+	end := sorted[0]
+
+	for i := 1; i < len(sorted); i++ {
+		if sorted[i] == end+1 {
+			end = sorted[i]
+		} else {
+			if start == end {
+				ranges = append(ranges, fmt.Sprintf("%d", start))
+			} else {
+				ranges = append(ranges, fmt.Sprintf("%d-%d", start, end))
+			}
+			start = sorted[i]
+			end = sorted[i]
+		}
+	}
+
+	// Add the last range
+	if start == end {
+		ranges = append(ranges, fmt.Sprintf("%d", start))
+	} else {
+		ranges = append(ranges, fmt.Sprintf("%d-%d", start, end))
+	}
+
+	return ranges
+}
