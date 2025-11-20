@@ -208,3 +208,9 @@ server.crt
 
 # Claude analysis files
 .claude/
+
+# SQLite database files (generated, not committed)
+data/
+*.db
+*.db-shm
+*.db-wal
