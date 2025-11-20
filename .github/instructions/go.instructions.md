@@ -278,12 +278,20 @@ Follow idiomatic Go practices and community standards when writing Go code. Thes
 
 ## Testing
 
+### Testing Libraries
+
+Use the following testing stack:
+- **Standard library `testing`**: Base testing framework
+- **`testify`**: For assertions (`github.com/stretchr/testify/assert`)
+- **`gomock`**: For generating mocks (`github.com/golang/mock/gomock`)
+
 ### Test Organization
 
 - Keep tests in the same package (white-box testing)
 - Use `_test` package suffix for black-box testing
 - Name test files with `_test.go` suffix
 - Place test files next to the code they test
+- Store generated mocks in a `mocks/` subdirectory
 
 ### Writing Tests
 
@@ -291,7 +299,74 @@ Follow idiomatic Go practices and community standards when writing Go code. Thes
 - Name tests descriptively using `Test_functionName_scenario`
 - Use subtests with `t.Run` for better organization
 - Test both success and error cases
-- Consider using `testify` or similar libraries when they add value, but don't over-complicate simple tests
+- Use testify for assertions to make tests more readable
+- Use gomock to generate mocks for interfaces
+
+### Table-Driven Tests with Testify
+
+Use table-driven tests with testify assertions:
+
+```go
+func TestFeature(t *testing.T) {
+    tests := []struct {
+        name     string
+        input    InputType
+        expected OutputType
+        wantErr  bool
+    }{
+        {
+            name:     "valid input",
+            input:    validInput,
+            expected: expectedOutput,
+            wantErr:  false,
+        },
+        {
+            name:     "invalid input",
+            input:    invalidInput,
+            expected: zeroValue,
+            wantErr:  true,
+        },
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            result, err := FeatureFunc(tt.input)
+            
+            if tt.wantErr {
+                assert.Error(t, err)
+                return
+            }
+            
+            assert.NoError(t, err)
+            assert.Equal(t, tt.expected, result)
+        })
+    }
+}
+```
+
+### Using Mocks with Gomock
+
+For testing with dependencies, use gomock to generate and use mocks:
+
+```go
+// Generate mocks with: mockgen -source=interface.go -destination=mocks/mock_interface.go
+
+func TestWithMock(t *testing.T) {
+    ctrl := gomock.NewController(t)
+    defer ctrl.Finish()
+
+    mockDep := mocks.NewMockDependency(ctrl)
+    mockDep.EXPECT().
+        DoSomething(gomock.Any()).
+        Return("result", nil)
+
+    sut := NewService(mockDep)
+    result, err := sut.Method()
+    
+    assert.NoError(t, err)
+    assert.Equal(t, "expected", result)
+}
+```
 
 ### Test Helpers
 
