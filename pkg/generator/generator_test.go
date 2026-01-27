@@ -39,6 +39,8 @@ func addTestWords(t *testing.T, repo repository.WordRepository) {
 		{3, "Tama", "Boy", "", "", ""},
 	}
 
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, w := range words {
 		word := &repository.Word{
 			DayIndex:         &w.dayIndex,
@@ -48,9 +50,11 @@ func addTestWords(t *testing.T, repo repository.WordRepository) {
 			Photo:            w.photo,
 			PhotoAttribution: w.attr,
 		}
-		err := repo.AddWord(word)
+		err := repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 }
 
 func TestGenerateJSON(t *testing.T) {
@@ -103,15 +107,19 @@ func TestGenerateJSONSorted(t *testing.T) {
 
 	// Add words in random order
 	indexes := []int{3, 1, 2}
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, idx := range indexes {
 		word := &repository.Word{
 			DayIndex: &idx,
 			Word:     "Word" + string(rune(idx)),
 			Meaning:  "Meaning" + string(rune(idx)),
 		}
-		err := repo.AddWord(word)
+		err := repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	gen := generator.NewGenerator(repo)
 	jsonBytes, err := gen.GenerateJSON()
@@ -144,7 +152,11 @@ func TestGenerateJSONPreservesUTF8(t *testing.T) {
 		Meaning:  "The world's only flightless parrot",
 		Photo:    "kakapo.jpg",
 	}
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	gen := generator.NewGenerator(repo)
@@ -176,7 +188,11 @@ func TestGenerateJSONEmptyFields(t *testing.T) {
 		Link:     "",
 		Photo:    "",
 	}
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	gen := generator.NewGenerator(repo)
@@ -265,7 +281,9 @@ func TestGenerateOnlyDayIndexedWords(t *testing.T) {
 		Word:     "Assigned",
 		Meaning:  "Has day index",
 	}
-	err := repo.AddWord(word1)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word1)
 	require.NoError(t, err)
 
 	// Add word without day_index
@@ -273,7 +291,9 @@ func TestGenerateOnlyDayIndexedWords(t *testing.T) {
 		Word:    "Unassigned",
 		Meaning: "No day index",
 	}
-	err = repo.AddWord(word2)
+	err = repo.AddWord(tx, word2)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	gen := generator.NewGenerator(repo)
@@ -291,4 +311,46 @@ func TestGenerateOnlyDayIndexedWords(t *testing.T) {
 
 	assert.Len(t, dict.Dictionary, 1, "Only words with day_index should be generated")
 	assert.Equal(t, "Assigned", dict.Dictionary[0].Word)
+}
+
+// Error scenario tests
+
+func TestGeneratorErrorScenarios(t *testing.T) {
+	t.Run("Write to invalid directory", func(t *testing.T) {
+		db, repo := setupTestDB(t)
+		defer db.Close()
+
+		addTestWords(t, repo)
+
+		gen := generator.NewGenerator(repo)
+		// Try to write to non-existent directory without creating it
+		err := gen.GenerateToFile("/nonexistent/directory/output.json")
+		assert.Error(t, err)
+	})
+
+	t.Run("Empty database", func(t *testing.T) {
+		db, repo := setupTestDB(t)
+		defer db.Close()
+
+		gen := generator.NewGenerator(repo)
+		jsonBytes, err := gen.GenerateJSON()
+
+		assert.NoError(t, err)
+		// Verify it contains an empty dictionary array (format may vary)
+		var dict struct {
+			Dictionary []interface{} `json:"dictionary"`
+		}
+		json.Unmarshal(jsonBytes, &dict)
+		assert.Len(t, dict.Dictionary, 0)
+	})
+
+	t.Run("Generate with closed database", func(t *testing.T) {
+		db, repo := setupTestDB(t)
+		addTestWords(t, repo)
+		db.Close() // Close database first
+
+		gen := generator.NewGenerator(repo)
+		_, err := gen.GenerateJSON()
+		assert.Error(t, err, "Should fail with closed database")
+	})
 }

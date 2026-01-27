@@ -50,17 +50,17 @@ func (m *Migrator) MigrateWords(dict *Dictionary) error {
 		return fmt.Errorf("failed to check existing words: %w", err)
 	}
 
-	// If we already have words, clear them first for idempotent behavior
+	// Begin transaction for all write operations
+	tx, err := m.repo.BeginTx()
+	if err != nil {
+		return fmt.Errorf("failed to begin transaction: %w", err)
+	}
+
+	// Delete existing words if any (batch operation)
 	if existingCount > 0 {
-		// Get all existing words and delete them
-		existingWords, err := m.repo.GetWordsByDayIndex()
-		if err != nil {
-			return fmt.Errorf("failed to get existing words: %w", err)
-		}
-		for _, word := range existingWords {
-			if err := m.repo.DeleteWord(word.ID); err != nil {
-				return fmt.Errorf("failed to delete existing word: %w", err)
-			}
+		if err := m.repo.DeleteAllWordsByDayIndex(tx); err != nil {
+			m.repo.RollbackTx(tx)
+			return fmt.Errorf("failed to delete existing words: %w", err)
 		}
 	}
 
@@ -75,10 +75,16 @@ func (m *Migrator) MigrateWords(dict *Dictionary) error {
 			PhotoAttribution: dictWord.PhotoAttribution,
 		}
 
-		if err := m.repo.AddWord(word); err != nil {
+		if err := m.repo.AddWord(tx, word); err != nil {
+			m.repo.RollbackTx(tx)
 			return fmt.Errorf("failed to add word %q (index %d): %w",
 				dictWord.Word, dictWord.Index, err)
 		}
+	}
+
+	if err := m.repo.CommitTx(tx); err != nil {
+		m.repo.RollbackTx(tx)
+		return fmt.Errorf("failed to commit transaction: %w", err)
 	}
 
 	return nil

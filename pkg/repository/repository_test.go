@@ -34,8 +34,12 @@ func TestAddWord(t *testing.T) {
 		Photo:    "kia-ora.jpg",
 	}
 
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
 	assert.NoError(t, err, "Adding word should succeed")
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 	assert.NotZero(t, word.ID, "Word ID should be set after insert")
 }
 
@@ -48,7 +52,12 @@ func TestAddWordWithoutDayIndex(t *testing.T) {
 		Meaning: "A word not yet assigned to a day",
 	}
 
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 	assert.NoError(t, err, "Adding word without day_index should succeed")
 	assert.NotZero(t, word.ID)
 }
@@ -64,7 +73,11 @@ func TestGetWordByID(t *testing.T) {
 		Word:     "Test word",
 		Meaning:  "Test meaning",
 	}
-	err := repo.AddWord(originalWord)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, originalWord)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	// Retrieve it
@@ -96,7 +109,11 @@ func TestGetWordByDayIndex(t *testing.T) {
 		Word:     "Day 10 word",
 		Meaning:  "Day 10 meaning",
 	}
-	err := repo.AddWord(originalWord)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, originalWord)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	// Retrieve by day_index
@@ -119,10 +136,14 @@ func TestGetAllWords(t *testing.T) {
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index
 	}
 
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, word := range words {
-		err := repo.AddWord(word)
+		err = repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	// Get all words
 	allWords, err := repo.GetAllWords()
@@ -143,10 +164,14 @@ func TestGetWordsByDayIndex(t *testing.T) {
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index - should not be in map
 	}
 
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, word := range words {
-		err := repo.AddWord(word)
+		err := repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	// Get words by day_index
 	wordsByDay, err := repo.GetWordsByDayIndex()
@@ -169,7 +194,11 @@ func TestUpdateWord(t *testing.T) {
 		Word:     "Original",
 		Meaning:  "Original meaning",
 	}
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	// Update it
@@ -200,12 +229,20 @@ func TestDeleteWord(t *testing.T) {
 		Word:     "To be deleted",
 		Meaning:  "Will be removed",
 	}
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
+	tx, err = repo.BeginTx()
+	require.NoError(t, err)
 	// Delete it
-	err = repo.DeleteWord(word.ID)
+	err = repo.DeleteWord(tx, word.ID)
 	assert.NoError(t, err)
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	// Verify deletion
 	_, err = repo.GetWordByID(word.ID)
@@ -228,10 +265,14 @@ func TestGetWordCount(t *testing.T) {
 		{Word: "Word2", Meaning: "Meaning2"},
 	}
 
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, word := range words {
-		err := repo.AddWord(word)
+		err := repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	count, err = repo.GetWordCount()
 	assert.NoError(t, err)
@@ -251,10 +292,14 @@ func TestGetWordCountByDayIndex(t *testing.T) {
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index
 	}
 
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
 	for _, word := range words {
-		err := repo.AddWord(word)
+		err := repo.AddWord(tx, word)
 		require.NoError(t, err)
 	}
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 
 	count, err := repo.GetWordCountByDayIndex()
 	assert.NoError(t, err)
@@ -272,7 +317,11 @@ func TestDuplicateDayIndexError(t *testing.T) {
 		Word:     "Word1",
 		Meaning:  "Meaning1",
 	}
-	err := repo.AddWord(word1)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word1)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	// Try to add another word with the same day_index
@@ -281,8 +330,11 @@ func TestDuplicateDayIndexError(t *testing.T) {
 		Word:     "Word2",
 		Meaning:  "Meaning2",
 	}
-	err = repo.AddWord(word2)
+	tx, err = repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word2)
 	assert.Error(t, err, "Adding duplicate day_index should fail")
+	repo.RollbackTx(tx)
 }
 
 func TestRequiredFieldsValidation(t *testing.T) {
@@ -299,7 +351,11 @@ func TestRequiredFieldsValidation(t *testing.T) {
 		Word:     "Valid word",
 		Meaning:  "Valid meaning",
 	}
-	err := repo.AddWord(word)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, word)
 	assert.NoError(t, err, "Adding word with all required fields should succeed")
+	err = repo.CommitTx(tx)
+	require.NoError(t, err)
 	assert.NotZero(t, word.ID)
 }

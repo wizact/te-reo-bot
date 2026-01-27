@@ -15,6 +15,25 @@ func NewSQLiteRepository(db *sql.DB) WordRepository {
 	return &SQLiteRepository{db: db}
 }
 
+// BeginTx starts a new database transaction
+func (r *SQLiteRepository) BeginTx() (*sql.Tx, error) {
+	tx, err := r.db.Begin()
+	if err != nil {
+		return nil, err
+	}
+	return tx, nil
+}
+
+// CommitTx commits the given transaction
+func (r *SQLiteRepository) CommitTx(tx *sql.Tx) error {
+	return tx.Commit()
+}
+
+// RollbackTx rolls back the given transaction
+func (r *SQLiteRepository) RollbackTx(tx *sql.Tx) error {
+	return tx.Rollback()
+}
+
 // GetAllWords returns all words from the database
 func (r *SQLiteRepository) GetAllWords() ([]Word, error) {
 	query := `
@@ -123,13 +142,13 @@ func (r *SQLiteRepository) GetWordByDayIndex(dayIndex int) (*Word, error) {
 }
 
 // AddWord inserts a new word into the database
-func (r *SQLiteRepository) AddWord(word *Word) error {
+func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *Word) error {
 	query := `
 		INSERT INTO words (day_index, word, meaning, link, photo, photo_attribution)
 		VALUES (?, ?, ?, ?, ?, ?)
 	`
 
-	result, err := r.db.Exec(query,
+	result, err := tx.Exec(query,
 		word.DayIndex,
 		word.Word,
 		word.Meaning,
@@ -174,9 +193,16 @@ func (r *SQLiteRepository) UpdateWord(word *Word) error {
 }
 
 // DeleteWord removes a word from the database (hard delete)
-func (r *SQLiteRepository) DeleteWord(id int) error {
+func (r *SQLiteRepository) DeleteWord(tx *sql.Tx, id int) error {
 	query := `DELETE FROM words WHERE id = ?`
-	_, err := r.db.Exec(query, id)
+	_, err := tx.Exec(query, id)
+	return err
+}
+
+// DeleteAllWordsByDayIndex deletes all words with day_index in single operation
+func (r *SQLiteRepository) DeleteAllWordsByDayIndex(tx *sql.Tx) error {
+	query := `DELETE FROM words WHERE day_index IS NOT NULL`
+	_, err := tx.Exec(query)
 	return err
 }
 
