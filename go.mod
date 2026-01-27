@@ -15,5 +15,4 @@ require (
 	github.com/stretchr/testify v1.8.1
 	github.com/wizact/yacli v0.0.0-20200621092021-be57780af79a
 	golang.org/x/sys v0.4.0 // indirect
-
 )

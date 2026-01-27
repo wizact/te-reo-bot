@@ -183,10 +183,86 @@ func TestMigrateDictionaryStructure(t *testing.T) {
 
 	// Verify structure matches
 	assert.Len(t, dict.Words, 3)
-	
+
 	// Check first word fields
 	firstWord := dict.Words[0]
 	assert.Equal(t, 1, firstWord.Index)
 	assert.Equal(t, "Kia ora", firstWord.Word)
 	assert.Equal(t, "Hello, be well", firstWord.Meaning)
+}
+
+// Error scenario tests
+
+func TestMigrationErrorScenarios(t *testing.T) {
+	t.Run("Invalid JSON format", func(t *testing.T) {
+		invalidJSON := `{"dictionary": "not an array"}`
+		_, err := migration.ParseDictionaryJSON([]byte(invalidJSON))
+		assert.Error(t, err)
+	})
+
+	t.Run("Corrupted JSON file", func(t *testing.T) {
+		corruptedJSON := `{"dictionary": [`
+		_, err := migration.ParseDictionaryJSON([]byte(corruptedJSON))
+		assert.Error(t, err)
+	})
+
+	t.Run("Empty JSON", func(t *testing.T) {
+		emptyJSON := `{}`
+		dict, err := migration.ParseDictionaryJSON([]byte(emptyJSON))
+		assert.NoError(t, err)
+		assert.Len(t, dict.Words, 0)
+	})
+
+	t.Run("Null dictionary array", func(t *testing.T) {
+		nullJSON := `{"dictionary": null}`
+		dict, err := migration.ParseDictionaryJSON([]byte(nullJSON))
+		assert.NoError(t, err)
+		assert.Nil(t, dict.Words)
+	})
+}
+
+func TestMigrationFileErrors(t *testing.T) {
+	t.Run("Non-existent file", func(t *testing.T) {
+		db, repo := setupTestDB(t)
+		defer db.Close()
+
+		migrator := migration.NewMigrator(repo)
+		err := migrator.MigrateFromFile("/nonexistent/file.json")
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "failed to read file")
+	})
+
+	t.Run("Invalid file path", func(t *testing.T) {
+		db, repo := setupTestDB(t)
+		defer db.Close()
+
+		migrator := migration.NewMigrator(repo)
+		// Use invalid JSON file
+		tmpDir := t.TempDir()
+		invalidFile := filepath.Join(tmpDir, "invalid.json")
+		os.WriteFile(invalidFile, []byte("not json"), 0644)
+
+		err := migrator.MigrateFromFile(invalidFile)
+		assert.Error(t, err)
+	})
+}
+
+func TestMigrationDuplicateIndexes(t *testing.T) {
+	db, repo := setupTestDB(t)
+	defer db.Close()
+
+	duplicateJSON := `{
+		"dictionary": [
+			{"index": 1, "word": "Word1", "meaning": "Meaning1", "link": "", "photo": "", "photo_attribution": ""},
+			{"index": 1, "word": "Word2", "meaning": "Meaning2", "link": "", "photo": "", "photo_attribution": ""}
+		]
+	}`
+
+	migrator := migration.NewMigrator(repo)
+	dict, err := migration.ParseDictionaryJSON([]byte(duplicateJSON))
+	require.NoError(t, err)
+
+	// Migration should fail due to unique constraint on day_index
+	err = migrator.MigrateWords(dict)
+	assert.Error(t, err, "Should fail with duplicate day_index")
 }

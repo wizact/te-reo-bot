@@ -29,7 +29,11 @@ func addTestWords(t *testing.T, repo repository.WordRepository, indexes []int) {
 			Word:     "Word" + string(rune(idx)),
 			Meaning:  "Meaning" + string(rune(idx)),
 		}
-		err := repo.AddWord(word)
+		tx, err := repo.BeginTx()
+		require.NoError(t, err)
+		err = repo.AddWord(tx, word)
+		require.NoError(t, err)
+		err = repo.CommitTx(tx)
 		require.NoError(t, err)
 	}
 }
@@ -119,12 +123,12 @@ func TestValidationReport(t *testing.T) {
 
 	assert.NoError(t, err)
 	assert.NotNil(t, report)
-	
+
 	// Verify report structure
 	assert.False(t, report.IsValid)
 	assert.Equal(t, 4, report.TotalWords)
 	assert.NotEmpty(t, report.MissingIndexes)
-	
+
 	// Check that we have proper error messages
 	assert.NotEmpty(t, report.Errors)
 }
@@ -145,7 +149,11 @@ func TestValidateWithUnassignedWords(t *testing.T) {
 		Word:    "Unassigned word",
 		Meaning: "Not assigned to a day",
 	}
-	err := repo.AddWord(unassigned)
+	tx, err := repo.BeginTx()
+	require.NoError(t, err)
+	err = repo.AddWord(tx, unassigned)
+	require.NoError(t, err)
+	err = repo.CommitTx(tx)
 	require.NoError(t, err)
 
 	v := validator.NewValidator(repo)
@@ -169,7 +177,7 @@ func TestValidationReportMessages(t *testing.T) {
 
 	assert.NoError(t, err)
 	assert.NotEmpty(t, report.Errors)
-	
+
 	// Check for helpful error message
 	hasCountError := false
 	for _, errMsg := range report.Errors {
@@ -197,7 +205,7 @@ func TestValidateIndexRange(t *testing.T) {
 
 	assert.NoError(t, err)
 	assert.True(t, report.IsValid)
-	
+
 	// Verify no indexes are out of range
 	assert.Empty(t, report.MissingIndexes)
 }
