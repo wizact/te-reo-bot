@@ -316,6 +316,7 @@ func runGenerate() {
 	dbPath := fs.String("db", defaultDBPath, "Path to SQLite database file")
 	outputFile := fs.String("output", defaultOutputPath, "Path to output dictionary.json file")
 	compact := fs.Bool("compact", false, "Generate compact JSON (no indentation)")
+	all := fs.Bool("all", false, "Export ALL words (including those without day_index, using 0 for index)")
 	fs.Parse(os.Args[2:])
 
 	if err := validatePath(*dbPath); err != nil {
@@ -326,6 +327,11 @@ func runGenerate() {
 	logInfo("Generating dictionary.json...\n")
 	logInfo("   Database: %s\n", *dbPath)
 	logInfo("   Output: %s\n", *outputFile)
+	if *all {
+		logInfo("   Mode: Export ALL words (including those without day_index)\n")
+	} else {
+		logInfo("   Mode: Export only words with day_index (1-366)\n")
+	}
 
 	// Open database
 	db, err := sql.Open("sqlite3", *dbPath)
@@ -337,31 +343,43 @@ func runGenerate() {
 
 	repo := repository.NewSQLiteRepository(db)
 
-	// Validate before generating
-	logInfo("\n Validating data...\n")
-	v := validator.NewValidator(repo)
-	report, err := v.Validate()
-	if err != nil {
-		logError("Validation error: %v\n", err)
-		os.Exit(1)
-	}
-
-	if !report.IsValid {
-		logInfo("Validation failed!\n")
-		logInfo("   - Total words: %d (expected 366)\n", report.TotalWords)
-		if len(report.MissingIndexes) > 0 {
-			logInfo("   - Missing indexes: %d\n", len(report.MissingIndexes))
-			if len(report.MissingIndexes) <= 20 {
-				logInfo("     %v\n", report.MissingIndexes)
-			} else {
-				logInfo("     First 20: %v\n", report.MissingIndexes[:20])
-			}
+	// Validate before generating (only for day_index mode)
+	var wordCount int
+	if !*all {
+		logInfo("\n Validating data...\n")
+		v := validator.NewValidator(repo)
+		report, err := v.Validate()
+		if err != nil {
+			logError("Validation error: %v\n", err)
+			os.Exit(1)
 		}
-		logInfo("\n Fix: Ensure all days 1-366 have exactly one word assigned\n")
-		os.Exit(1)
-	}
 
-	logInfo("Validation passed\n")
+		if !report.IsValid {
+			logInfo("Validation failed!\n")
+			logInfo("   - Total words: %d (expected 366)\n", report.TotalWords)
+			if len(report.MissingIndexes) > 0 {
+				logInfo("   - Missing indexes: %d\n", len(report.MissingIndexes))
+				if len(report.MissingIndexes) <= 20 {
+					logInfo("     %v\n", report.MissingIndexes)
+				} else {
+					logInfo("     First 20: %v\n", report.MissingIndexes[:20])
+				}
+			}
+			logInfo("\n Fix: Ensure all days 1-366 have exactly one word assigned\n")
+			os.Exit(1)
+		}
+
+		logInfo("Validation passed\n")
+		wordCount = report.TotalWords
+	} else {
+		// Get total word count for --all mode
+		count, err := repo.GetWordCount()
+		if err != nil {
+			logError("Failed to count words: %v\n", err)
+			os.Exit(1)
+		}
+		wordCount = count
+	}
 
 	// Backup existing dictionary.json if it exists
 	if _, err := os.Stat(*outputFile); err == nil {
@@ -388,9 +406,17 @@ func runGenerate() {
 		os.Exit(1)
 	}
 
-	if err := gen.GenerateToFile(*outputFile); err != nil {
-		logError("Generation failed: %v\n", err)
-		os.Exit(1)
+	// Generate based on mode
+	if *all {
+		if err := gen.GenerateAllToFile(*outputFile); err != nil {
+			logError("Generation failed: %v\n", err)
+			os.Exit(1)
+		}
+	} else {
+		if err := gen.GenerateToFile(*outputFile); err != nil {
+			logError("Generation failed: %v\n", err)
+			os.Exit(1)
+		}
 	}
 
 	// Get file size
@@ -402,7 +428,7 @@ func runGenerate() {
 
 	logInfo("Dictionary generated successfully!\n")
 	logInfo("   - Output: %s\n", *outputFile)
-	logInfo("   - Words: %d\n", report.TotalWords)
+	logInfo("   - Words: %d\n", wordCount)
 	logInfo("   - Size: %.1f KB\n", float64(fileInfo.Size())/1024)
 
 	format := "pretty (indented)"
@@ -496,8 +522,11 @@ func printUsage() {
 	fmt.Println("  # Validate database")
 	fmt.Println("  dict-gen validate")
 	fmt.Println()
-	fmt.Println("  # Generate dictionary.json")
+	fmt.Println("  # Generate dictionary.json (only 366 words with day_index)")
 	fmt.Println("  dict-gen generate --output=./cmd/server/dictionary.json")
+	fmt.Println()
+	fmt.Println("  # Generate dictionary.json with ALL words (including extras)")
+	fmt.Println("  dict-gen generate --all --output=./backup-all-words.json")
 	fmt.Println()
 	fmt.Println("For more information, visit:")
 	fmt.Println("  https://github.com/wizact/te-reo-bot")

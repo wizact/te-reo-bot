@@ -31,9 +31,41 @@ func (tc *TwitterClient) getLogger() logger.Logger {
 
 func Tweet(wo *Word, w http.ResponseWriter) *ent.AppError {
 	var c TwitterCredential
-	envconfig.Process("tereobot", &c)
-	tc := NewTwitterClient(&c)
 	log := logger.GetGlobalLogger()
+
+	err := envconfig.Process("tereobot", &c)
+	if err != nil {
+		appErr := ent.NewAppErrorWithContexts(err, 500, "Failed to load Twitter config", map[string]interface{}{
+			"operation":     "load_twitter_config",
+			"config_prefix": "tereobot",
+		})
+		log.ErrorWithStack(err, "Config error",
+			logger.String("operation", "load_twitter_config"),
+			logger.String("config_prefix", "tereobot"))
+		return appErr
+	}
+
+	// Validate required fields
+	if c.ConsumerKey == "" || c.ConsumerSecret == "" || c.AccessToken == "" || c.AccessSecret == "" {
+		appErr := ent.NewAppErrorWithContexts(nil, 500, "Missing Twitter credentials", map[string]interface{}{
+			"operation":           "validate_twitter_config",
+			"has_consumer_key":    c.ConsumerKey != "",
+			"has_consumer_secret": c.ConsumerSecret != "",
+			"has_access_token":    c.AccessToken != "",
+			"has_access_secret":   c.AccessSecret != "",
+		})
+		log.Error(appErr, "Credentials missing",
+			logger.String("operation", "validate_twitter_config"),
+			logger.Bool("has_consumer_key", c.ConsumerKey != ""),
+			logger.Bool("has_consumer_secret", c.ConsumerSecret != ""),
+			logger.Bool("has_access_token", c.AccessToken != ""),
+			logger.Bool("has_access_secret", c.AccessSecret != ""))
+		return appErr
+	}
+
+	log.Debug("Twitter config loaded", logger.Bool("has_credentials", true))
+
+	tc := NewTwitterClient(&c)
 
 	message := wo.Word + " : " + wo.Meaning
 	t, tr, e := tc.SendTweet(message)
@@ -50,11 +82,12 @@ func Tweet(wo *Word, w http.ResponseWriter) *ent.AppError {
 		return nil
 	} else {
 		// Create enhanced AppError with context
-		appErr := ent.NewAppError(e, tr.StatusCode, "Failed sending the tweet")
-		appErr.WithContext("word", wo.Word)
-		appErr.WithContext("message", message)
-		appErr.WithContext("status_code", tr.StatusCode)
-		appErr.WithContext("operation", "twitter_post")
+		appErr := ent.NewAppErrorWithContexts(e, tr.StatusCode, "Failed sending the tweet", map[string]interface{}{
+			"word":        wo.Word,
+			"message":     message,
+			"status_code": tr.StatusCode,
+			"operation":   "twitter_post",
+		})
 
 		// Log the error with stack trace and context
 		log.ErrorWithStack(e, "Failed to send tweet to Twitter API",

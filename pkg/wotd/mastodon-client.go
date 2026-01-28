@@ -21,11 +21,45 @@ type MastodonClient struct {
 
 func (mclient *MastodonClient) NewClient() *MastodonClient {
 	var mc MastodonCredential
-	envconfig.Process("tereobot", &mc)
+	err := envconfig.Process("tereobot", &mc)
+	if err != nil {
+		appErr := ent.NewAppErrorWithContexts(err, 500, "Failed to load Mastodon config", map[string]interface{}{
+			"operation":     "load_mastodon_config",
+			"config_prefix": "tereobot",
+		})
+		mclient.getLogger().ErrorWithStack(err, "Config error",
+			logger.String("operation", "load_mastodon_config"),
+			logger.String("config_prefix", "tereobot"))
+		// Return client anyway to avoid nil pointer, error will surface when used
+		_ = appErr // Mark as used to avoid compiler warning
+		return mclient
+	}
+
+	// Validate required fields
+	if mc.MastodonServerName == "" || mc.MastodonClientID == "" || mc.MastodonAccessToken == "" {
+		appErr := ent.NewAppErrorWithContexts(nil, 500, "Missing Mastodon credentials", map[string]interface{}{
+			"operation":        "validate_mastodon_config",
+			"has_server":       mc.MastodonServerName != "",
+			"has_client_id":    mc.MastodonClientID != "",
+			"has_access_token": mc.MastodonAccessToken != "",
+		})
+		mclient.getLogger().Error(appErr, "Credentials missing",
+			logger.String("operation", "validate_mastodon_config"),
+			logger.Bool("has_server", mc.MastodonServerName != ""),
+			logger.Bool("has_client_id", mc.MastodonClientID != ""),
+			logger.Bool("has_access_token", mc.MastodonAccessToken != ""))
+		// Return client anyway to avoid nil pointer, error will surface when used
+		_ = appErr // Mark as used to avoid compiler warning
+		return mclient
+	}
 
 	mclient.mastodonServerName = mc.MastodonServerName
 	mclient.mastodonClientID = mc.MastodonClientID
 	mclient.mastodonAccessToken = mc.MastodonAccessToken
+
+	mclient.getLogger().Debug("Mastodon config loaded",
+		logger.String("server", mc.MastodonServerName),
+		logger.Bool("has_credentials", true))
 
 	return mclient
 }
@@ -67,13 +101,14 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 
 		if e != nil {
 			// Create enhanced AppError with context
-			appErr := ent.NewAppError(e, 500, "Failed sending the toot with media")
-			appErr.WithContext("word", wo.Word)
-			appErr.WithContext("toot_content", tootContent)
-			appErr.WithContext("bucket_name", bucketName)
-			appErr.WithContext("photo", wo.Photo)
-			appErr.WithContext("attribution", wo.Attribution)
-			appErr.WithContext("operation", "mastodon_media_upload")
+			appErr := ent.NewAppErrorWithContexts(e, 500, "Failed sending the toot with media", map[string]interface{}{
+				"word":         wo.Word,
+				"toot_content": tootContent,
+				"bucket_name":  bucketName,
+				"photo":        wo.Photo,
+				"attribution":  wo.Attribution,
+				"operation":    "mastodon_media_upload",
+			})
 
 			// Log the error with stack trace and context
 			mclient.getLogger().ErrorWithStack(e, "Failed to upload media to Mastodon",
@@ -117,11 +152,12 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		return nil
 	} else {
 		// Create enhanced AppError with context
-		appErr := ent.NewAppError(e, 500, "Failed sending the toot")
-		appErr.WithContext("word", wo.Word)
-		appErr.WithContext("toot_content", tootContent)
-		appErr.WithContext("has_media", len(mids) > 0)
-		appErr.WithContext("operation", "mastodon_post")
+		appErr := ent.NewAppErrorWithContexts(e, 500, "Failed sending the toot", map[string]interface{}{
+			"word":         wo.Word,
+			"toot_content": tootContent,
+			"has_media":    len(mids) > 0,
+			"operation":    "mastodon_post",
+		})
 
 		// Log the error with stack trace and context
 		mclient.getLogger().ErrorWithStack(e, "Failed to send toot to Mastodon API",
@@ -147,10 +183,11 @@ func acquireMedia(bucketName, objectName string) ([]byte, *ent.AppError) {
 		}
 
 		// Create enhanced AppError with context
-		appErr := ent.NewAppError(err, 500, "Failed to acquire image")
-		appErr.WithContext("bucket_name", bucketName)
-		appErr.WithContext("object_name", objectName)
-		appErr.WithContext("operation", "gcs_client_init")
+		appErr := ent.NewAppErrorWithContexts(err, 500, "Failed to acquire image", map[string]interface{}{
+			"bucket_name": bucketName,
+			"object_name": objectName,
+			"operation":   "gcs_client_init",
+		})
 
 		// Log the error with stack trace and context
 		log.ErrorWithStack(err, "Failed to initialize Google Cloud Storage client",
@@ -171,10 +208,11 @@ func acquireMedia(bucketName, objectName string) ([]byte, *ent.AppError) {
 		}
 
 		// Create enhanced AppError with context
-		appErr := ent.NewAppError(err, 500, "Failed to acquire image")
-		appErr.WithContext("bucket_name", bucketName)
-		appErr.WithContext("object_name", objectName)
-		appErr.WithContext("operation", "gcs_get_object")
+		appErr := ent.NewAppErrorWithContexts(err, 500, "Failed to acquire image", map[string]interface{}{
+			"bucket_name": bucketName,
+			"object_name": objectName,
+			"operation":   "gcs_get_object",
+		})
 
 		// Log the error with stack trace and context
 		log.ErrorWithStack(err, "Failed to get object from Google Cloud Storage",

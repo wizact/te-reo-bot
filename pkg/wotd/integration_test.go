@@ -101,7 +101,7 @@ func TestWordSelectorIntegrationErrors(t *testing.T) {
 			},
 			expectedError: "Cannot select word from empty dictionary",
 			logShouldContain: []string{
-				"Attempted to select word from empty dictionary",
+				"Cannot select word from empty dictionary",
 				"stack_trace",
 				"word_count",
 				"operation",

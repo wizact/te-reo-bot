@@ -37,15 +37,16 @@ func StartServer(address, port string, tls bool) {
 
 	getLogger().Info("Starting server initialization", serverFields...)
 
-	router := mux.NewRouter()
-	router.Use(panicRecoveryMiddleware)
-	router.Use(commonMiddleware)
+	// Load server configuration once at startup
+	var serverConfig ServerConfig
+	err := envconfig.Process("tereobot", &serverConfig)
+	if err != nil {
+		configFields := append(serverFields, logger.Field{Key: "config_type", Value: "server_config"})
+		getLogger().Fatal(err, "Cannot load server configuration", configFields...)
+		return
+	}
 
-	// HealthCheck route setup
-	hcr := HealthCheckRoute{}
-	hcr.SetupRoutes(healthCheckRoute, router)
-
-	// MessageRoute route setup - handle configuration errors with enhanced logging
+	// Load storage configuration once at startup
 	bn, err := (&StorageConfig{}).GetBucketName()
 	if err != nil {
 		configFields := append(serverFields, logger.Field{Key: "config_type", Value: "storage_bucket"})
@@ -53,6 +54,19 @@ func StartServer(address, port string, tls bool) {
 		return
 	}
 
+	getLogger().Info("Server configuration loaded successfully",
+		logger.String("bucket_name", bn),
+		logger.Bool("has_api_key", serverConfig.ApiKey != ""))
+
+	router := mux.NewRouter()
+	router.Use(panicRecoveryMiddleware)
+	router.Use(authMiddleware(&serverConfig))
+
+	// HealthCheck route setup
+	hcr := NewHealthCheckRoute()
+	hcr.SetupRoutes(healthCheckRoute, router)
+
+	// MessageRoute route setup
 	mr := MessagesRoute{bucketName: bn}
 	mr.SetupRoutes(messagesRoute, router)
 
@@ -80,71 +94,49 @@ func StartServer(address, port string, tls bool) {
 	}
 }
 
-// commonMiddleware the generic middleware
-func commonMiddleware(next http.Handler) http.Handler {
-	var s ServerConfig
-	err := envconfig.Process("tereobot", &s)
-
-	if err != nil {
-		// Use new logger with contextual information for configuration errors
-		configFields := []logger.Field{
-			{Key: "config_type", Value: "server_config"},
-			{Key: "config_prefix", Value: "tereobot"},
-		}
-		getLogger().ErrorWithStack(err, "Cannot read server configuration", configFields...)
-
-		// Return a middleware that always returns HTTP 500 for configuration errors
+// authMiddleware provides authentication middleware using pre-loaded configuration
+func authMiddleware(serverConfig *ServerConfig) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Extract request context for configuration error logging
-			requestContext := logger.ExtractRequestContext(r)
-			logFields := configFields
-			if requestContext != nil {
-				logFields = append(logFields, requestContext.ToFields()...)
-			}
+			// Skip authentication for health check endpoint
+			if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
+				rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
 
-			getLogger().ErrorWithStack(err, "Server configuration error - cannot process request", logFields...)
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+				if err != nil {
+					// Extract request context for authentication failure logging
+					requestContext := logger.ExtractRequestContext(r)
+					logFields := []logger.Field{}
+					if requestContext != nil {
+						logFields = append(logFields, requestContext.ToFields()...)
+					}
+
+					// Log authentication failure with request context
+					getLogger().ErrorWithStack(err, "Authentication failed - missing API key", logFields...)
+
+					http.Error(w, "authentication failed", http.StatusUnauthorized)
+					return
+				}
+
+				if rak != serverConfig.ApiKey {
+					// Extract request context for authentication failure logging
+					requestContext := logger.ExtractRequestContext(r)
+					logFields := []logger.Field{
+						{Key: "provided_api_key_length", Value: len(rak)},
+					}
+					if requestContext != nil {
+						logFields = append(logFields, requestContext.ToFields()...)
+					}
+
+					// Log authentication failure with request context (don't log actual keys for security)
+					getLogger().ErrorWithStack(errors.New("invalid API key"), "Authentication failed - invalid API key", logFields...)
+
+					http.Error(w, "authentication failed", http.StatusUnauthorized)
+					return
+				}
+			}
+			next.ServeHTTP(w, r)
 		})
 	}
-
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if strings.Index(r.RequestURI, healthCheckRoute) != 0 {
-			rak, err := findCaseInsensitiveHeader("X-Api-Key", r)
-
-			if err != nil {
-				// Extract request context for authentication failure logging
-				requestContext := logger.ExtractRequestContext(r)
-				logFields := []logger.Field{}
-				if requestContext != nil {
-					logFields = append(logFields, requestContext.ToFields()...)
-				}
-
-				// Log authentication failure with request context
-				getLogger().ErrorWithStack(err, "Authentication failed - missing API key", logFields...)
-
-				http.Error(w, "authentication failed", http.StatusUnauthorized)
-				return
-			}
-
-			if rak != s.ApiKey {
-				// Extract request context for authentication failure logging
-				requestContext := logger.ExtractRequestContext(r)
-				logFields := []logger.Field{
-					{Key: "provided_api_key_length", Value: len(rak)},
-				}
-				if requestContext != nil {
-					logFields = append(logFields, requestContext.ToFields()...)
-				}
-
-				// Log authentication failure with request context (don't log actual keys for security)
-				getLogger().ErrorWithStack(errors.New("invalid API key"), "Authentication failed - invalid API key", logFields...)
-
-				http.Error(w, "authentication failed", http.StatusUnauthorized)
-				return
-			}
-		}
-		next.ServeHTTP(w, r)
-	})
 }
 
 func findCaseInsensitiveHeader(headerName string, r *http.Request) (string, error) {

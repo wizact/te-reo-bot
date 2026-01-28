@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sort"
 
+	"github.com/wizact/te-reo-bot/pkg/entities"
+	"github.com/wizact/te-reo-bot/pkg/logger"
 	"github.com/wizact/te-reo-bot/pkg/repository"
 )
 
@@ -11,12 +13,16 @@ const requiredWordCount = 366
 
 // Validator handles validation of dictionary data
 type Validator struct {
-	repo repository.WordRepository
+	repo   repository.WordRepository
+	logger logger.Logger
 }
 
 // NewValidator creates a new Validator
 func NewValidator(repo repository.WordRepository) *Validator {
-	return &Validator{repo: repo}
+	return &Validator{
+		repo:   repo,
+		logger: logger.GetGlobalLogger(),
+	}
 }
 
 // ValidationReport contains the results of validation
@@ -30,6 +36,8 @@ type ValidationReport struct {
 
 // Validate checks if the database contains exactly 366 unique day indexes (1-366)
 func (v *Validator) Validate() (*ValidationReport, error) {
+	v.logger.Info("Starting validation")
+
 	report := &ValidationReport{
 		IsValid:          true,
 		MissingIndexes:   []int{},
@@ -40,10 +48,14 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 	// Get all words by day index
 	wordsByDay, err := v.repo.GetWordsByDayIndex()
 	if err != nil {
-		return nil, fmt.Errorf("failed to get words by day index: %w", err)
+		appErr := entities.NewAppError(err, 500, "Failed to get words for validation")
+		appErr.WithContext("operation", "validate_get_words")
+		v.logger.ErrorWithStack(err, "Validation query failed", logger.String("operation", "validate_get_words"))
+		return nil, appErr
 	}
 
 	report.TotalWords = len(wordsByDay)
+	v.logger.Info("Retrieved words for validation", logger.Int("word_count", report.TotalWords))
 
 	// Check total count
 	if report.TotalWords != requiredWordCount {
@@ -51,6 +63,9 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 		report.Errors = append(report.Errors,
 			fmt.Sprintf("Expected %d words with day_index, but found %d",
 				requiredWordCount, report.TotalWords))
+		v.logger.Error(nil, "Word count mismatch",
+			logger.Int("expected", requiredWordCount),
+			logger.Int("found", report.TotalWords))
 	}
 
 	// Find missing indexes (1-366)
@@ -70,6 +85,7 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 				fmt.Sprintf("Missing %d day indexes (showing first 20): %v",
 					len(report.MissingIndexes), report.MissingIndexes[:20]))
 		}
+		v.logger.Error(nil, "Missing day indexes", logger.Int("count", len(report.MissingIndexes)))
 	}
 
 	// Note: Duplicates are prevented by UNIQUE constraint in database,
@@ -78,6 +94,13 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 		report.IsValid = false
 		report.Errors = append(report.Errors,
 			fmt.Sprintf("Duplicate day indexes found: %v", report.DuplicateIndexes))
+		v.logger.Error(nil, "Duplicate day indexes found", logger.Int("count", len(report.DuplicateIndexes)))
+	}
+
+	if report.IsValid {
+		v.logger.Info("Validation passed")
+	} else {
+		v.logger.Error(nil, "Validation failed", logger.Int("error_count", len(report.Errors)))
 	}
 
 	return report, nil

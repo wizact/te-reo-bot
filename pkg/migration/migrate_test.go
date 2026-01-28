@@ -9,6 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/migration"
 	"github.com/wizact/te-reo-bot/pkg/repository"
 )
@@ -229,7 +230,10 @@ func TestMigrationFileErrors(t *testing.T) {
 		migrator := migration.NewMigrator(repo)
 		err := migrator.MigrateFromFile("/nonexistent/file.json")
 		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "failed to read file")
+		// Check that it's an AppError with the expected message
+		appErr, ok := err.(*entities.AppError)
+		require.True(t, ok, "Expected AppError")
+		assert.Equal(t, "failed to read file", appErr.Message)
 	})
 
 	t.Run("Invalid file path", func(t *testing.T) {
