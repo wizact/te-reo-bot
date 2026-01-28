@@ -6,6 +6,8 @@ BUILDTAGS :=
 PREFIX?=$(shell pwd)
 OUTDIR := ${PREFIX}/out
 
+.DEFAULT_GOAL := help
+
 VERSION := $(shell cat VERSION.txt)
 REGISTRY := "docker.pkg.github.com/wizact/te-reo-bot/"
 
@@ -55,3 +57,49 @@ docker-rmi:
 		fi; \
 		docker rmi $$DOCKERIMAGEID; \
 	done;
+
+# Database commands
+.PHONY: backup-all
+backup-all:
+	@echo "+ Backing up ALL words from database to JSON"
+	@$(GO) run cmd/dict-gen/main.go generate --all --output=backup-all.json
+	@echo "Backup complete: backup-all.json"
+
+.PHONY: backup
+backup:
+	@echo "+ Backing up 366 words (with day_index) from database to JSON"
+	@$(GO) run cmd/dict-gen/main.go generate --output=backup-366.json
+	@echo "Backup complete: backup-366.json"
+
+.PHONY: migrate
+migrate:
+	@echo "+ Migrating dictionary.json to database"
+	@$(GO) run cmd/dict-gen/main.go migrate --input=cmd/server/dictionary.json
+	@echo "Migration complete"
+
+.PHONY: validate
+validate:
+	@echo "+ Validating database"
+	@$(GO) run cmd/dict-gen/main.go validate
+
+.PHONY: help
+help:
+	@echo "Te Reo Bot - Makefile Commands"
+	@echo ""
+	@echo "Build Commands:"
+	@echo "  make build-static    - Build static binary"
+	@echo "  make clean          - Remove build artifacts"
+	@echo ""
+	@echo "Database Commands:"
+	@echo "  make backup-all     - Export ALL words to backup-all.json (includes extras)"
+	@echo "  make backup         - Export 366 words to backup-366.json (day_index only)"
+	@echo "  make migrate        - Import dictionary.json into database"
+	@echo "  make validate       - Validate database integrity"
+	@echo ""
+	@echo "Docker Commands:"
+	@echo "  make docker-build   - Build Docker image"
+	@echo "  make docker-rmi     - Remove Docker images"
+	@echo ""
+	@echo "Other Commands:"
+	@echo "  make version        - Update VERSION.txt"
+	@echo "  make help           - Show this help message"

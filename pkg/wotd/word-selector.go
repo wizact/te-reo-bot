@@ -30,9 +30,9 @@ func (ws *WordSelector) SelectWordByDay(words []Word) (*Word, error) {
 		err.WithContext("word_count", 0)
 		err.WithContext("operation", "select_word_by_day")
 
-		ws.getLogger().ErrorWithStack(nil, "Attempted to select word from empty dictionary",
-			logger.Field{Key: "word_count", Value: 0},
-			logger.Field{Key: "operation", Value: "select_word_by_day"},
+		ws.getLogger().ErrorWithStack(err, "Cannot select word from empty dictionary",
+			logger.Int("word_count", 0),
+			logger.String("operation", "select_word_by_day"),
 		)
 
 		return nil, err
@@ -56,10 +56,10 @@ func (ws *WordSelector) SelectWordByDay(words []Word) (*Word, error) {
 
 	// Log the word selection
 	ws.getLogger().Debug("Selected word by day",
-		logger.Field{Key: "day_of_year", Value: doy},
-		logger.Field{Key: "selected_index", Value: selectedIndex},
-		logger.Field{Key: "word_count", Value: low},
-		logger.Field{Key: "selected_word", Value: words[selectedIndex].Word},
+		logger.Int("day_of_year", doy),
+		logger.Int("selected_index", selectedIndex),
+		logger.Int("word_count", low),
+		logger.String("selected_word", words[selectedIndex].Word),
 	)
 
 	return &words[selectedIndex], nil
@@ -73,10 +73,10 @@ func (ws *WordSelector) SelectWordByIndex(words []Word, index int) (*Word, error
 		err.WithContext("requested_index", index)
 		err.WithContext("operation", "select_word_by_index")
 
-		ws.getLogger().ErrorWithStack(nil, "Attempted to select word from empty dictionary",
-			logger.Field{Key: "word_count", Value: 0},
-			logger.Field{Key: "requested_index", Value: index},
-			logger.Field{Key: "operation", Value: "select_word_by_index"},
+		ws.getLogger().ErrorWithStack(err, "Cannot select word from empty dictionary",
+			logger.Int("word_count", 0),
+			logger.Int("requested_index", index),
+			logger.String("operation", "select_word_by_index"),
 		)
 
 		return nil, err
@@ -88,10 +88,10 @@ func (ws *WordSelector) SelectWordByIndex(words []Word, index int) (*Word, error
 		err.WithContext("word_count", len(words))
 		err.WithContext("operation", "select_word_by_index")
 
-		ws.getLogger().ErrorWithStack(nil, "Invalid word index provided",
-			logger.Field{Key: "requested_index", Value: index},
-			logger.Field{Key: "word_count", Value: len(words)},
-			logger.Field{Key: "operation", Value: "select_word_by_index"},
+		ws.getLogger().ErrorWithStack(err, "Invalid word index provided",
+			logger.Int("requested_index", index),
+			logger.Int("word_count", len(words)),
+			logger.String("operation", "select_word_by_index"),
 		)
 
 		return nil, err
@@ -114,10 +114,10 @@ func (ws *WordSelector) SelectWordByIndex(words []Word, index int) (*Word, error
 
 	// Log the word selection
 	ws.getLogger().Debug("Selected word by index",
-		logger.Field{Key: "requested_index", Value: index},
-		logger.Field{Key: "selected_index", Value: selectedIndex},
-		logger.Field{Key: "word_count", Value: low},
-		logger.Field{Key: "selected_word", Value: words[selectedIndex].Word},
+		logger.Int("requested_index", index),
+		logger.Int("selected_index", selectedIndex),
+		logger.Int("word_count", low),
+		logger.String("selected_word", words[selectedIndex].Word),
 	)
 
 	return &words[selectedIndex], nil
@@ -132,8 +132,8 @@ func (ws *WordSelector) ParseFile(f []byte, filePath string) (*Dictionary, error
 	if err != nil {
 		// Log the parsing error with context
 		ws.getLogger().ErrorWithStack(err, "Failed to parse dictionary JSON file",
-			logger.Field{Key: "file_path", Value: filePath},
-			logger.Field{Key: "file_size", Value: len(f)},
+			logger.String("file_path", filePath),
+			logger.Int("file_size", len(f)),
 		)
 
 		// Return enhanced AppError with context
@@ -146,8 +146,8 @@ func (ws *WordSelector) ParseFile(f []byte, filePath string) (*Dictionary, error
 
 	// Log successful parsing
 	ws.getLogger().Info("Successfully parsed dictionary file",
-		logger.Field{Key: "file_path", Value: filePath},
-		logger.Field{Key: "word_count", Value: len(wd.Words)},
+		logger.String("file_path", filePath),
+		logger.Int("word_count", len(wd.Words)),
 	)
 
 	return &wd, nil
@@ -160,8 +160,8 @@ func (ws *WordSelector) ReadFile(filePath string) ([]byte, error) {
 	if err != nil {
 		// Log the file reading error with context
 		ws.getLogger().ErrorWithStack(err, "Failed to read dictionary file",
-			logger.Field{Key: "file_path", Value: filePath},
-			logger.Field{Key: "operation", Value: "file_read"},
+			logger.String("file_path", filePath),
+			logger.String("operation", "file_read"),
 		)
 
 		// Return enhanced AppError with context
@@ -173,8 +173,8 @@ func (ws *WordSelector) ReadFile(filePath string) ([]byte, error) {
 
 	// Log successful file reading
 	ws.getLogger().Debug("Successfully read dictionary file",
-		logger.Field{Key: "file_path", Value: filePath},
-		logger.Field{Key: "file_size", Value: len(f)},
+		logger.String("file_path", filePath),
+		logger.Int("file_size", len(f)),
 	)
 
 	return f, nil

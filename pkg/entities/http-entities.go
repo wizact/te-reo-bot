@@ -23,6 +23,19 @@ func NewAppError(err error, code int, message string) *AppError {
 	}
 }
 
+// NewAppErrorWithContexts creates a new AppError with stack trace capture
+// It accepts a map of context key-value pairs to add to the error
+// skip parameter allows skipping stack frames (typically 0 for direct calls)
+func NewAppErrorWithContexts(err error, code int, message string, contexts map[string]interface{}) *AppError {
+	return &AppError{
+		Err:        err,
+		Message:    message,
+		Code:       code,
+		StackTrace: logger.CaptureStackTrace(1), // Skip this function call
+		Context:    contexts,
+	}
+}
+
 // WithContext adds contextual information to the error for debugging
 func (ae *AppError) WithContext(key string, value interface{}) *AppError {
 	if ae.Context == nil {

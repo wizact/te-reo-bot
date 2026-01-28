@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/wizact/te-reo-bot/pkg/backup"
+	"github.com/wizact/te-reo-bot/pkg/entities"
 )
 
 func TestBackupFile(t *testing.T) {
@@ -62,7 +63,10 @@ func TestBackupFile(t *testing.T) {
 
 		_, err = backup.BackupFile(sourceFile)
 		assert.Error(t, err)
-		assert.Contains(t, err.Error(), "failed to open source")
+		// Check that it's an AppError with the expected message
+		appErr, ok := err.(*entities.AppError)
+		require.True(t, ok, "Expected AppError")
+		assert.Equal(t, "failed to open source", appErr.Message)
 	})
 }
 
