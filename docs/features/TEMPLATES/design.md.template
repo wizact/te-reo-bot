@@ -1,0 +1,379 @@
+# Feature Design: [Feature Name]
+
+**GitHub Issue**: [#XXX - Issue Title](https://github.com/wizact/te-reo-bot/issues/XXX)
+
+## Architecture Overview
+
+HOW will this feature work?
+
+### High-Level Design
+
+[Diagram or description of the overall approach]
+
+```
+┌─────────────┐
+│  Component  │
+│     A       │
+└──────┬──────┘
+       │
+       ↓
+┌─────────────┐
+│  Component  │
+│     B       │
+└─────────────┘
+```
+
+### Component Interactions
+
+- **Component A**: [Responsibility and how it fits]
+- **Component B**: [Responsibility and how it fits]
+
+## Components
+
+### Component 1: [Name]
+
+**Purpose**: [What does this component do?]
+
+**Location**: `pkg/[package]/[file].go`
+
+**Key Types**:
+```go
+type ComponentName struct {
+    field1 Type1
+    field2 Type2
+}
+```
+
+**Key Methods**:
+```go
+func (c *ComponentName) Method1(param Type) (ReturnType, error)
+func (c *ComponentName) Method2(param Type) error
+```
+
+**Dependencies**:
+- [Depends on Component X]
+- [Uses interface Y]
+
+### Component 2: [Name]
+
+**Purpose**: [What does this component do?]
+
+**Location**: `pkg/[package]/[file].go`
+
+[Same structure as Component 1]
+
+## Data Structures
+
+### New Types
+
+```go
+// WordMetadata represents ...
+type WordMetadata struct {
+    ID          int       `json:"id"`
+    Word        string    `json:"word"`
+    DayIndex    *int      `json:"day_index,omitempty"`
+    CreatedAt   time.Time `json:"created_at"`
+}
+```
+
+**Rationale**: [Why this structure? What alternatives were considered?]
+
+### Modified Types
+
+**Before**:
+```go
+type OldStructure struct {
+    Field1 string
+}
+```
+
+**After**:
+```go
+type OldStructure struct {
+    Field1 string
+    Field2 int  // Added for [reason]
+}
+```
+
+## Algorithms
+
+### Algorithm 1: [Name]
+
+**Purpose**: [What does this algorithm solve?]
+
+**Approach**:
+1. Step 1: [Description]
+2. Step 2: [Description]
+3. Step 3: [Description]
+
+**Complexity**:
+- Time: O(?)
+- Space: O(?)
+
+**Pseudocode**:
+```
+function algorithmName(input):
+    step 1
+    step 2
+    return result
+```
+
+**Edge Cases**:
+- Case 1: [How handled]
+- Case 2: [How handled]
+
+## Database Changes
+
+### Schema Modifications
+
+**New Tables**:
+```sql
+CREATE TABLE new_table (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    field1 TEXT NOT NULL,
+    field2 INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_field1 ON new_table(field1);
+```
+
+**Modified Tables**:
+```sql
+-- Add column to existing table
+ALTER TABLE words ADD COLUMN new_field TEXT;
+
+-- Add index
+CREATE INDEX idx_new_field ON words(new_field);
+```
+
+**Migration Strategy**:
+1. [How to migrate existing data]
+2. [Backward compatibility considerations]
+3. [Rollback plan]
+
+### Query Patterns
+
+**New Queries**:
+```sql
+-- Query purpose: [Description]
+SELECT field1, field2
+FROM new_table
+WHERE condition = ?
+ORDER BY field1;
+```
+
+**Performance Considerations**:
+- [Index strategy]
+- [Expected query frequency]
+- [Caching strategy]
+
+## API Changes
+
+### New Endpoints
+
+**Endpoint**: `POST /api/v1/new-endpoint`
+
+**Request**:
+```json
+{
+    "field1": "value",
+    "field2": 123
+}
+```
+
+**Response** (200 OK):
+```json
+{
+    "id": 1,
+    "status": "success"
+}
+```
+
+**Response** (400 Bad Request):
+```json
+{
+    "error": "validation failed",
+    "details": "field1 is required"
+}
+```
+
+### Modified Endpoints
+
+**Endpoint**: `GET /api/v1/existing-endpoint`
+
+**Changes**:
+- Added query parameter: `?new_param=value`
+- Response now includes `new_field`
+- Backward compatible: [Yes/No, details]
+
+## Configuration Changes
+
+### New Environment Variables
+
+```bash
+# New configuration
+NEW_CONFIG_VAR=value        # Purpose: [Description]
+ANOTHER_VAR=123             # Purpose: [Description]
+```
+
+### Modified Configuration
+
+**Before**:
+```bash
+OLD_VAR=value
+```
+
+**After**:
+```bash
+OLD_VAR=new_value  # Changed because [reason]
+```
+
+## Testing Approach
+
+### Unit Tests
+
+**Test Coverage**:
+- Component 1: [What to test]
+- Component 2: [What to test]
+- Edge cases: [List specific scenarios]
+
+**Example Test Structure**:
+```go
+func TestComponent_Method(t *testing.T) {
+    tests := []struct {
+        name    string
+        input   InputType
+        want    OutputType
+        wantErr bool
+    }{
+        {"case 1", input1, output1, false},
+        {"error case", badInput, nil, true},
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            result, err := Method(tt.input)
+            if tt.wantErr {
+                require.Error(t, err)
+                return
+            }
+            require.NoError(t, err)
+            assert.Equal(t, tt.want, result)
+        })
+    }
+}
+```
+
+### Integration Tests
+
+**Scenarios**:
+1. End-to-end flow: [Description]
+2. Error handling: [Description]
+3. Performance test: [Description]
+
+**Setup**:
+- Use `:memory:` SQLite for database tests
+- Mock external services (GCS, social media APIs)
+- Test fixtures in `testdata/`
+
+### Manual Testing
+
+**Checklist**:
+- [ ] Test case 1: [Description]
+- [ ] Test case 2: [Description]
+- [ ] Performance validation: [Metrics to check]
+- [ ] Backward compatibility: [What to verify]
+
+## Security Considerations
+
+- **Input Validation**: [How user input is validated]
+- **SQL Injection**: [Prevention strategy]
+- **Authentication**: [Changes to auth flow, if any]
+- **Data Exposure**: [What data is exposed, to whom]
+- **Secrets Management**: [New secrets, how handled]
+
+## Performance Considerations
+
+**Optimization Strategy**:
+- [Indexing strategy]
+- [Caching approach]
+- [Query optimization]
+- [Batch processing]
+
+**Benchmarks**:
+```go
+func BenchmarkOperation(b *testing.B) {
+    for i := 0; i < b.N; i++ {
+        Operation()
+    }
+}
+```
+
+**Expected Performance**:
+- Baseline: [Current performance]
+- Target: [Expected performance after feature]
+- Acceptable: [Minimum acceptable performance]
+
+## Rollout Strategy
+
+**Phases**:
+1. **Phase 1**: [What to deploy first]
+2. **Phase 2**: [What to deploy second]
+3. **Phase 3**: [Final deployment]
+
+**Feature Flags** (if applicable):
+```go
+if featureEnabled("new-feature") {
+    // New behavior
+} else {
+    // Old behavior
+}
+```
+
+**Rollback Plan**:
+1. [How to disable the feature]
+2. [How to revert database changes]
+3. [How to restore previous behavior]
+
+## Alternatives Considered
+
+### Alternative 1: [Name]
+
+**Approach**: [Description]
+
+**Pros**:
+- [Advantage 1]
+- [Advantage 2]
+
+**Cons**:
+- [Disadvantage 1]
+- [Disadvantage 2]
+
+**Why Rejected**: [Rationale]
+
+### Alternative 2: [Name]
+
+[Same structure as Alternative 1]
+
+## Trade-offs
+
+**Decision 1**: [What was decided]
+- **Pro**: [Benefit]
+- **Con**: [Cost]
+- **Rationale**: [Why this trade-off was accepted]
+
+**Decision 2**: [What was decided]
+- **Pro**: [Benefit]
+- **Con**: [Cost]
+- **Rationale**: [Why this trade-off was accepted]
+
+## Future Enhancements
+
+What this design enables for future work:
+- [Enhancement 1]
+- [Enhancement 2]
+
+What would require redesign:
+- [Limitation 1]
+- [Limitation 2]

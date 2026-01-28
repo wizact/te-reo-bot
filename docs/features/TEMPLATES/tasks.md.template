@@ -1,0 +1,196 @@
+# Feature Tasks: [Feature Name]
+
+**GitHub Issue**: [#XXX - Issue Title](https://github.com/wizact/te-reo-bot/issues/XXX)
+
+## Overview
+
+**Estimated Effort**: [X hours / Y days]
+
+**Assigned To**: [Developer name or team]
+
+**Status**: [Not Started / In Progress / Completed]
+
+**Related PRs**:
+- [#PR1 - PR Title](https://github.com/wizact/te-reo-bot/pull/PR1)
+- [#PR2 - PR Title](https://github.com/wizact/te-reo-bot/pull/PR2)
+
+## Phases
+
+Break implementation into 2-3 hour chunks with clear deliverables.
+
+### Phase 1: [Name] (Estimated: Xh)
+
+**Goal**: [What will be accomplished]
+
+**Tasks**:
+- [ ] Task 1: [Specific actionable task]
+- [ ] Task 2: [Specific actionable task]
+- [ ] Task 3: [Specific actionable task]
+
+**Deliverables**:
+- [Concrete output 1]
+- [Concrete output 2]
+
+**Dependencies**:
+- Requires: [What must exist first]
+- Blocks: [What waits for this]
+
+**Status**: ⬜ Not Started / 🟡 In Progress / ✅ Completed
+
+---
+
+### Phase 2: [Name] (Estimated: Xh)
+
+**Goal**: [What will be accomplished]
+
+**Tasks**:
+- [ ] Task 1: [Specific actionable task]
+- [ ] Task 2: [Specific actionable task]
+- [ ] Task 3: [Specific actionable task]
+
+**Deliverables**:
+- [Concrete output 1]
+- [Concrete output 2]
+
+**Dependencies**:
+- Requires: Phase 1 completion
+- Blocks: [What waits for this]
+
+**Status**: ⬜ Not Started / 🟡 In Progress / ✅ Completed
+
+---
+
+### Phase 3: [Name] (Estimated: Xh)
+
+**Goal**: [What will be accomplished]
+
+**Tasks**:
+- [ ] Task 1: [Specific actionable task]
+- [ ] Task 2: [Specific actionable task]
+- [ ] Task 3: [Specific actionable task]
+
+**Deliverables**:
+- [Concrete output 1]
+- [Concrete output 2]
+
+**Dependencies**:
+- Requires: Phase 2 completion
+
+**Status**: ⬜ Not Started / 🟡 In Progress / ✅ Completed
+
+## Progress Tracking
+
+### [Date] - [Phase Name]
+
+**Completed**:
+- ✅ Task 1
+- ✅ Task 2
+
+**In Progress**:
+- 🟡 Task 3 (50% done)
+
+**Blocked**:
+- ❌ Task 4 (waiting on [dependency])
+
+**Notes**:
+- [Any observations, challenges, or decisions made]
+
+---
+
+### [Date] - [Phase Name]
+
+**Completed**:
+- ✅ Task X
+- ✅ Task Y
+
+**In Progress**:
+- 🟡 Task Z
+
+**Notes**:
+- [Any observations, challenges, or decisions made]
+
+## Lessons Learned
+
+Update this section during and after implementation. Document surprises, challenges, and insights for future reference.
+
+### What Went Well
+
+- [Success 1]
+- [Success 2]
+
+### Challenges Encountered
+
+- **Challenge**: [Description]
+  - **Solution**: [How it was resolved]
+  - **Prevention**: [How to avoid in future]
+
+- **Challenge**: [Description]
+  - **Solution**: [How it was resolved]
+  - **Prevention**: [How to avoid in future]
+
+### Design Decisions Made During Implementation
+
+- **Decision**: [What was decided]
+  - **Context**: [Why it came up]
+  - **Rationale**: [Why this choice]
+  - **Impact**: [What changed]
+
+### Performance Observations
+
+- **Metric**: [What was measured]
+  - **Expected**: [Target performance]
+  - **Actual**: [Measured performance]
+  - **Analysis**: [What it means]
+
+### Testing Insights
+
+- [What testing revealed]
+- [Edge cases discovered]
+- [Coverage gaps identified]
+
+### Future Improvements
+
+What could be better but is out of scope for now:
+- [Improvement 1]
+- [Improvement 2]
+
+### Would Do Differently
+
+Looking back, what would you change:
+- [Reflection 1]
+- [Reflection 2]
+
+## Actual vs Estimated Effort
+
+| Phase | Estimated | Actual | Delta | Notes |
+|-------|-----------|--------|-------|-------|
+| Phase 1 | Xh | Yh | +Zh | [Why difference] |
+| Phase 2 | Xh | Yh | +Zh | [Why difference] |
+| Phase 3 | Xh | Yh | +Zh | [Why difference] |
+| **Total** | **Xh** | **Yh** | **+Zh** | |
+
+## Completion Checklist
+
+- [ ] All phases completed
+- [ ] All tests passing (unit + integration)
+- [ ] Code reviewed and approved
+- [ ] Documentation updated
+- [ ] PR merged
+- [ ] Feature validated in production/staging
+- [ ] Retrospective completed
+- [ ] Lessons learned documented
+
+## Retrospective Summary
+
+**Date Completed**: [YYYY-MM-DD]
+
+**Overall Assessment**: [Success / Partial Success / Needs Improvement]
+
+**Key Takeaways**:
+1. [Takeaway 1]
+2. [Takeaway 2]
+3. [Takeaway 3]
+
+**Action Items for Future Work**:
+- [Action 1]
+- [Action 2]
