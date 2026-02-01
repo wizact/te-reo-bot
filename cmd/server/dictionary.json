@@ -246,7 +246,7 @@
             "meaning": "Greetings to you (said to one person)",
             "photo": "",
             "photo_attribution": "",
-            "word": "Tena koe"
+            "word": "Tēnā koe"
         },
         {
             "index": 33,
@@ -350,7 +350,7 @@
             "meaning": "M\u0101ori tattooing designs on the face or body.",
             "photo": "",
             "photo_attribution": "",
-            "word": "Ta moko"
+            "word": "Tā moko"
         },
         {
             "index": 46,
@@ -446,7 +446,7 @@
             "meaning": "Greetings to you all",
             "photo": "",
             "photo_attribution": "",
-            "word": "Tena koutou"
+            "word": "Tēnā koutou"
         },
         {
             "index": 58,
@@ -718,7 +718,7 @@
             "meaning": "elder",
             "photo": "",
             "photo_attribution": "",
-            "word": "kaumatua"
+            "word": "kaumātua"
         },
         {
             "index": 92,
@@ -774,7 +774,7 @@
             "meaning": "clan, sub-tribe; to be born",
             "photo": "",
             "photo_attribution": "",
-            "word": "hapu"
+            "word": "Hapū"
         },
         {
             "index": 99,
@@ -782,20 +782,20 @@
             "meaning": "snow",
             "photo": "",
             "photo_attribution": "",
-            "word": "hukarere"
+            "word": "Hukarere"
         },
         {
             "index": 100,
             "link": "",
-            "meaning": "mother, aunt",
+            "meaning": "Mother, aunt",
             "photo": "",
             "photo_attribution": "",
-            "word": "whaea"
+            "word": "Whaea"
         },
         {
             "index": 101,
             "link": "",
-            "meaning": "delicious",
+            "meaning": "Delicious",
             "photo": "",
             "photo_attribution": "",
             "word": "Kakato"
@@ -803,18 +803,18 @@
         {
             "index": 102,
             "link": "",
-            "meaning": "to tend, nurse, care for",
+            "meaning": "To tend, nurse, care for",
             "photo": "",
             "photo_attribution": "",
-            "word": "mohimohi"
+            "word": "Mohimohi"
         },
         {
             "index": 103,
             "link": "",
-            "meaning": "brother of a girl",
+            "meaning": "Brother of a girl",
             "photo": "",
             "photo_attribution": "",
-            "word": "tung\u0101ne"
+            "word": "Tungāne"
         },
         {
             "index": 104,
@@ -822,7 +822,7 @@
             "meaning": "elder sibling (of the same sex)",
             "photo": "",
             "photo_attribution": "",
-            "word": "tuakana"
+            "word": "Tuākana"
         },
         {
             "index": 105,
@@ -1166,7 +1166,7 @@
             "meaning": "Tuesday",
             "photo": "",
             "photo_attribution": "",
-            "word": "R\u0101tu"
+            "word": "R\u0101tū"
         },
         {
             "index": 148,
@@ -1566,7 +1566,7 @@
             "meaning": "M\u0101ori tattooing designs on the face or body.",
             "photo": "",
             "photo_attribution": "Portrait of T\u0101mati W\u0101ka Nene by Gottfried Lindauer (1890) - Public Domain, https://commons.wikimedia.org/w/index.php?curid=22007400",
-            "word": "Ta moko"
+            "word": "Tā moko"
         },
         {
             "index": 198,
@@ -1750,7 +1750,7 @@
             "meaning": "Yes / No",
             "photo": "",
             "photo_attribution": "",
-            "word": "Ae / Kare"
+            "word": "āe / kāre"
         },
         {
             "index": 221,
@@ -1934,7 +1934,7 @@
             "meaning": "clan, sub-tribe; to be born",
             "photo": "",
             "photo_attribution": "",
-            "word": "hapu"
+            "word": "hapū"
         },
         {
             "index": 244,
@@ -1966,7 +1966,7 @@
             "meaning": "sister of a boy",
             "photo": "",
             "photo_attribution": "",
-            "word": "tuahine"
+            "word": "tuāhine"
         },
         {
             "index": 248,
@@ -1982,7 +1982,7 @@
             "meaning": "elder sibling (of the same sex)",
             "photo": "",
             "photo_attribution": "",
-            "word": "tuakana"
+            "word": "tuākana"
         },
         {
             "index": 250,
@@ -2062,7 +2062,7 @@
             "meaning": "Flower, blossom, beauty in nature",
             "photo": "",
             "photo_attribution": "",
-            "word": "Puawai"
+            "word": "Puāwai"
         },
         {
             "index": 260,
@@ -2342,7 +2342,7 @@
             "meaning": "Farewell",
             "photo": "",
             "photo_attribution": "",
-            "word": "Haere ra"
+            "word": "Haere rā"
         },
         {
             "index": 295,
@@ -2486,7 +2486,7 @@
             "meaning": "to lead and guide",
             "photo": "",
             "photo_attribution": "",
-            "word": "\u0101rahi"
+            "word": "Ārahi"
         },
         {
             "index": 313,
@@ -2558,23 +2558,23 @@
             "meaning": "to shout, bawl",
             "photo": "",
             "photo_attribution": "",
-            "word": "h\u0101parangi"
+            "word": "Hāparangi"
         },
         {
             "index": 322,
             "link": "",
-            "meaning": "holiday",
+            "meaning": "Holiday",
             "photo": "",
             "photo_attribution": "",
-            "word": "hararei"
+            "word": "Hararei"
         },
         {
             "index": 323,
             "link": "",
-            "meaning": "egg",
+            "meaning": "Egg",
             "photo": "",
             "photo_attribution": "",
-            "word": "h\u0113ki"
+            "word": "H\u0113ki"
         },
         {
             "index": 324,
@@ -2590,7 +2590,7 @@
             "meaning": "See you later",
             "photo": "",
             "photo_attribution": "",
-            "word": "Hei konei ra"
+            "word": "Hei konei rā"
         },
         {
             "index": 326,
@@ -2766,7 +2766,7 @@
             "meaning": "The silver tree fern is a species of medium-sized tree fern, endemic (not found naturally anywhere else) to New Zealand. It arrived\u00a0relatively late in New Zealand\u2019s history during the Pliocene epoch (around 5 \u2013 1.8 million years ago).",
             "photo": "Silver-fern.jpeg",
             "photo_attribution": "Silver fern. (2024, November 29). In Wikipedia. https://en.wikipedia.org/wiki/Silver_fern",
-            "word": "Ponga, Kaponga, Katote"
+            "word": "Ponga, Kaponga, Kātote"
         },
         {
             "index": 348,
