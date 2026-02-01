@@ -208,39 +208,6 @@ func (r *SQLiteRepository) GetWordByDayIndex(dayIndex int) (*Word, error) {
 	return &word, nil
 }
 
-// GetWordByText retrieves a word by exact text match (case-sensitive)
-// Can be called with or without transaction - if tx is nil, uses direct DB query
-func (r *SQLiteRepository) GetWordByText(tx *sql.Tx, word string) (*Word, error) {
-	query := `
-		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
-		       created_at, updated_at, is_active
-		FROM words
-		WHERE word = ?
-	`
-
-	var row scanner
-	if tx != nil {
-		row = tx.QueryRow(query, word)
-	} else {
-		row = r.db.QueryRow(query, word)
-	}
-
-	wordResult, err := scanWord(row)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, err // Expected - word doesn't exist
-		}
-		appErr := entities.NewAppError(err, 500, "Failed to get word by text").
-			WithContext("operation", "get_word_by_text").
-			WithContext("table", "words").
-			WithContext("word", word)
-		r.logger.ErrorWithStack(err, "Query failed", logger.String("operation", "get_word_by_text"), logger.String("word", word))
-		return nil, appErr
-	}
-
-	return &wordResult, nil
-}
-
 // AddWord inserts a new word into the database
 func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *Word) error {
 	query := `
@@ -321,34 +288,6 @@ func (r *SQLiteRepository) UpdateWord(word *Word) error {
 	return nil
 }
 
-// UpdateWordDayIndex updates only the day_index field for an existing word
-func (r *SQLiteRepository) UpdateWordDayIndex(tx *sql.Tx, wordText string, dayIndex int) error {
-	query := `UPDATE words SET day_index = ?, updated_at = ? WHERE word = ?`
-
-	r.logger.Debug("Updating word day_index",
-		logger.String("word", wordText),
-		logger.Int("day_index", dayIndex))
-
-	_, err := tx.Exec(query, dayIndex, time.Now(), wordText)
-	if err != nil {
-		appErr := entities.NewAppError(err, 500, "Failed to update word day_index").
-			WithContext("operation", "update_word_day_index").
-			WithContext("table", "words").
-			WithContext("word", wordText).
-			WithContext("day_index", dayIndex)
-		r.logger.ErrorWithStack(err, "Update failed",
-			logger.String("operation", "update_word_day_index"),
-			logger.String("word", wordText),
-			logger.Int("day_index", dayIndex))
-		return appErr
-	}
-
-	r.logger.Info("Word day_index updated",
-		logger.String("word", wordText),
-		logger.Int("day_index", dayIndex))
-	return nil
-}
-
 // DeleteWord removes a word from the database (hard delete)
 func (r *SQLiteRepository) DeleteWord(tx *sql.Tx, id int) error {
 	r.logger.Debug("Deleting word from database", logger.Int("word_id", id))
@@ -365,53 +304,6 @@ func (r *SQLiteRepository) DeleteWord(tx *sql.Tx, id int) error {
 	}
 
 	r.logger.Info("Word deleted successfully", logger.Int("word_id", id))
-	return nil
-}
-
-// DeduplicateWords removes duplicate word entries, keeping first occurrence (lowest ID)
-func (r *SQLiteRepository) DeduplicateWords(tx *sql.Tx) (int, error) {
-	r.logger.Debug("Deduplicating words in database")
-
-	query := `
-		DELETE FROM words
-		WHERE id NOT IN (
-			SELECT MIN(id)
-			FROM words
-			GROUP BY word
-		)
-	`
-	result, err := tx.Exec(query)
-	if err != nil {
-		appErr := entities.NewAppError(err, 500, "Failed to deduplicate words").
-			WithContext("operation", "deduplicate_words").
-			WithContext("table", "words")
-		r.logger.ErrorWithStack(err, "Deduplication failed", logger.String("operation", "deduplicate_words"))
-		return 0, appErr
-	}
-
-	rowsAffected, _ := result.RowsAffected()
-	if rowsAffected > 0 {
-		r.logger.Info("Removed duplicate words from database", logger.Int("duplicates_removed", int(rowsAffected)))
-	}
-	return int(rowsAffected), nil
-}
-
-// UnsetAllDayIndexes clears day_index for all words (preserves words)
-func (r *SQLiteRepository) UnsetAllDayIndexes(tx *sql.Tx) error {
-	r.logger.Debug("Unsetting all day_index assignments")
-
-	query := `UPDATE words SET day_index = NULL, updated_at = ? WHERE day_index IS NOT NULL`
-	result, err := tx.Exec(query, time.Now())
-	if err != nil {
-		appErr := entities.NewAppError(err, 500, "Failed to unset day_index assignments").
-			WithContext("operation", "unset_day_indexes").
-			WithContext("table", "words")
-		r.logger.ErrorWithStack(err, "Unset failed", logger.String("operation", "unset_day_indexes"))
-		return appErr
-	}
-
-	rowsAffected, _ := result.RowsAffected()
-	r.logger.Info("Day indexes unset", logger.Int("rows_affected", int(rowsAffected)))
 	return nil
 }
 
