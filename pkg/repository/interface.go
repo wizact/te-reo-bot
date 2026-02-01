@@ -35,6 +35,25 @@ type WordRepository interface {
 	// DeleteWord removes a word from the database (hard delete)
 	DeleteWord(tx *sql.Tx, id int) error
 
+	// DeduplicateWords removes duplicate word entries from database, keeping first occurrence (lowest ID)
+	// Returns count of deleted duplicate words
+	// Used at start of migration to ensure data consistency
+	DeduplicateWords(tx *sql.Tx) (int, error)
+
+	// UnsetAllDayIndexes clears day_index for all words with non-null day_index
+	// Used at start of migration to reset assignments before applying new ones
+	UnsetAllDayIndexes(tx *sql.Tx) error
+
+	// GetWordByText retrieves a word by exact text match (case-sensitive)
+	// Returns sql.ErrNoRows if word doesn't exist
+	// Can be called with or without transaction - if tx is nil, uses direct DB query
+	GetWordByText(tx *sql.Tx, word string) (*Word, error)
+
+	// UpdateWordDayIndex updates only the day_index field for an existing word
+	// Preserves all other fields, updates updated_at timestamp
+	// Uses word text for lookup (not ID)
+	UpdateWordDayIndex(tx *sql.Tx, wordText string, dayIndex int) error
+
 	// GetWordCount returns the total number of words in the database
 	GetWordCount() (int, error)
 
@@ -42,5 +61,6 @@ type WordRepository interface {
 	GetWordCountByDayIndex() (int, error)
 
 	// DeleteAllWordsByDayIndex deletes all words with non-null day_index in a single query
+	// Deprecated: Use UnsetAllDayIndexes instead. Will be removed in v2.0.0
 	DeleteAllWordsByDayIndex(tx *sql.Tx) error
 }
