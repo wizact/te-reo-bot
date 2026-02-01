@@ -1,2924 +1,2932 @@
 {
     "dictionary": [
         {
-            "index": 2,
+            "index": 1,
+            "word": "ngā mihi o te tau hou",
+            "meaning": "happy new year, greetings for the new year",
             "link": "",
-            "meaning": "The New Zealand bellbird. Also known by its other M\u0101ori names makomako, and k\u014dmako, is a passerine bird endemic to New Zealand.",
+            "photo": "fireworks.jpeg",
+            "photo_attribution": "Skycity's fireworks display at midnight. Photo/Jason Oxenham"
+        },
+        {
+            "index": 2,
+            "word": "Korimako",
+            "meaning": "The New Zealand bellbird. Also known by its other Māori names makomako, and kōmako, is a passerine bird endemic to New Zealand.",
+            "link": "",
             "photo": "bellbird.jpeg",
-            "photo_attribution": "Photo of the New Zealand bellbird.",
-            "word": "Korimako"
+            "photo_attribution": "Photo of the New Zealand bellbird."
         },
         {
             "index": 3,
-            "link": "",
+            "word": "Karure, Kakaruia",
             "meaning": "Chatham Island black robin, is an endangered bird from the Chatham Islands off the east coast of New Zealand.",
+            "link": "",
             "photo": "chathams-island-black-robin-hero.jpg",
-            "photo_attribution": "Karure, Kakaruia, Chatham Island black robin bird.",
-            "word": "Karure, Kakaruia"
+            "photo_attribution": "Karure, Kakaruia, Chatham Island black robin bird."
         },
         {
             "index": 4,
+            "word": "Parea",
+            "meaning": "Chatham Island pigeon is a bird endemic to the Chatham Islands in New Zealand \u0026 is closely related to the kererū.",
             "link": "",
-            "meaning": "Chatham Island pigeon is a bird endemic to the Chatham Islands in New Zealand & is closely related to the kerer\u016b.",
             "photo": "chatham-island-pigeon-parea-hero.jpg",
-            "photo_attribution": "Parea, Chatham Island pigeon bird.",
-            "word": "Parea"
+            "photo_attribution": "Parea, Chatham Island pigeon bird."
         },
         {
             "index": 5,
-            "link": "",
+            "word": "Riroriro",
             "meaning": "The grey warbler is one of the smallest birds found in New Zealand, about 11 centimeters long, with a weight of up to 6.5 grams.",
+            "link": "",
             "photo": "grey-warbler.jpg",
-            "photo_attribution": "Riroriro, grey warbler bird.",
-            "word": "Riroriro"
+            "photo_attribution": "Riroriro, grey warbler bird."
         },
         {
             "index": 6,
+            "word": "Kākā",
+            "meaning": "A large parrot belonging to the nestorinae family, a group that includes the kea and the extinct Norfolk Island kākā.",
             "link": "",
-            "meaning": "A large parrot belonging to the nestorinae family, a group that includes the kea and the extinct Norfolk Island k\u0101k\u0101.",
             "photo": "kaka.jpg",
-            "photo_attribution": "K\u0101k\u0101, a large parrot native to New Zealand that includes Kea.",
-            "word": "K\u0101k\u0101"
+            "photo_attribution": "Kākā, a large parrot native to New Zealand that includes Kea."
         },
         {
             "index": 7,
+            "word": "Kākāpō",
+            "meaning": "The kākāpō is the world's only flightless parrot, the world's heaviest parrot, and also is nocturnal, herbivorous, endemic to New Zealand.",
             "link": "",
-            "meaning": "The k\u0101k\u0101p\u014d is the world's only flightless parrot, the world's heaviest parrot, and also is nocturnal, herbivorous, endemic to New Zealand.",
             "photo": "kakapo.jpg",
-            "photo_attribution": "K\u0101k\u0101p\u014d, the world's only flightless parrot endemic to New Zealand.",
-            "word": "K\u0101k\u0101p\u014d"
+            "photo_attribution": "Kākāpō, the world's only flightless parrot endemic to New Zealand."
         },
         {
             "index": 8,
-            "link": "",
+            "word": "Kea",
             "meaning": "A species of large parrot found in the forested and alpine regions of the South Island of New Zealand. It is one of the most intelligent birds in the world.",
+            "link": "",
             "photo": "kea.jpg",
-            "photo_attribution": "Kea bird, a large parrot found in the forested and alpine regions of the South Island of New Zealand.",
-            "word": "Kea"
+            "photo_attribution": "Kea bird, a large parrot found in the forested and alpine regions of the South Island of New Zealand."
         },
         {
             "index": 9,
-            "link": "",
+            "word": "Kōkako",
             "meaning": "An endemic New Zealand wattlebirds, an ancient family of birds which includes the North and South Island saddleback and the extinct huia.",
+            "link": "",
             "photo": "kokako.jpg",
-            "photo_attribution": "K\u014dkako, an endemic New Zealand wattlebird.",
-            "word": "K\u014dkako"
+            "photo_attribution": "Kōkako, an endemic New Zealand wattlebird."
         },
         {
             "index": 10,
+            "word": "Ruru",
+            "meaning": "The native morepork is known for its haunting, melancholic call. This sound gives it the Māori name 'ruru'.",
             "link": "",
-            "meaning": "The native morepork is known for its haunting, melancholic call. This sound gives it the M\u0101ori name 'ruru'.",
             "photo": "ruru.jpg",
-            "photo_attribution": "Ruru, the native morepork bird known for its haunting, melancholic call.",
-            "word": "Ruru"
+            "photo_attribution": "Ruru, the native morepork bird known for its haunting, melancholic call."
         },
         {
             "index": 11,
+            "word": "Toutouwai",
+            "meaning": "North Island robin is a friendly and trusting bird and is found in both native and exotic forests. Often come close to people \u0026 occasionally stand on a person's boot.",
             "link": "",
-            "meaning": "North Island robin is a friendly and trusting bird and is found in both native and exotic forests. Often come close to people & occasionally stand on a person's boot.",
             "photo": "north-island-robin.jpg",
-            "photo_attribution": "Toutouwai, North Island robin bird.",
-            "word": "Toutouwai"
+            "photo_attribution": "Toutouwai, North Island robin bird."
         },
         {
             "index": 12,
-            "link": "",
+            "word": "Kārearea",
             "meaning": "New Zealand falcon. It is capable of flying at speeds up to 200 km/h and catching prey larger than itself.",
+            "link": "",
             "photo": "falcon.jpg",
-            "photo_attribution": "K\u0101reaream, New Zealand falcon bird.",
-            "word": "K\u0101rearea"
+            "photo_attribution": "Kāreaream, New Zealand falcon bird."
         },
         {
             "index": 13,
+            "word": "Kākāriki",
+            "meaning": "New Zealand parakeet. It means 'small green parrot' in Māori. They are beautiful forest birds. They feed on berries, seeds, fruit and insects, and generally nest in holes in trees.",
             "link": "",
-            "meaning": "New Zealand parakeet. It means 'small green parrot' in M\u0101ori. They are beautiful forest birds. They feed on berries, seeds, fruit and insects, and generally nest in holes in trees.",
             "photo": "red-crowned.jpg",
-            "photo_attribution": "K\u0101k\u0101riki, New Zealand parakeet bird.",
-            "word": "K\u0101k\u0101riki"
+            "photo_attribution": "Kākāriki, New Zealand parakeet bird."
         },
         {
             "index": 14,
+            "word": "Kererū / kūkū / kūkupa",
+            "meaning": "New Zealand pigeon. The kererū is a large bird with irridescent green and bronze feathers on its head and a smart white vest. The noisy beat of its wings is a distinctive sound in our forests.",
             "link": "",
-            "meaning": "New Zealand pigeon. The kerer\u016b is a large bird with irridescent green and bronze feathers on its head and a smart white vest. The noisy beat of its wings is a distinctive sound in our forests.",
             "photo": "kereru.jpg",
-            "photo_attribution": "Kerer\u016b, New Zealand pigeon bird.",
-            "word": "Kerer\u016b / k\u016bk\u016b / k\u016bkupa"
+            "photo_attribution": "Kererū, New Zealand pigeon bird."
         },
         {
             "index": 15,
+            "word": "Tuke / Pīwauwau",
+            "meaning": "Rock wren. A small and reclusive bird, rock wrens are restricted to pockets of the South Island’s high country.",
             "link": "",
-            "meaning": "Rock wren. A small and reclusive bird, rock wrens are restricted to pockets of the South Island\u2019s high country.",
             "photo": "rock-wren.jpg",
-            "photo_attribution": "Tuke, P\u012bwauwau, Rock wren bird.",
-            "word": "Tuke / P\u012bwauwau"
+            "photo_attribution": "Tuke, Pīwauwau, Rock wren bird."
         },
         {
             "index": 16,
+            "word": "Tīeke",
+            "meaning": "The Saddleback belongs to New Zealand's unique wattlebird family, an ancient group which includes the endangered kōkako and the extinct huia.",
             "link": "",
-            "meaning": "The Saddleback belongs to New Zealand's unique wattlebird family, an ancient group which includes the endangered k\u014dkako and the extinct huia.",
             "photo": "saddleback.jpg",
-            "photo_attribution": "T\u012beke, Saddleback bird.",
-            "word": "T\u012beke"
+            "photo_attribution": "Tīeke, Saddleback bird."
         },
         {
             "index": 17,
+            "word": "Tauhou",
+            "meaning": "Silvereye or wax-eye or sometimes white eye were self introduced to NZ in the 1800s. Their Māori name means 'stranger' or more literally, 'new arrival'.",
             "link": "",
-            "meaning": "Silvereye or wax-eye or sometimes white eye were self introduced to NZ in the 1800s. Their M\u0101ori name means 'stranger' or more literally, 'new arrival'.",
             "photo": "silvereye.jpg",
-            "photo_attribution": "Tauhou, Silvereye or wax-eye bird.",
-            "word": "Tauhou"
+            "photo_attribution": "Tauhou, Silvereye or wax-eye bird."
         },
         {
             "index": 18,
-            "link": "",
+            "word": "Hihi",
             "meaning": "The stitchbird is a honeyeater-like bird endemic to the North Island and adjacent offshore islands of New Zealand. It's classed as the only member of its own family, the Notiomystidae.",
+            "link": "",
             "photo": "stitchbird-hihi.jpg",
-            "photo_attribution": "Hihi, Stitchbird bird.",
-            "word": "Hihi"
+            "photo_attribution": "Hihi, Stitchbird bird."
         },
         {
             "index": 19,
-            "link": "",
+            "word": "Takahē",
             "meaning": "It is a flightless swamphen indigenous to New Zealand and the largest living member of the rail family.",
+            "link": "",
             "photo": "takahe.jpg",
-            "photo_attribution": "Takah\u0113, a flightless swamphen bird indigenous to New Zealand.",
-            "word": "Takah\u0113"
+            "photo_attribution": "Takahē, a flightless swamphen bird indigenous to New Zealand."
         },
         {
             "index": 20,
+            "word": "Miromiro",
+            "meaning": "The New Zealand tomtit looks similar to a robin. They are a small bird with a large head, a short bill and tail, and live in forest and scrub. The Māori name of the North Island tomtit is miromiro, while the South Island tomtit is known as ngirungiru.",
             "link": "",
-            "meaning": "The New Zealand tomtit looks similar to a robin. They are a small bird with a large head, a short bill and tail, and live in forest and scrub. The M\u0101ori name of the North Island tomtit is miromiro, while the South Island tomtit is known as ngirungiru.",
             "photo": "tomtit.jpg",
-            "photo_attribution": "Miromiro, New Zealand tomtit bird.",
-            "word": "Miromiro"
+            "photo_attribution": "Miromiro, New Zealand tomtit bird."
         },
         {
             "index": 21,
-            "link": "",
+            "word": "Tūī",
             "meaning": "A boisterous medium-sized bird native to New Zealand. It is blue, green, and bronze coloured with a distinctive white throat tuft.",
+            "link": "",
             "photo": "nz-tui.jpg",
-            "photo_attribution": "T\u016b\u012b, a boisterous medium-sized bird native to New Zealand.",
-            "word": "T\u016b\u012b"
+            "photo_attribution": "Tūī, a boisterous medium-sized bird native to New Zealand."
         },
         {
             "index": 22,
+            "word": "Te Whanganui a Tara",
+            "meaning": "The Māori name for Wellington Harbour or the great Harbour of Tara.",
             "link": "",
-            "meaning": "The M\u0101ori name for Wellington Harbour or the great Harbour of Tara.",
             "photo": "1155px-Wellington_Harbour,_New_Zealand,_Nov._2009.jpg",
-            "photo_attribution": "Aerial photo of Wellington Harbour, New Zealand. By Phillip Capper - Flickr: Wellington Harbour, New Zealand, Nov. 2009, CC BY 2.0",
-            "word": "Te Whanganui a Tara"
+            "photo_attribution": "Aerial photo of Wellington Harbour, New Zealand. By Phillip Capper - Flickr: Wellington Harbour, New Zealand, Nov. 2009, CC BY 2.0"
         },
         {
             "index": 23,
+            "word": "Pōpokotea",
+            "meaning": "The whitehead is a small species of bird endemic to New Zealand. In many legends, whiteheads were viewed by Māori to have roles as messengers of the gods and as fortune tellers or seers.",
             "link": "",
-            "meaning": "The whitehead is a small species of bird endemic to New Zealand. In many legends, whiteheads were viewed by M\u0101ori to have roles as messengers of the gods and as fortune tellers or seers.",
             "photo": "whitehead.jpg",
-            "photo_attribution": "P\u014dpokotea, whitehead bird is a small species of bird endemic to New Zealand.",
-            "word": "P\u014dpokotea"
+            "photo_attribution": "Pōpokotea, whitehead bird is a small species of bird endemic to New Zealand."
         },
         {
             "index": 24,
-            "link": "",
+            "word": "Mohua",
             "meaning": "The yellowhead is a small, insect eating bird which lives only in the forests of New Zealand's South Island and Stewart Island. Since 1991, a yellowhead has appeared on the reverse side of the New Zealand $100 note.",
+            "link": "",
             "photo": "yellowhead.jpg",
-            "photo_attribution": "Mohua, yellowhead bird lives in the forests of New Zealand's South Island and Stewart Island.",
-            "word": "Mohua"
+            "photo_attribution": "Mohua, yellowhead bird lives in the forests of New Zealand's South Island and Stewart Island."
         },
         {
             "index": 25,
-            "link": "",
+            "word": "Tohorā",
             "meaning": "whale - often used as a general term, particularly for baleen whales.",
+            "link": "",
             "photo": "480px-Southern_right_whale.jpg",
-            "photo_attribution": "Southern right whale. By Micha\u00ebl CATANZARITI - by Micha\u00ebl CATANZARITI, CC BY-SA 3.0",
-            "word": "Tohor\u0101"
+            "photo_attribution": "Southern right whale. By Michaël CATANZARITI - by Michaël CATANZARITI, CC BY-SA 3.0"
         },
         {
             "index": 26,
-            "link": "",
+            "word": "Weka",
             "meaning": "A large, brown flightless bird that has a famously feisty and curious personality.",
+            "link": "",
             "photo": "weka.jpg",
-            "photo_attribution": "Weka, a large, brown flightless bird.",
-            "word": "Weka"
+            "photo_attribution": "Weka, a large, brown flightless bird."
         },
         {
             "index": 27,
-            "link": "",
+            "word": "Kaitiaki",
             "meaning": "Guardian, caretaker, manager, trustee",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaitiaki"
+            "photo_attribution": ""
         },
         {
             "index": 28,
-            "link": "",
+            "word": "Whakatū",
             "meaning": "Nelson. A New Zealand city on the eastern shores of Tasman Bay at the top of the South Island.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakat\u016b"
+            "photo_attribution": ""
         },
         {
             "index": 29,
+            "word": "Tāmaki Makaurau",
+            "meaning": "The Māori name for Auckland, means Tāmaki desired by many. This name refers to the abundance of natural resources, strategic vantage points, portage routes, and mahinga kai which first attracted Māori, and then other settlers.",
             "link": "",
-            "meaning": "The M\u0101ori name for Auckland, means T\u0101maki desired by many. This name refers to the abundance of natural resources, strategic vantage points, portage routes, and mahinga kai which first attracted M\u0101ori, and then other settlers.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "T\u0101maki Makaurau"
+            "photo_attribution": ""
         },
         {
             "index": 30,
-            "link": "",
+            "word": "Ngāwhā",
             "meaning": "Geothermal hot pools, boiling spring, volcanic activity, boiling mud pool",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ng\u0101wh\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 31,
-            "link": "",
+            "word": "Rāhui",
             "meaning": "To put in place a temporary ritual prohibition, closed season, ban, reserve",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101hui"
+            "photo_attribution": ""
         },
         {
             "index": 32,
-            "link": "",
+            "word": "Tēnā koe",
             "meaning": "Greetings to you (said to one person)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tena koe"
+            "photo_attribution": ""
         },
         {
             "index": 33,
-            "link": "",
+            "word": "marae",
             "meaning": "the area for formal discourse in front of a meeting house, or applied to a whole marae complex",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "marae"
+            "photo_attribution": ""
         },
         {
             "index": 34,
-            "link": "",
+            "word": "manuhiri",
             "meaning": "guests, visitors",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "manuhiri"
+            "photo_attribution": ""
         },
         {
             "index": 35,
-            "link": "",
+            "word": "mana",
             "meaning": "prestige, reputation",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "mana"
+            "photo_attribution": ""
         },
         {
             "index": 36,
-            "link": "",
+            "word": "mahi",
             "meaning": "work or activity",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "mahi"
+            "photo_attribution": ""
         },
         {
             "index": 37,
+            "word": "Tiriti o Waitangi",
+            "meaning": "The Treaty of Waitangi, sometimes referred to as Te Tiriti, is New Zealand’s founding document. It takes its name from the place in the Bay of Islands where it was first signed, on 6 February 1840.",
             "link": "https://nzhistory.govt.nz/politics/treaty/the-treaty-in-brief",
-            "meaning": "The Treaty of Waitangi, sometimes referred to as Te Tiriti, is New Zealand\u2019s founding document. It takes its name from the place in the Bay of Islands where it was first signed, on 6 February 1840.",
             "photo": "385px-Treatyofwaitangi.jpg",
-            "photo_attribution": "The Waitangi Sheet of the Treaty of Waitangi. By William Hobson, James Freeman, and James Busby (English version); Henry Williams and Edward Williams (M\u0101ori translation)",
-            "word": "Tiriti o Waitangi"
+            "photo_attribution": "The Waitangi Sheet of the Treaty of Waitangi. By William Hobson, James Freeman, and James Busby (English version); Henry Williams and Edward Williams (Māori translation)"
         },
         {
             "index": 38,
-            "link": "",
+            "word": "Manāki tangata",
             "meaning": "Practise reciprocity and generosity",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Man\u0101ki tangata"
+            "photo_attribution": ""
         },
         {
             "index": 39,
-            "link": "",
+            "word": "Kāinga",
             "meaning": "Home, abode, dwelling",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "K\u0101inga"
+            "photo_attribution": ""
         },
         {
             "index": 40,
-            "link": "",
+            "word": "Kawa",
             "meaning": "Ceremonial rituals, protocol",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kawa"
+            "photo_attribution": ""
         },
         {
             "index": 41,
-            "link": "",
+            "word": "Tarawera",
             "meaning": "Lake Tarawera, meaning 'Burnt Spear' is one of the largest lakes in New Zealand. The lake was home to many small Maori villages and mission settlements.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tarawera"
+            "photo_attribution": ""
         },
         {
             "index": 42,
+            "word": "Whakaari",
+            "meaning": "The name Whakaari means 'to make visible' or 'exposed to view'. The full Māori name for the island is te puia whakaari, meaning 'The Dramatic Volcano'.",
             "link": "",
-            "meaning": "The name Whakaari means 'to make visible' or 'exposed to view'. The full M\u0101ori name for the island is te puia whakaari, meaning 'The Dramatic Volcano'.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakaari"
+            "photo_attribution": ""
         },
         {
             "index": 43,
-            "link": "",
+            "word": "Haere rā",
             "meaning": "Goodbye, farewell",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere r\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 44,
-            "link": "",
+            "word": "Manaakitanga",
             "meaning": "Hospitality, taking good care of others.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Manaakitanga"
+            "photo_attribution": ""
         },
         {
             "index": 45,
+            "word": "Tā moko",
+            "meaning": "Māori tattooing designs on the face or body.",
             "link": "",
-            "meaning": "M\u0101ori tattooing designs on the face or body.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ta moko"
+            "photo_attribution": ""
         },
         {
             "index": 46,
-            "link": "",
+            "word": "Kare",
             "meaning": "Used to address a close friend affectionately",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kare"
+            "photo_attribution": ""
         },
         {
             "index": 47,
-            "link": "",
+            "word": "Aroha mai, aroha atu",
             "meaning": "Love received demands love returned",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Aroha mai, aroha atu"
+            "photo_attribution": ""
         },
         {
             "index": 48,
-            "link": "",
+            "word": "Hei kona rā",
             "meaning": "Goodbye (said to someone staying)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hei kona r\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 49,
-            "link": "",
+            "word": "Mā te wā",
             "meaning": "See you next time",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "M\u0101 te w\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 50,
-            "link": "",
+            "word": "Ka kite anō",
             "meaning": "See you later",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ka kite an\u014d"
+            "photo_attribution": ""
         },
         {
             "index": 51,
-            "link": "",
+            "word": "Waikikamukau",
             "meaning": "(as if saying 'Why kick a moo cow') is a generic name for a small rural town or locality in New Zealand. New Zealanders use the name as a placeholder name for 'any town' or to denote a non-specific but remote rural town. It has a similar connotation to the New Zealand slang Wop Wops.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Waikikamukau"
+            "photo_attribution": ""
         },
         {
             "index": 52,
-            "link": "",
+            "word": "Eketāhuna",
             "meaning": "town located at eastern foot of the Tararua Ranges, has become synonymous with stereotypes of remote rural New Zealand towns, with New Zealanders colloquially referring to the town in the same way other English speakers refer to Timbuktu.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Eket\u0101huna"
+            "photo_attribution": ""
         },
         {
             "index": 53,
-            "link": "",
+            "word": "Noho ora mai rā",
             "meaning": "Look after yourself/stay well",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Noho ora mai r\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 54,
-            "link": "",
+            "word": "Nāku noa, nā [your name]",
             "meaning": "Yours sincerely, [NAME]",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "N\u0101ku noa, n\u0101 [your name]"
+            "photo_attribution": ""
         },
         {
             "index": 55,
-            "link": "",
+            "word": "Hei konā mai me ngā mihi",
             "meaning": "Thanks and goodbye",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hei kon\u0101 mai me ng\u0101 mihi"
+            "photo_attribution": ""
         },
         {
             "index": 56,
-            "link": "",
+            "word": "Haere mai",
             "meaning": "Welcome",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere mai"
+            "photo_attribution": ""
         },
         {
             "index": 57,
-            "link": "",
+            "word": "Tēnā koutou",
             "meaning": "Greetings to you all",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tena koutou"
+            "photo_attribution": ""
         },
         {
             "index": 58,
-            "link": "",
+            "word": "One",
             "meaning": "Sand, earth",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "One"
+            "photo_attribution": ""
         },
         {
             "index": 59,
-            "link": "",
+            "word": "Pae",
             "meaning": "Ridge, range",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pae"
+            "photo_attribution": ""
         },
         {
             "index": 60,
-            "link": "",
+            "word": "Papa",
             "meaning": "Flat",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Papa"
+            "photo_attribution": ""
         },
         {
             "index": 61,
-            "link": "",
+            "word": "Puke",
             "meaning": "Hill",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Puke"
+            "photo_attribution": ""
         },
         {
             "index": 62,
-            "link": "",
+            "word": "Mānia",
             "meaning": "plain, plateau",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "M\u0101nia"
+            "photo_attribution": ""
         },
         {
             "index": 63,
-            "link": "",
+            "word": "Manga",
             "meaning": "branch of a river or tree. stream",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Manga"
+            "photo_attribution": ""
         },
         {
             "index": 64,
-            "link": "",
+            "word": "Au",
             "meaning": "smoke, cloud, mist, fog",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Au"
+            "photo_attribution": ""
         },
         {
             "index": 65,
-            "link": "",
+            "word": "Kai moana",
             "meaning": "Seafood",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kai moana"
+            "photo_attribution": ""
         },
         {
             "index": 66,
-            "link": "",
+            "word": "Moe",
             "meaning": "sleep, dream",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Moe"
+            "photo_attribution": ""
         },
         {
             "index": 67,
-            "link": "",
+            "word": "Kōrero",
             "meaning": "Talk",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "K\u014drero"
+            "photo_attribution": ""
         },
         {
             "index": 68,
-            "link": "",
+            "word": "Ako",
             "meaning": "Learn",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ako"
+            "photo_attribution": ""
         },
         {
             "index": 69,
-            "link": "",
+            "word": "Titiro",
             "meaning": "Look",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Titiro"
+            "photo_attribution": ""
         },
         {
             "index": 70,
-            "link": "",
+            "word": "Whakarongo",
             "meaning": "Listen",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakarongo"
+            "photo_attribution": ""
         },
         {
             "index": 71,
-            "link": "",
+            "word": "Kanikani",
             "meaning": "Dance",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kanikani"
+            "photo_attribution": ""
         },
         {
             "index": 72,
-            "link": "",
+            "word": "Pakipaki",
             "meaning": "Clap",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pakipaki"
+            "photo_attribution": ""
         },
         {
             "index": 73,
-            "link": "",
+            "word": "kauri",
             "meaning": "large native conifer",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kauri"
+            "photo_attribution": ""
         },
         {
             "index": 74,
-            "link": "",
+            "word": "tau",
             "meaning": "to land, alight, come to rest, settle on",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tau"
+            "photo_attribution": ""
         },
         {
             "index": 75,
-            "link": "",
+            "word": "me te rearea",
             "meaning": "how beautiful, how stunning",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "me te rearea"
+            "photo_attribution": ""
         },
         {
             "index": 76,
-            "link": "",
+            "word": "Waka-o-Māui, Te",
             "meaning": "South Island",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Waka-o-M\u0101ui, Te"
+            "photo_attribution": ""
         },
         {
             "index": 77,
-            "link": "",
+            "word": "Waka-o-Aoraki, Te",
             "meaning": "South Island - an ancient name for Te Wai Pounamu",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Waka-o-Aoraki, Te"
+            "photo_attribution": ""
         },
         {
             "index": 78,
+            "word": "Aotearoa",
+            "meaning": "Land of the Long White Cloud. North Island - now used as the Māori name for New Zealand",
             "link": "",
-            "meaning": "Land of the Long White Cloud. North Island - now used as the M\u0101ori name for New Zealand",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Aotearoa"
+            "photo_attribution": ""
         },
         {
             "index": 79,
-            "link": "",
+            "word": "Kuki Airani",
             "meaning": "Cook Islands - a group of fifteen islands in the SW Pacific",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kuki Airani"
+            "photo_attribution": ""
         },
         {
             "index": 80,
-            "link": "",
+            "word": "hūmārie",
             "meaning": "to be handsome, pleasant, beautiful, peaceful, gentle, amiable",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "h\u016bm\u0101rie"
+            "photo_attribution": ""
         },
         {
             "index": 81,
-            "link": "",
+            "word": "Ngahuru",
             "meaning": "Autumn",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ngahuru"
+            "photo_attribution": ""
         },
         {
             "index": 82,
-            "link": "",
+            "word": "Te Moana-nui-o-Kiwa",
             "meaning": "The Pacific Ocean",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Te Moana-nui-o-Kiwa"
+            "photo_attribution": ""
         },
         {
             "index": 83,
-            "link": "",
+            "word": "Te Tai-o-Rehua",
             "meaning": "The Tasman Sea",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Te Tai-o-Rehua"
+            "photo_attribution": ""
         },
         {
             "index": 84,
-            "link": "",
+            "word": "Kōraki",
             "meaning": "North wind, north-north-west wind",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "K\u014draki"
+            "photo_attribution": ""
         },
         {
             "index": 85,
-            "link": "",
+            "word": "whakapaipai",
             "meaning": "to decorate, ornament, beautify, tidy up, adorn",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whakapaipai"
+            "photo_attribution": ""
         },
         {
             "index": 86,
-            "link": "",
+            "word": "nōku te whiwhi",
             "meaning": "my gain, lucky me, I've got a beauty, I am fortunate",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "n\u014dku te whiwhi"
+            "photo_attribution": ""
         },
         {
             "index": 87,
-            "link": "",
+            "word": "ātanga",
             "meaning": "to adorn, embellish, enhance",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "\u0101tanga"
+            "photo_attribution": ""
         },
         {
             "index": 88,
-            "link": "",
+            "word": "huatau",
             "meaning": "be comely, suitable, elegant, graceful",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "huatau"
+            "photo_attribution": ""
         },
         {
             "index": 89,
-            "link": "",
+            "word": "maitai",
             "meaning": "iron, steel, cutlery, metal",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "maitai"
+            "photo_attribution": ""
         },
         {
             "index": 90,
-            "link": "",
+            "word": "ngahere",
             "meaning": "forest",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "ngahere"
+            "photo_attribution": ""
         },
         {
             "index": 91,
-            "link": "",
+            "word": "kaumātua",
             "meaning": "elder",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kaumatua"
+            "photo_attribution": ""
         },
         {
             "index": 92,
-            "link": "",
+            "word": "karakia",
             "meaning": "prayer",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "karakia"
+            "photo_attribution": ""
         },
         {
             "index": 93,
-            "link": "",
+            "word": "kai",
             "meaning": "food",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kai"
+            "photo_attribution": ""
         },
         {
             "index": 94,
-            "link": "",
+            "word": "iwi",
             "meaning": "tribe",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "iwi"
+            "photo_attribution": ""
         },
         {
             "index": 95,
-            "link": "",
+            "word": "iti",
             "meaning": "small",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "iti"
+            "photo_attribution": ""
         },
         {
             "index": 96,
-            "link": "",
+            "word": "hui",
             "meaning": "gathering, meeting",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hui"
+            "photo_attribution": ""
         },
         {
             "index": 97,
-            "link": "",
+            "word": "hīkoi",
             "meaning": "walk",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "h\u012bkoi"
+            "photo_attribution": ""
         },
         {
             "index": 98,
-            "link": "",
+            "word": "Hapū",
             "meaning": "clan, sub-tribe; to be born",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hapu"
+            "photo_attribution": ""
         },
         {
             "index": 99,
-            "link": "",
+            "word": "Hukarere",
             "meaning": "snow",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hukarere"
+            "photo_attribution": ""
         },
         {
             "index": 100,
+            "word": "Whaea",
+            "meaning": "Mother, aunt",
             "link": "",
-            "meaning": "mother, aunt",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whaea"
+            "photo_attribution": ""
         },
         {
             "index": 101,
+            "word": "Kakato",
+            "meaning": "Delicious",
             "link": "",
-            "meaning": "delicious",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kakato"
+            "photo_attribution": ""
         },
         {
             "index": 102,
+            "word": "Mohimohi",
+            "meaning": "To tend, nurse, care for",
             "link": "",
-            "meaning": "to tend, nurse, care for",
             "photo": "",
-            "photo_attribution": "",
-            "word": "mohimohi"
+            "photo_attribution": ""
         },
         {
             "index": 103,
+            "word": "Tungāne",
+            "meaning": "Brother of a girl",
             "link": "",
-            "meaning": "brother of a girl",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tung\u0101ne"
+            "photo_attribution": ""
         },
         {
             "index": 104,
-            "link": "",
+            "word": "Tuākana",
             "meaning": "elder sibling (of the same sex)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tuakana"
+            "photo_attribution": ""
         },
         {
             "index": 105,
-            "link": "",
+            "word": "Kia ora tatou",
             "meaning": "Hello everyone",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kia ora tatou"
+            "photo_attribution": ""
         },
         {
             "index": 106,
-            "link": "",
+            "word": "whenua",
             "meaning": "land, homeland",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whenua"
+            "photo_attribution": ""
         },
         {
             "index": 107,
-            "link": "",
+            "word": "whānau",
             "meaning": "extended family",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "wh\u0101nau"
+            "photo_attribution": ""
         },
         {
             "index": 108,
-            "link": "",
+            "word": "whakapapa",
             "meaning": "genealogical or ancestral lineages",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whakapapa"
+            "photo_attribution": ""
         },
         {
             "index": 109,
-            "link": "",
+            "word": "waka",
             "meaning": "canoe",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "waka"
+            "photo_attribution": ""
         },
         {
             "index": 110,
-            "link": "",
+            "word": "wai",
             "meaning": "water",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "wai"
+            "photo_attribution": ""
         },
         {
             "index": 111,
-            "link": "",
+            "word": "Ata",
             "meaning": "Dawn, new beginning, awakening",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ata"
+            "photo_attribution": ""
         },
         {
             "index": 112,
-            "link": "",
+            "word": "tapu",
             "meaning": "sacred, not to be touched, to be avoided because sacred, taboo",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tapu"
+            "photo_attribution": ""
         },
         {
             "index": 113,
-            "link": "",
+            "word": "taonga",
             "meaning": "treasured possessions or cultural items, anything precious",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "taonga"
+            "photo_attribution": ""
         },
         {
             "index": 114,
-            "link": "",
+            "word": "tangi",
             "meaning": "funeral",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tangi"
+            "photo_attribution": ""
         },
         {
             "index": 115,
-            "link": "",
+            "word": "tamariki",
             "meaning": "children",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tamariki"
+            "photo_attribution": ""
         },
         {
             "index": 116,
-            "link": "",
+            "word": "Rā o Ngā Hōia",
             "meaning": "Anzac Day - a day (25 April) to commemorate those who have served in the New Zealand and Australian armed forces",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101 o Ng\u0101 H\u014dia"
+            "photo_attribution": ""
         },
         {
             "index": 117,
-            "link": "",
+            "word": "tamāhine",
             "meaning": "daughter",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tam\u0101hine"
+            "photo_attribution": ""
         },
         {
             "index": 118,
-            "link": "",
+            "word": "tama",
             "meaning": "son, young man, youth",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tama"
+            "photo_attribution": ""
         },
         {
             "index": 119,
-            "link": "",
+            "word": "taihoa",
             "meaning": "to delay, to wait, to hold off to allow maturation of plans etc.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "taihoa"
+            "photo_attribution": ""
         },
         {
             "index": 120,
-            "link": "",
+            "word": "rangatira",
             "meaning": "person of chiefly rank, boss",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "rangatira"
+            "photo_attribution": ""
         },
         {
             "index": 121,
-            "link": "",
+            "word": "puku",
             "meaning": "belly, stomach",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "puku"
+            "photo_attribution": ""
         },
         {
             "index": 122,
+            "word": "Pākehā",
+            "meaning": "New Zealander of non-Māori descent, usually European",
             "link": "",
-            "meaning": "New Zealander of non-M\u0101ori descent, usually European",
             "photo": "",
-            "photo_attribution": "",
-            "word": "P\u0101keh\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 123,
-            "link": "",
+            "word": "pā",
             "meaning": "hill fort",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "p\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 124,
-            "link": "",
+            "word": "nui",
             "meaning": "large, many, big",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "nui"
+            "photo_attribution": ""
         },
         {
             "index": 125,
-            "link": "",
+            "word": "motu",
             "meaning": "island",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "motu"
+            "photo_attribution": ""
         },
         {
             "index": 126,
-            "link": "",
+            "word": "moana",
             "meaning": "sea",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "moana"
+            "photo_attribution": ""
         },
         {
             "index": 127,
-            "link": "",
+            "word": "teina",
             "meaning": "younger sibling (of the same sex)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "teina"
+            "photo_attribution": ""
         },
         {
             "index": 128,
-            "link": "",
+            "word": "pōtiki",
             "meaning": "youngest",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "p\u014dtiki"
+            "photo_attribution": ""
         },
         {
             "index": 129,
-            "link": "",
+            "word": "mātāmua",
             "meaning": "eldest sibling",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "m\u0101t\u0101mua"
+            "photo_attribution": ""
         },
         {
             "index": 130,
-            "link": "",
+            "word": "irāmutu",
             "meaning": "niece, nephew",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "ir\u0101mutu"
+            "photo_attribution": ""
         },
         {
             "index": 131,
-            "link": "",
+            "word": "tipuna/tupuna / tīpuna/tūpuna",
             "meaning": "ancestor/grandparent / ancestors/grandparents",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tipuna/tupuna / t\u012bpuna/t\u016bpuna"
+            "photo_attribution": ""
         },
         {
             "index": 132,
-            "link": "",
+            "word": "koroua",
             "meaning": "elderly man",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "koroua"
+            "photo_attribution": ""
         },
         {
             "index": 133,
-            "link": "",
+            "word": "kuia",
             "meaning": "elderly woman",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kuia"
+            "photo_attribution": ""
         },
         {
             "index": 134,
-            "link": "",
+            "word": "hoa",
             "meaning": "friend",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hoa"
+            "photo_attribution": ""
         },
         {
             "index": 135,
-            "link": "",
+            "word": "matua whakaangi",
             "meaning": "stepfather",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "matua whakaangi"
+            "photo_attribution": ""
         },
         {
             "index": 136,
-            "link": "",
+            "word": "whaea whakaangi",
             "meaning": "stepmother",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whaea whakaangi"
+            "photo_attribution": ""
         },
         {
             "index": 137,
-            "link": "",
+            "word": "wahine / wāhine",
             "meaning": "woman, wife / women",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "wahine / w\u0101hine"
+            "photo_attribution": ""
         },
         {
             "index": 138,
-            "link": "",
+            "word": "mokopuna",
             "meaning": "grandchild",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "mokopuna"
+            "photo_attribution": ""
         },
         {
             "index": 139,
-            "link": "",
+            "word": "taokete",
             "meaning": "brother- / sister-in-law (of same gender)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "taokete"
+            "photo_attribution": ""
         },
         {
             "index": 140,
-            "link": "",
+            "word": "hungarei",
             "meaning": "mother- / father-in-law",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hungarei"
+            "photo_attribution": ""
         },
         {
             "index": 141,
-            "link": "",
+            "word": "ingoa",
             "meaning": "name",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "ingoa"
+            "photo_attribution": ""
         },
         {
             "index": 142,
-            "link": "",
+            "word": "Koanga. Mahuru.",
             "meaning": "Spring",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Koanga. Mahuru."
+            "photo_attribution": ""
         },
         {
             "index": 143,
-            "link": "",
+            "word": "awa",
             "meaning": "river",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "awa"
+            "photo_attribution": ""
         },
         {
             "index": 144,
-            "link": "",
+            "word": "Tangaroa",
             "meaning": "God of the sea and fish",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tangaroa"
+            "photo_attribution": ""
         },
         {
             "index": 145,
-            "link": "",
+            "word": "Rātapu",
             "meaning": "Sunday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101tapu"
+            "photo_attribution": ""
         },
         {
             "index": 146,
-            "link": "",
+            "word": "Rāhina",
             "meaning": "Monday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101hina"
+            "photo_attribution": ""
         },
         {
             "index": 147,
-            "link": "",
+            "word": "Rātū",
             "meaning": "Tuesday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101tu"
+            "photo_attribution": ""
         },
         {
             "index": 148,
-            "link": "",
+            "word": "Rāapa",
             "meaning": "Wednesday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101apa"
+            "photo_attribution": ""
         },
         {
             "index": 149,
-            "link": "",
+            "word": "Rāpare",
             "meaning": "Thursday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101pare"
+            "photo_attribution": ""
         },
         {
             "index": 150,
-            "link": "",
+            "word": "Rāmere",
             "meaning": "Friday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101mere"
+            "photo_attribution": ""
         },
         {
             "index": 151,
-            "link": "",
+            "word": "Rāhoroi",
             "meaning": "Saturday",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101horoi"
+            "photo_attribution": ""
         },
         {
             "index": 152,
-            "link": "",
+            "word": "Red",
             "meaning": "Whero",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Red"
+            "photo_attribution": ""
         },
         {
             "index": 153,
-            "link": "",
+            "word": "Orange (color)",
             "meaning": "Karaka",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Orange (color)"
+            "photo_attribution": ""
         },
         {
             "index": 154,
+            "word": "Yellow",
+            "meaning": "Kōwhai",
             "link": "",
-            "meaning": "K\u014dwhai",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Yellow"
+            "photo_attribution": ""
         },
         {
             "index": 155,
+            "word": "Green",
+            "meaning": "Kākāriki",
             "link": "",
-            "meaning": "K\u0101k\u0101riki",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Green"
+            "photo_attribution": ""
         },
         {
             "index": 156,
-            "link": "",
+            "word": "Blue",
             "meaning": "Kikorangi",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Blue"
+            "photo_attribution": ""
         },
         {
             "index": 157,
-            "link": "",
+            "word": "Purple",
             "meaning": "Waiporoporo",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Purple"
+            "photo_attribution": ""
         },
         {
             "index": 158,
-            "link": "",
+            "word": "Black (color)",
             "meaning": "Mangu",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Black (color)"
+            "photo_attribution": ""
         },
         {
             "index": 159,
-            "link": "",
+            "word": "Brown",
             "meaning": "Parauri",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Brown"
+            "photo_attribution": ""
         },
         {
             "index": 160,
+            "word": "Light blue",
+            "meaning": "Kikorangi māmā (or Kikorangi angaanga)",
             "link": "",
-            "meaning": "Kikorangi m\u0101m\u0101 (or Kikorangi angaanga)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Light blue"
+            "photo_attribution": ""
         },
         {
             "index": 161,
+            "word": "Pink",
+            "meaning": "Māwhero",
             "link": "",
-            "meaning": "M\u0101whero",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pink"
+            "photo_attribution": ""
         },
         {
             "index": 162,
+            "word": "White",
+            "meaning": "Mā",
             "link": "",
-            "meaning": "M\u0101",
             "photo": "",
-            "photo_attribution": "",
-            "word": "White"
+            "photo_attribution": ""
         },
         {
             "index": 163,
-            "link": "",
+            "word": "ia weherua-kore",
             "meaning": "non-binary gender",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "ia weherua-kore"
+            "photo_attribution": ""
         },
         {
             "index": 164,
-            "link": "",
+            "word": "iakē",
             "meaning": "genderqueer, queer",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "iak\u0113"
+            "photo_attribution": ""
         },
         {
             "index": 165,
-            "link": "",
+            "word": "Kei te pai",
             "meaning": "It's Good. It's fine.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kei te pai"
+            "photo_attribution": ""
         },
         {
             "index": 166,
+            "word": "Kei te pēhea koe?",
+            "meaning": "How’s it going?",
             "link": "",
-            "meaning": "How\u2019s it going?",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kei te p\u0113hea koe?"
+            "photo_attribution": ""
         },
         {
             "index": 167,
-            "link": "",
+            "word": "Nau mai",
             "meaning": "Welcome",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Nau mai"
+            "photo_attribution": ""
         },
         {
             "index": 168,
+            "word": "tahi",
+            "meaning": "one",
             "link": "",
-            "meaning": "Come; Welcome. Often paired with 'nau mai' to create a more emphatic greeting.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere mai"
+            "photo_attribution": ""
         },
         {
             "index": 169,
-            "link": "",
+            "word": "tēnā koutou",
             "meaning": "Hello! Greetings to you all.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "t\u0113n\u0101 koutou"
+            "photo_attribution": ""
         },
         {
             "index": 170,
+            "word": "rua",
+            "meaning": "two",
             "link": "",
-            "meaning": "Sand, earth",
             "photo": "",
-            "photo_attribution": "",
-            "word": "One"
+            "photo_attribution": ""
         },
         {
-            "index": 181,
+            "index": 171,
+            "word": "toru",
+            "meaning": "three",
             "link": "",
-            "meaning": "Happy M\u0101ori New Year",
-            "photo": "matariki.png",
-            "photo_attribution": "A postcard representing nine stars of Matariki (M\u0101ori new year). Disclaimer: AI-generated.",
-            "word": "M\u0101nawatia a Matariki"
+            "photo": "",
+            "photo_attribution": ""
         },
         {
             "index": 172,
+            "word": "Takurua. Hotoke.",
+            "meaning": "Winter; Second month of the Māori lunar calendar, approximately equivalent to July",
             "link": "",
-            "meaning": "Winter; Second month of the M\u0101ori lunar calendar, approximately equivalent to July",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Takurua. Hotoke."
+            "photo_attribution": ""
         },
         {
             "index": 173,
+            "word": "Waitī",
+            "meaning": "One of nine stars of Matariki. Waitī watches over our freshwater environments. Our awa (rivers), roto (lakes), kūkūwai (wetlands), and waipuna (springs)",
             "link": "",
-            "meaning": "One of nine stars of Matariki. Wait\u012b watches over our freshwater environments. Our awa (rivers), roto (lakes), k\u016bk\u016bwai (wetlands), and waipuna (springs)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Wait\u012b"
+            "photo_attribution": ""
         },
         {
             "index": 174,
+            "word": "Waitā",
+            "meaning": "One of nine stars of Matariki. Waitā surveys our vast oceans, Te Moana-nui-o-Kiwa (the Pacific Ocean) and Te Tai-o-Rehua (the Tasman Sea)",
             "link": "",
-            "meaning": "One of nine stars of Matariki. Wait\u0101 surveys our vast oceans, Te Moana-nui-o-Kiwa (the Pacific Ocean) and Te Tai-o-Rehua (the Tasman Sea)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Wait\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 175,
+            "word": "Waipuna-ā-rangi",
+            "meaning": "One of nine stars of Matariki. She welcomes the winter sky waters in all their forms – ua (rain) ua nganga (hail) and hukarere (snow) included.",
             "link": "",
-            "meaning": "One of nine stars of Matariki. She welcomes the winter sky waters in all their forms \u2013 ua (rain) ua nganga (hail) and hukarere (snow) included.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Waipuna-\u0101-rangi"
+            "photo_attribution": ""
         },
         {
             "index": 176,
+            "word": "Tupu-ā-nuku",
+            "meaning": "One of nine stars of Matariki. Tupu-ā-nuku has a special interest in our edible plants. This includes the natives pūhā (sowthistle), kawakawa (pepper tree), kōkihi (NZ spinach), and tī kōuka (cabbage tree)",
             "link": "",
-            "meaning": "One of nine stars of Matariki. Tupu-\u0101-nuku has a special interest in our edible plants. This includes the natives p\u016bh\u0101 (sowthistle), kawakawa (pepper tree), k\u014dkihi (NZ spinach), and t\u012b k\u014duka (cabbage tree)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tupu-\u0101-nuku"
+            "photo_attribution": ""
         },
         {
             "index": 177,
+            "word": "Tupu-ā-rangi",
+            "meaning": "One of nine stars of Matariki. Tupu-ā-rangi has long looked out for the ngahere (forests), and he is deeply concerned by the collapse he is witnessing.",
             "link": "",
-            "meaning": "One of nine stars of Matariki. Tupu-\u0101-rangi has long looked out for the ngahere (forests), and he is deeply concerned by the collapse he is witnessing.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tupu-\u0101-rangi"
+            "photo_attribution": ""
         },
         {
             "index": 178,
+            "word": "Ururangi",
+            "meaning": "One of nine stars of Matariki. Ururangi is close friends with te whānau puhi (the wind family) – including Hauraro (the north wind), Tonga (the south wind), Hauāuru (the west wind), and Marangai (the east wind)",
             "link": "",
-            "meaning": "One of nine stars of Matariki. Ururangi is close friends with te wh\u0101nau puhi (the wind family) \u2013 including Hauraro (the north wind), Tonga (the south wind), Hau\u0101uru (the west wind), and Marangai (the east wind)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ururangi"
+            "photo_attribution": ""
         },
         {
             "index": 179,
+            "word": "Pōhutukawa",
+            "meaning": "One of nine stars of Matariki. Pōhutukawa holds tight to our memories of treasured people who have passed on.",
             "link": "",
-            "meaning": "One of nine stars of Matariki. P\u014dhutukawa holds tight to our memories of treasured people who have passed on.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "P\u014dhutukawa"
+            "photo_attribution": ""
         },
         {
             "index": 180,
-            "link": "",
+            "word": "Hiwai-te-rangi",
             "meaning": "One of nine stars of Matariki. Hiwai-i-te-rangi is a wishing star, who helps us to recognise our hopes, dreams and aspirations for the coming year.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hiwai-te-rangi"
+            "photo_attribution": ""
         },
         {
-            "index": 366,
+            "index": 181,
+            "word": "Mānawatia a Matariki",
+            "meaning": "Happy Māori New Year",
             "link": "",
-            "meaning": "July (month of)",
-            "photo": "",
-            "photo_attribution": "",
-            "word": "H\u014dngongoi"
+            "photo": "matariki.png",
+            "photo_attribution": "A postcard representing nine stars of Matariki (Māori new year). Disclaimer: AI-generated."
         },
         {
             "index": 182,
-            "link": "",
+            "word": "Mana",
             "meaning": "Prestige, influence, status, spiritual power",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Mana"
+            "photo_attribution": ""
         },
         {
             "index": 183,
-            "link": "",
+            "word": "Kotahitanga",
             "meaning": "Unity, togetherness",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kotahitanga"
+            "photo_attribution": ""
         },
         {
             "index": 184,
-            "link": "",
+            "word": "Harikoa",
             "meaning": "Be joyful, euphoric, pleased, glad, cheerful",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Harikoa"
+            "photo_attribution": ""
         },
         {
             "index": 185,
-            "link": "",
+            "word": "Huka",
             "meaning": "Snow, foam, froth - also a general term for any of the other white forms of precipitation, i.e hail and frost.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Huka"
+            "photo_attribution": ""
         },
         {
             "index": 186,
-            "link": "",
+            "word": "Anu",
             "meaning": "Cold, chilly",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Anu"
+            "photo_attribution": ""
         },
         {
             "index": 187,
-            "link": "",
+            "word": "Huka papa",
             "meaning": "Snow lying on the ground, snow-covered ground",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Huka papa"
+            "photo_attribution": ""
         },
         {
             "index": 188,
-            "link": "",
+            "word": "Puna",
             "meaning": "Spring (of water), flow.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Puna"
+            "photo_attribution": ""
         },
         {
             "index": 189,
-            "link": "",
+            "word": "Papatūānuku",
             "meaning": "The earth mother",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Papat\u016b\u0101nuku"
+            "photo_attribution": ""
         },
         {
             "index": 190,
+            "word": "Maramataka",
+            "meaning": "Māori lunar calendar, calendar.",
             "link": "",
-            "meaning": "M\u0101ori lunar calendar, calendar.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Maramataka"
+            "photo_attribution": ""
         },
         {
             "index": 191,
+            "word": "whā",
+            "meaning": "four",
             "link": "",
-            "meaning": "God of the sea and fish",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tangaroa"
+            "photo_attribution": ""
         },
         {
             "index": 192,
-            "link": "",
+            "word": "Ngaio",
             "meaning": "Clever, professional",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ngaio"
+            "photo_attribution": ""
         },
         {
             "index": 193,
-            "link": "",
+            "word": "Marama",
             "meaning": "Moon, brightness",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Marama"
+            "photo_attribution": ""
         },
         {
             "index": 194,
+            "word": "Tāne",
+            "meaning": "Man. Name given to the Māori and Polynesian god of the forests",
             "link": "",
-            "meaning": "Man. Name given to the M\u0101ori and Polynesian god of the forests",
             "photo": "",
-            "photo_attribution": "",
-            "word": "T\u0101ne"
+            "photo_attribution": ""
         },
         {
             "index": 195,
+            "word": "rima",
+            "meaning": "five",
             "link": "",
-            "meaning": "Goodbye, farewell",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere r\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 196,
+            "word": "ono",
+            "meaning": "six",
             "link": "",
-            "meaning": "Hospitality, taking good care of others.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Manaakitanga"
+            "photo_attribution": ""
         },
         {
             "index": 197,
+            "word": "whitu",
+            "meaning": "seven",
             "link": "",
-            "meaning": "M\u0101ori tattooing designs on the face or body.",
             "photo": "",
-            "photo_attribution": "Portrait of T\u0101mati W\u0101ka Nene by Gottfried Lindauer (1890) - Public Domain, https://commons.wikimedia.org/w/index.php?curid=22007400",
-            "word": "Ta moko"
+            "photo_attribution": ""
         },
         {
             "index": 198,
+            "word": "waru",
+            "meaning": "eight",
             "link": "",
-            "meaning": "Used to address a close friend affectionately",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kare"
+            "photo_attribution": ""
         },
         {
             "index": 199,
+            "word": "iwa",
+            "meaning": "nine",
             "link": "",
-            "meaning": "A M\u0101ori proverb that translates to 'Love received demands love returned'",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Aroha mai, aroha atu"
+            "photo_attribution": ""
         },
         {
             "index": 200,
+            "word": "tekau",
+            "meaning": "ten",
             "link": "",
-            "meaning": "Goodbye (said to someone staying)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hei kona r\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 201,
+            "word": "ihu",
+            "meaning": "nose",
             "link": "",
-            "meaning": "See you next time",
             "photo": "",
-            "photo_attribution": "",
-            "word": "M\u0101 te w\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 202,
+            "word": "waha",
+            "meaning": "mouth",
             "link": "",
-            "meaning": "See you later",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ka kite an\u014d"
+            "photo_attribution": ""
         },
         {
             "index": 203,
+            "word": "niho",
+            "meaning": "tooth",
             "link": "",
-            "meaning": "How are you?",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kei te p\u0113hea koe?"
+            "photo_attribution": ""
         },
         {
             "index": 204,
-            "link": "",
+            "word": "Tino pai",
             "meaning": "Really good, excellent.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tino pai"
+            "photo_attribution": ""
         },
         {
             "index": 205,
+            "word": "karu",
+            "meaning": "eye",
             "link": "",
-            "meaning": "Tha's good; It's fine.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kei te pai"
+            "photo_attribution": ""
         },
         {
             "index": 206,
+            "word": "upoko",
+            "meaning": "head",
             "link": "",
-            "meaning": "How\u2019s it going?",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kei te p\u0113hea koe?"
+            "photo_attribution": ""
         },
         {
             "index": 207,
+            "word": "tuarā",
+            "meaning": "back",
             "link": "",
-            "meaning": "Welcome",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Nau mai"
+            "photo_attribution": ""
         },
         {
             "index": 208,
-            "link": "",
+            "word": "Ākarana",
             "meaning": "Auckland",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "\u0100karana"
+            "photo_attribution": ""
         },
         {
             "index": 209,
-            "link": "",
+            "word": "Ōtautahi",
             "meaning": "Christchurch",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "\u014ctautahi"
+            "photo_attribution": ""
         },
         {
             "index": 210,
-            "link": "",
+            "word": "Tauranga",
             "meaning": "Harbour in the Bay of Plenty; Resting place, anchorage, fishing ground.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tauranga"
+            "photo_attribution": ""
         },
         {
             "index": 211,
-            "link": "",
+            "word": "Ōtepoti",
             "meaning": "Dunedin",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "\u014ctepoti"
+            "photo_attribution": ""
         },
         {
             "index": 212,
-            "link": "",
+            "word": "Kirikiriroa",
             "meaning": "Hamilton (city)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kirikiriroa"
+            "photo_attribution": ""
         },
         {
             "index": 213,
+            "word": "māhunga",
+            "meaning": "head/hair",
             "link": "",
-            "meaning": "The M\u0101ori name for Wellington Harbour or the great Harbour of Tara.",
-            "photo": "1155px-Wellington_Harbour,_New_Zealand,_Nov._2009.jpg",
-            "photo_attribution": "Aerial photo of Wellington Harbour, New Zealand. By Phillip Capper - Flickr: Wellington Harbour, New Zealand, Nov. 2009, CC BY 2.0",
-            "word": "Te Whanganui a Tara"
+            "photo": "",
+            "photo_attribution": ""
         },
         {
             "index": 214,
-            "link": "",
+            "word": "Mauao",
             "meaning": "Mount Maunganui is a 232 metre volcanic dome at the end of a peninsula in the Tauranga.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Mauao"
+            "photo_attribution": ""
         },
         {
             "index": 215,
-            "link": "",
+            "word": "Pōneke",
             "meaning": "Wellington. Commonly held to be a phonetic Māori transliteration Port Nicholson. An alternatively suggested etymology for Pōneke is that it comes from a shortening of the phrase Pō Nekeneke, meaning 'journey into the night'",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pōneke"
+            "photo_attribution": ""
         },
         {
             "index": 216,
+            "word": "Tāhuna",
+            "meaning": "The Māori name for Queenstown. It means 'shallow bay' or 'sandy shore', reflecting the area's original geography.",
             "link": "",
-            "meaning": "The M\u0101ori name for Queenstown. It means 'shallow bay' or 'sandy shore', reflecting the area's original geography.",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tāhuna"
+            "photo_attribution": ""
         },
         {
             "index": 217,
-            "link": "",
+            "word": "Ātui'tui’ia au ki te raurau a tōku matakeinanga",
             "meaning": "Connect me to the offerings of my people. https://www.mpp.govt.nz/programmes-and-funding/pacific-languages/pacific-language-weeks/cook-islands-maori-language-week/",
+            "link": "",
             "photo": "CookIslands-2025.jpg",
-            "photo_attribution": "Cook Islands Language Week 2025 Poster.",
-            "word": "Ātui'tui’ia au ki te raurau a tōku matakeinanga"
+            "photo_attribution": "Cook Islands Language Week 2025 Poster."
         },
         {
             "index": 218,
-            "link": "",
+            "word": "Kia orana",
             "meaning": "Hello / May you live long",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kia orana"
+            "photo_attribution": ""
         },
         {
             "index": 219,
-            "link": "",
+            "word": "Meitaki ma’ata",
             "meaning": "Thank you very much",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Meitaki ma’ata"
+            "photo_attribution": ""
         },
         {
             "index": 220,
-            "link": "",
+            "word": "āe / kāre",
             "meaning": "Yes / No",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ae / Kare"
+            "photo_attribution": ""
         },
         {
             "index": 221,
-            "link": "",
+            "word": "Aere ra",
             "meaning": "Goodbye",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Aere ra"
+            "photo_attribution": ""
         },
         {
             "index": 222,
+            "word": "Ahuriri",
+            "meaning": "The Māori name for Napier",
             "link": "",
-            "meaning": "The M\u0101ori name for Napier",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ahuriri"
+            "photo_attribution": ""
         },
         {
             "index": 223,
-            "link": "",
+            "word": "Te Papa Tongarewa",
             "meaning": "Container of treasures (Museum of New Zealand)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Te Papa Tongarewa"
+            "photo_attribution": ""
         },
         {
             "index": 224,
+            "word": "makawe",
+            "meaning": "hair",
             "link": "",
-            "meaning": "Clap",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pakipaki"
+            "photo_attribution": ""
         },
         {
             "index": 225,
+            "word": "kurī",
+            "meaning": "dog",
             "link": "",
-            "meaning": "large native conifer",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kauri"
+            "photo_attribution": ""
         },
         {
             "index": 226,
+            "word": "ngeru",
+            "meaning": "cat",
             "link": "",
-            "meaning": "to land, alight, come to rest, settle on",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tau"
+            "photo_attribution": ""
         },
         {
             "index": 227,
+            "word": "poaka",
+            "meaning": "pig",
             "link": "",
-            "meaning": "how beautiful, how stunning",
             "photo": "",
-            "photo_attribution": "",
-            "word": "me te rearea"
+            "photo_attribution": ""
         },
         {
             "index": 228,
-            "link": "",
+            "word": "Tūrangawaewae",
             "meaning": "Place where one has rights of residence and belonging through kinship and whakapapa. A seat or location of identity.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tūrangawaewae"
+            "photo_attribution": ""
         },
         {
             "index": 229,
-            "link": "",
+            "word": "Whenua",
             "meaning": "Land, homeland, country.",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whenua"
+            "photo_attribution": ""
         },
         {
             "index": 230,
-            "link": "",
+            "word": "Tiaki",
             "meaning": "To care for, look after, guard",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tiaki"
+            "photo_attribution": ""
         },
         {
             "index": 231,
+            "word": "hipi",
+            "meaning": "sheep",
             "link": "",
-            "meaning": "Greeting to one person (formal)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tēnā koe"
+            "photo_attribution": ""
         },
         {
             "index": 232,
-            "link": "",
+            "word": "Tēnā kōrua",
             "meaning": "Greeting to two people (formal)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tēnā kōrua"
+            "photo_attribution": ""
         },
         {
             "index": 233,
+            "word": "ika",
+            "meaning": "fish",
             "link": "",
-            "meaning": "Greeting to many people (formal)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tēnā koutou"
+            "photo_attribution": ""
         },
         {
             "index": 234,
+            "word": "tuna",
+            "meaning": "eel",
             "link": "",
-            "meaning": "Goodbye (from a person staying)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere rā"
+            "photo_attribution": ""
         },
         {
             "index": 235,
-            "link": "",
+            "word": "E noho rā",
             "meaning": "Goodbye (from a person leaving)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "E noho rā"
+            "photo_attribution": ""
         },
         {
             "index": 236,
-            "link": "",
+            "word": "Kaumatua",
             "meaning": "elder",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaumatua"
+            "photo_attribution": ""
         },
         {
             "index": 237,
-            "link": "",
+            "word": "Karakia",
             "meaning": "prayer",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Karakia"
+            "photo_attribution": ""
         },
         {
             "index": 238,
-            "link": "",
+            "word": "Kai",
             "meaning": "food",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kai"
+            "photo_attribution": ""
         },
         {
             "index": 239,
-            "link": "",
+            "word": "Iwi",
             "meaning": "tribe",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Iwi"
+            "photo_attribution": ""
         },
         {
             "index": 240,
-            "link": "",
+            "word": "Iti",
             "meaning": "small",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Iti"
+            "photo_attribution": ""
         },
         {
             "index": 241,
-            "link": "",
+            "word": "Hui",
             "meaning": "gathering, meeting",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hui"
+            "photo_attribution": ""
         },
         {
             "index": 242,
+            "word": "kōura",
+            "meaning": "crayfish",
             "link": "",
-            "meaning": "walk",
             "photo": "",
-            "photo_attribution": "",
-            "word": "h\u012bkoi"
+            "photo_attribution": ""
         },
         {
             "index": 243,
-            "link": "",
+            "word": "hapū",
             "meaning": "clan, sub-tribe; to be born",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hapu"
+            "photo_attribution": ""
         },
         {
             "index": 244,
-            "link": "",
+            "word": "hukarere",
             "meaning": "snow",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hukarere"
+            "photo_attribution": ""
         },
         {
             "index": 245,
-            "link": "",
+            "word": "whaea",
             "meaning": "mother, aunt",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whaea"
+            "photo_attribution": ""
         },
         {
             "index": 246,
-            "link": "",
+            "word": "matua / mātua",
             "meaning": "father, parent / parents",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "matua / m\u0101tua"
+            "photo_attribution": ""
         },
         {
             "index": 247,
-            "link": "",
+            "word": "tuāhine",
             "meaning": "sister of a boy",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tuahine"
+            "photo_attribution": ""
         },
         {
             "index": 248,
-            "link": "",
+            "word": "tungāne",
             "meaning": "brother of a girl",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tung\u0101ne"
+            "photo_attribution": ""
         },
         {
             "index": 249,
-            "link": "",
+            "word": "tuākana",
             "meaning": "elder sibling (of the same sex)",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tuakana"
+            "photo_attribution": ""
         },
         {
             "index": 250,
+            "word": "pepe",
+            "meaning": "butterfly/moth",
             "link": "",
-            "meaning": "Hello everyone",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kia ora tatou"
+            "photo_attribution": ""
         },
         {
             "index": 251,
+            "word": "ngārara",
+            "meaning": "lizard/reptile",
             "link": "",
-            "meaning": "land, homeland",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whenua"
+            "photo_attribution": ""
         },
         {
             "index": 252,
+            "word": "pūngāwerewere",
+            "meaning": "spider",
             "link": "",
-            "meaning": "extended family",
             "photo": "",
-            "photo_attribution": "",
-            "word": "wh\u0101nau"
+            "photo_attribution": ""
         },
         {
             "index": 253,
+            "word": "āpōpō",
+            "meaning": "tomorrow",
             "link": "",
-            "meaning": "genealogical or ancestral lineages",
             "photo": "",
-            "photo_attribution": "",
-            "word": "whakapapa"
+            "photo_attribution": ""
         },
         {
             "index": 254,
+            "word": "inanahi",
+            "meaning": "yesterday",
             "link": "",
-            "meaning": "canoe",
             "photo": "",
-            "photo_attribution": "",
-            "word": "waka"
+            "photo_attribution": ""
         },
         {
             "index": 255,
-            "link": "",
+            "word": "Wai",
             "meaning": "Water",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Wai"
+            "photo_attribution": ""
         },
         {
             "index": 256,
-            "link": "",
+            "word": "Moemoeā",
             "meaning": "Dream, vision, aspiration for the future",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Moemoeā"
+            "photo_attribution": ""
         },
         {
             "index": 257,
-            "link": "",
+            "word": "Ara",
             "meaning": "Journey, pathway, way forward",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ara"
+            "photo_attribution": ""
         },
         {
             "index": 258,
-            "link": "",
+            "word": "Hauhunga",
             "meaning": "Wind, breath, life-giving air",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hauhunga"
+            "photo_attribution": ""
         },
         {
             "index": 259,
-            "link": "",
+            "word": "Puāwai",
             "meaning": "Flower, blossom, beauty in nature",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Puawai"
+            "photo_attribution": ""
         },
         {
             "index": 260,
-            "link": "",
+            "word": "Ngahere",
             "meaning": "Forest, woodland, natural sanctuary",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ngahere"
+            "photo_attribution": ""
         },
         {
             "index": 261,
-            "link": "",
+            "word": "Mahana",
             "meaning": "Warmth, heat, passion, inner fire",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Mahana"
+            "photo_attribution": ""
         },
         {
             "index": 262,
-            "link": "",
+            "word": "Manu",
             "meaning": "Bird, freedom, messenger of the natural world",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Manu"
+            "photo_attribution": ""
         },
         {
             "index": 263,
-            "link": "",
+            "word": "Kōpere",
             "meaning": "Rainbow, bridge between earth and sky",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kōpere"
+            "photo_attribution": ""
         },
         {
             "index": 264,
-            "link": "",
+            "word": "Whetū",
             "meaning": "Star, celestial light, guidance from above",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whetū"
+            "photo_attribution": ""
         },
         {
             "index": 265,
-            "link": "",
+            "word": "Mauri",
             "meaning": "Life principle, life force, essence of being",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Mauri"
+            "photo_attribution": ""
         },
         {
             "index": 266,
-            "link": "",
+            "word": "Rongo",
             "meaning": "Peace, tranquility, calmness",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Rongo"
+            "photo_attribution": ""
         },
         {
             "index": 267,
-            "link": "",
+            "word": "Tūmanako",
             "meaning": "Hope, expectation, trust",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tūmanako"
+            "photo_attribution": ""
         },
         {
             "index": 268,
-            "link": "",
+            "word": "Atarau",
             "meaning": "Moonlight, gentle illumination",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Atarau"
+            "photo_attribution": ""
         },
         {
             "index": 269,
-            "link": "",
+            "word": "Tīpuna",
             "meaning": "Ancestors, grandparents, those who came before",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Tīpuna"
+            "photo_attribution": ""
         },
         {
             "index": 270,
+            "word": "ināianei",
+            "meaning": "now",
             "link": "",
-            "meaning": "Dawn, new beginning, awakening",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ata"
+            "photo_attribution": ""
         },
         {
             "index": 271,
-            "link": "",
+            "word": "Waiata",
             "meaning": "Song, music, melody",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Waiata"
+            "photo_attribution": ""
         },
         {
             "index": 272,
+            "word": "mauī",
+            "meaning": "left",
             "link": "",
-            "meaning": "Unity, togetherness, collective strength",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kotahitanga"
+            "photo_attribution": ""
         },
         {
             "index": 273,
+            "word": "matau",
+            "meaning": "right",
             "link": "",
-            "meaning": "Hospitality, care, kindness towards others",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Manaakitanga"
+            "photo_attribution": ""
         },
         {
             "index": 274,
-            "link": "",
+            "word": "Wairua",
             "meaning": "Spirit, soul, essence of life",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Wairua"
+            "photo_attribution": ""
         },
         {
             "index": 275,
-            "link": "",
+            "word": "Aihikirīmi",
             "meaning": "Ice cream",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Aihikir\u012bmi"
+            "photo_attribution": ""
         },
         {
             "index": 276,
-            "link": "",
+            "word": "Pono",
             "meaning": "Truth, honesty, integrity",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pono"
+            "photo_attribution": ""
         },
         {
             "index": 277,
-            "link": "",
+            "word": "Kaha",
             "meaning": "Strength, power, energy",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaha"
+            "photo_attribution": ""
         },
         {
             "index": 278,
-            "link": "",
+            "word": "Rangimārie",
             "meaning": "Peace, tranquility, serenity",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Rangimārie"
+            "photo_attribution": ""
         },
         {
             "index": 279,
-            "link": "",
+            "word": "Hauora",
             "meaning": "Health, wellness, vitality",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hauora"
+            "photo_attribution": ""
         },
         {
             "index": 280,
-            "link": "",
+            "word": "Māhaki",
             "meaning": "Gentleness, kindness, softness",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Māhaki"
+            "photo_attribution": ""
         },
         {
             "index": 281,
-            "link": "",
+            "word": "Ūkaipō",
             "meaning": "Place of nurturing, home where one belongs",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ūkaipō"
+            "photo_attribution": ""
         },
         {
             "index": 282,
-            "link": "",
+            "word": "Hononga",
             "meaning": "Connection, relationship, kinship bonds",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hononga"
+            "photo_attribution": ""
         },
         {
             "index": 283,
+            "word": "ua",
+            "meaning": "rain",
             "link": "",
-            "meaning": "Fragrance, sweet scent, pleasant aroma",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hauhunga"
+            "photo_attribution": ""
         },
         {
             "index": 284,
-            "link": "",
+            "word": "Kaumātua",
             "meaning": "Elder, senior person, older person of status within the whānau, hapū or iwi",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaumātua"
+            "photo_attribution": ""
         },
         {
             "index": 285,
-            "link": "",
+            "word": "Whakamā",
             "meaning": "To be ashamed, embarrassed, shy, bashful",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakamā"
+            "photo_attribution": ""
         },
         {
             "index": 286,
-            "link": "",
+            "word": "Kaiako",
             "meaning": "Teacher, instructor, educator",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaiako"
+            "photo_attribution": ""
         },
         {
             "index": 287,
-            "link": "",
+            "word": "Hinengaro",
             "meaning": "Mind, brain, seat of thoughts and emotions",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hinengaro"
+            "photo_attribution": ""
         },
         {
             "index": 288,
-            "link": "",
+            "word": "Whakatā",
             "meaning": "Catch breath, rest, relax, have a break",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakatā"
+            "photo_attribution": ""
         },
         {
             "index": 289,
-            "link": "",
+            "word": "Pakeke",
             "meaning": "Adult, mature person, grown up",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Pakeke"
+            "photo_attribution": ""
         },
         {
             "index": 290,
-            "link": "",
+            "word": "Kaikōrero",
             "meaning": "Speaker, orator, one who speaks",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaikōrero"
+            "photo_attribution": ""
         },
         {
             "index": 291,
-            "link": "",
+            "word": "Whakaora",
             "meaning": "To heal, cure, revive, restore to health",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakaora"
+            "photo_attribution": ""
         },
         {
             "index": 292,
-            "link": "",
+            "word": "Kōkiri",
             "meaning": "To rush forward, charge, advance, make an effort",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kōkiri"
+            "photo_attribution": ""
         },
         {
             "index": 293,
-            "link": "",
+            "word": "Haumaru",
             "meaning": "Safe, secure, protected, safety",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haumaru"
+            "photo_attribution": ""
         },
         {
             "index": 294,
+            "word": "hau",
+            "meaning": "wind",
             "link": "",
-            "meaning": "Farewell",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Haere ra"
+            "photo_attribution": ""
         },
         {
             "index": 295,
+            "word": "oma",
+            "meaning": "run",
             "link": "",
-            "meaning": "Home, abode, dwelling",
             "photo": "",
-            "photo_attribution": "",
-            "word": "K\u0101inga"
+            "photo_attribution": ""
         },
         {
             "index": 296,
+            "word": "peke",
+            "meaning": "jump",
             "link": "",
-            "meaning": "Guardian, caretaker, manager, trustee",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kaitiaki"
+            "photo_attribution": ""
         },
         {
             "index": 297,
+            "word": "kaukau",
+            "meaning": "swim",
             "link": "",
-            "meaning": "Ceremonial rituals, protocol",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kawa"
+            "photo_attribution": ""
         },
         {
             "index": 298,
+            "word": "inu",
+            "meaning": "drink",
             "link": "",
-            "meaning": "Practise reciprocity and generosity",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Man\u0101ki tangata"
+            "photo_attribution": ""
         },
         {
             "index": 299,
+            "word": "pōuri",
+            "meaning": "sad",
             "link": "",
-            "meaning": "Geothermal hot pools, boiling spring, volcanic activity, boiling mud pool",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ng\u0101wh\u0101"
+            "photo_attribution": ""
         },
         {
             "index": 300,
+            "word": "riri",
+            "meaning": "angry",
             "link": "",
-            "meaning": "To put in place a temporary ritual prohibition, closed season, ban, reserve",
             "photo": "",
-            "photo_attribution": "",
-            "word": "R\u0101hui"
+            "photo_attribution": ""
         },
         {
             "index": 301,
-            "link": "",
+            "word": "Rākau",
             "meaning": "Tree, wood, timber",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Rākau"
+            "photo_attribution": ""
         },
         {
             "index": 302,
-            "link": "",
+            "word": "Kapua",
             "meaning": "Cloud, mist",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kapua"
+            "photo_attribution": ""
         },
         {
             "index": 303,
-            "link": "",
+            "word": "Kōpū",
             "meaning": "Belly, stomach, womb",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kōpū"
+            "photo_attribution": ""
         },
         {
             "index": 304,
-            "link": "",
+            "word": "Kanohi",
             "meaning": "Eyes, face",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kanohi"
+            "photo_attribution": ""
         },
         {
             "index": 305,
-            "link": "",
+            "word": "Makariri",
             "meaning": "Cold, winter",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Makariri"
+            "photo_attribution": ""
         },
         {
             "index": 306,
-            "link": "",
+            "word": "Taringa",
             "meaning": "Ear",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Taringa"
+            "photo_attribution": ""
         },
         {
             "index": 307,
-            "link": "",
+            "word": "Wharenui",
             "meaning": "Meeting house, large house, main building of a marae",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Wharenui"
+            "photo_attribution": ""
         },
         {
             "index": 308,
-            "link": "",
+            "word": "Whakapono",
             "meaning": "Faith, belief, trust",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakapono"
+            "photo_attribution": ""
         },
         {
             "index": 309,
-            "link": "",
+            "word": "Mānaaki",
             "meaning": "To care for, support, nurture",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Mānaaki"
+            "photo_attribution": ""
         },
         {
             "index": 310,
-            "link": "",
+            "word": "Whakawhetai",
             "meaning": "To give thanks, be grateful",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakawhetai"
+            "photo_attribution": ""
         },
         {
             "index": 311,
-            "link": "",
+            "word": "Māhara",
             "meaning": "To remember, think of",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Māhara"
+            "photo_attribution": ""
         },
         {
             "index": 312,
-            "link": "",
+            "word": "Ārahi",
             "meaning": "to lead and guide",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "\u0101rahi"
+            "photo_attribution": ""
         },
         {
             "index": 313,
-            "link": "",
+            "word": "Ngākau",
             "meaning": "Heart, mind, emotion",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ngākau"
+            "photo_attribution": ""
         },
         {
             "index": 314,
-            "link": "",
+            "word": "Whaiāipo",
             "meaning": "Sweetheart, lover, partner",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whaiāipo"
+            "photo_attribution": ""
         },
         {
             "index": 315,
-            "link": "",
+            "word": "Whakatōpū",
             "meaning": "To gather together, unite",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakatōpū"
+            "photo_attribution": ""
         },
         {
             "index": 316,
-            "link": "",
+            "word": "Ātaahua",
             "meaning": "Beautiful, lovely, attractive",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ātaahua"
+            "photo_attribution": ""
         },
         {
             "index": 317,
-            "link": "",
+            "word": "Whakamahara",
             "meaning": "To remind, commemorate",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakamahara"
+            "photo_attribution": ""
         },
         {
             "index": 318,
-            "link": "",
+            "word": "Ringa",
             "meaning": "Hand, arm",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Ringa"
+            "photo_attribution": ""
         },
         {
             "index": 319,
-            "link": "",
+            "word": "Whakatipu",
             "meaning": "To grow, develop, nurture growth",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakatipu"
+            "photo_attribution": ""
         },
         {
             "index": 320,
-            "link": "",
+            "word": "Whakamutu",
             "meaning": "To end, finish, complete",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Whakamutu"
+            "photo_attribution": ""
         },
         {
             "index": 321,
-            "link": "",
+            "word": "Hāparangi",
             "meaning": "to shout, bawl",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "h\u0101parangi"
+            "photo_attribution": ""
         },
         {
             "index": 322,
+            "word": "Hararei",
+            "meaning": "Holiday",
             "link": "",
-            "meaning": "holiday",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hararei"
+            "photo_attribution": ""
         },
         {
             "index": 323,
+            "word": "Hēki",
+            "meaning": "Egg",
             "link": "",
-            "meaning": "egg",
             "photo": "",
-            "photo_attribution": "",
-            "word": "h\u0113ki"
+            "photo_attribution": ""
         },
         {
             "index": 324,
-            "link": "",
+            "word": "hika",
             "meaning": "a term of address for both sexes: E hika",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "hika"
+            "photo_attribution": ""
         },
         {
             "index": 325,
-            "link": "",
+            "word": "Hei konei rā",
             "meaning": "See you later",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Hei konei ra"
+            "photo_attribution": ""
         },
         {
             "index": 326,
+            "word": "hari",
+            "meaning": "happy",
             "link": "",
-            "meaning": "younger sibling (of the same sex)",
             "photo": "",
-            "photo_attribution": "",
-            "word": "teina"
+            "photo_attribution": ""
         },
         {
             "index": 327,
-            "link": "",
+            "word": "tāne",
             "meaning": "man, husband, god of forests and of birds",
+            "link": "",
             "photo": "tane.jpg",
-            "photo_attribution": "Carving by Bernard Makoare, Manos Nathan, and Lyonel Grant.Photograph by Avenue., CC0, via Wikimedia Commons",
-            "word": "t\u0101ne"
+            "photo_attribution": "Carving by Bernard Makoare, Manos Nathan, and Lyonel Grant.Photograph by Avenue., CC0, via Wikimedia Commons"
         },
         {
             "index": 328,
-            "link": "",
+            "word": "aroha",
             "meaning": "love, sympathy, compassion",
+            "link": "",
             "photo": "aroha.jpeg",
-            "photo_attribution": "U3190523, CC BY-SA 4.0 \\u003chttps://creativecommons.org/licenses/by-sa/4.0\\u003e, via Wikimedia Commons",
-            "word": "aroha"
+            "photo_attribution": "U3190523, CC BY-SA 4.0 \\u003chttps://creativecommons.org/licenses/by-sa/4.0\\u003e, via Wikimedia Commons"
         },
         {
             "index": 329,
-            "link": "",
+            "word": "atawhai",
             "meaning": "to show kindness towards",
+            "link": "",
             "photo": "atawhai.jpeg",
-            "photo_attribution": "",
-            "word": "atawhai"
+            "photo_attribution": ""
         },
         {
             "index": 330,
-            "link": "",
+            "word": "haka",
             "meaning": "to perform traditional dance; haka, a traditional dance, war dance",
+            "link": "",
             "photo": "haka.jpeg",
-            "photo_attribution": "Merrett, Joseph Jenner, 1816-1854., Public domain, via Wikimedia Commons",
-            "word": "haka"
+            "photo_attribution": "Merrett, Joseph Jenner, 1816-1854., Public domain, via Wikimedia Commons"
         },
         {
             "index": 331,
-            "link": "",
+            "word": "hāngi",
             "meaning": "traditional earth oven",
+            "link": "",
             "photo": "hangi.jpeg",
-            "photo_attribution": "Maori women and children cooking at Geothermal Hangi Pit. Ellen Von Meyern, Public domain, via Wikimedia Commons",
-            "word": "h\u0101ngi"
+            "photo_attribution": "Maori women and children cooking at Geothermal Hangi Pit. Ellen Von Meyern, Public domain, via Wikimedia Commons"
         },
         {
             "index": 332,
-            "link": "",
+            "word": "ākau",
             "meaning": "shore, coast",
+            "link": "",
             "photo": "Shore_with_footsteps.jpg",
-            "photo_attribution": "A winter landscape with a frozen lake, snow-covered ground with footprints, and mist rising from the icy water. The background features trees and scattered houses under a clear blue sky. Magnus Johansson, CC BY-SA 2.0 \\u003chttps://creativecommons.org/licenses/by-sa/2.0\\u003e, via Wikimedia Commons",
-            "word": "\u0101kau"
+            "photo_attribution": "A winter landscape with a frozen lake, snow-covered ground with footprints, and mist rising from the icy water. The background features trees and scattered houses under a clear blue sky. Magnus Johansson, CC BY-SA 2.0 \\u003chttps://creativecommons.org/licenses/by-sa/2.0\\u003e, via Wikimedia Commons"
         },
         {
             "index": 333,
-            "link": "",
+            "word": "ākonga",
             "meaning": "student",
+            "link": "",
             "photo": "800px-Primary_Laos.jpg",
-            "photo_attribution": "An open-air classroom with wooden desks and benches, filled with young children attentively sitting or interacting with school materials. The setting includes wooden beams and visible greenery in the background, suggesting a rural environment. Masae, Public domain, via Wikimedia Commons",
-            "word": "\u0101konga"
+            "photo_attribution": "An open-air classroom with wooden desks and benches, filled with young children attentively sitting or interacting with school materials. The setting includes wooden beams and visible greenery in the background, suggesting a rural environment. Masae, Public domain, via Wikimedia Commons"
         },
         {
             "index": 334,
-            "link": "",
+            "word": "onepū",
             "meaning": "loose sandy soil",
+            "link": "",
             "photo": "Balevullin_ripples_in_the_sand.jpeg",
-            "photo_attribution": "Balevullin: ripples in the sand by Chris Downer, CC BY-SA 2.0 \\u003chttps://creativecommons.org/licenses/by-sa/2.0\\u003e, via Wikimedia Commons",
-            "word": "onep\u016b"
+            "photo_attribution": "Balevullin: ripples in the sand by Chris Downer, CC BY-SA 2.0 \\u003chttps://creativecommons.org/licenses/by-sa/2.0\\u003e, via Wikimedia Commons"
         },
         {
             "index": 335,
-            "link": "",
+            "word": "aorangi",
             "meaning": "planet",
+            "link": "",
             "photo": "aorangi.png",
-            "photo_attribution": "Pictures of Uranus (left), Neptune (right), Earth (lower left), Sirius B (lower center), and Venus (lower right). The smaller planets, Earth's moon, and dwarf planets below, in decreasing size are Mars and Mercury, the Moon, Pluto, and Haumea. Paul Stansifer, 84user, NASA, Celestia, JPL/Caltech, GPLv2 \\u003chttps://www.gnu.org/licenses/old-licenses/gpl-2.0.html\\u003e, via Wikimedia Commons",
-            "word": "aorangi"
+            "photo_attribution": "Pictures of Uranus (left), Neptune (right), Earth (lower left), Sirius B (lower center), and Venus (lower right). The smaller planets, Earth's moon, and dwarf planets below, in decreasing size are Mars and Mercury, the Moon, Pluto, and Haumea. Paul Stansifer, 84user, NASA, Celestia, JPL/Caltech, GPLv2 \\u003chttps://www.gnu.org/licenses/old-licenses/gpl-2.0.html\\u003e, via Wikimedia Commons"
         },
         {
             "index": 336,
-            "link": "",
+            "word": "āporo",
             "meaning": "apple",
+            "link": "",
             "photo": "aporo.jpg",
-            "photo_attribution": "Picture of a basket of red apples. George Chernilevsky, Public domain, via Wikimedia Commons",
-            "word": "\u0101poro"
+            "photo_attribution": "Picture of a basket of red apples. George Chernilevsky, Public domain, via Wikimedia Commons"
         },
         {
             "index": 337,
-            "link": "",
+            "word": "wāhine toa",
             "meaning": "a female warrior; any strong or brave woman",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "w\u0101hine toa"
+            "photo_attribution": ""
         },
         {
             "index": 338,
+            "word": "utu",
+            "meaning": "to repay, respond, avenge. Utu is a 1983 New Zealand war film about the New Zealand Wars. Co-written and directed by Geoff Murphy and depicts the story of a Māori warrior who sets out on a quest for utu (revenge)",
             "link": "",
-            "meaning": "to repay, respond, avenge. Utu is a 1983 New Zealand war film about the New Zealand Wars. Co-written and directed by Geoff Murphy and depicts the story of a M\u0101ori warrior who sets out on a quest for utu (revenge)",
             "photo": "utu.jpg",
-            "photo_attribution": "Poster of the movie Utu (1983)",
-            "word": "utu"
+            "photo_attribution": "Poster of the movie Utu (1983)"
         },
         {
             "index": 339,
+            "word": "whea",
+            "meaning": "where",
             "link": "",
-            "meaning": "youngest",
             "photo": "",
-            "photo_attribution": "",
-            "word": "p\u014dtiki"
+            "photo_attribution": ""
         },
         {
             "index": 340,
+            "word": "aha",
+            "meaning": "what",
             "link": "",
-            "meaning": "eldest sibling",
             "photo": "",
-            "photo_attribution": "",
-            "word": "m\u0101t\u0101mua"
+            "photo_attribution": ""
         },
         {
             "index": 341,
+            "word": "pēhea",
+            "meaning": "how",
             "link": "",
-            "meaning": "niece, nephew",
             "photo": "",
-            "photo_attribution": "",
-            "word": "ir\u0101mutu"
+            "photo_attribution": ""
         },
         {
             "index": 342,
+            "word": "pukapuka",
+            "meaning": "book",
             "link": "",
-            "meaning": "ancestor/grandparent / ancestors/grandparents",
             "photo": "",
-            "photo_attribution": "",
-            "word": "tipuna/tupuna / t\u012bpuna/t\u016bpuna"
+            "photo_attribution": ""
         },
         {
             "index": 343,
+            "word": "pene",
+            "meaning": "pen",
             "link": "",
-            "meaning": "elderly man",
             "photo": "",
-            "photo_attribution": "",
-            "word": "koroua"
+            "photo_attribution": ""
         },
         {
             "index": 344,
+            "word": "tēpu",
+            "meaning": "table",
             "link": "",
-            "meaning": "elderly woman",
             "photo": "",
-            "photo_attribution": "",
-            "word": "kuia"
+            "photo_attribution": ""
         },
         {
             "index": 345,
-            "link": "https://www.doc.govt.nz/nature/native-plants/cabbage-tree-ti-kouka/",
+            "word": "tī kōuka",
             "meaning": "The cabbage tree is one of the most distinctive trees in the New Zealand landscape, especially on farms. They grow all over the country, but prefer wet, open areas like swamps.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/cabbage-tree-ti-kouka/",
             "photo": "cabbage-tree-1920.jpeg",
-            "photo_attribution": "Picture of a Cabbage tree/t\u012b k\u014duka Image:\u00a0Travis Wiens",
-            "word": "t\u012b k\u014duka"
+            "photo_attribution": "Picture of a Cabbage tree/tī kōuka Image: Travis Wiens"
         },
         {
             "index": 346,
-            "link": "https://www.doc.govt.nz/nature/native-plants/chatham-island-christmas-tree/",
+            "word": "rautini",
             "meaning": "Chatham Island Christmas tree. The spectacular tree daisy Rautini, sometimes known as the Chatham Island Christmas tree, can grow up to 8 metres tall.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/chatham-island-christmas-tree/",
             "photo": "4MI6I4O_image_crop_115182.jpeg",
-            "photo_attribution": "Rautini flowers\u00a0Photo:\u00a0John Ragla, CC BY-SA 4.0.",
-            "word": "rautini"
+            "photo_attribution": "Rautini flowers Photo: John Ragla, CC BY-SA 4.0."
         },
         {
             "index": 347,
+            "word": "Ponga, Kaponga, Kātote",
+            "meaning": "The silver tree fern is a species of medium-sized tree fern, endemic (not found naturally anywhere else) to New Zealand. It arrived relatively late in New Zealand’s history during the Pliocene epoch (around 5 – 1.8 million years ago).",
             "link": "https://www.doc.govt.nz/nature/native-plants/ferns/",
-            "meaning": "The silver tree fern is a species of medium-sized tree fern, endemic (not found naturally anywhere else) to New Zealand. It arrived\u00a0relatively late in New Zealand\u2019s history during the Pliocene epoch (around 5 \u2013 1.8 million years ago).",
             "photo": "Silver-fern.jpeg",
-            "photo_attribution": "Silver fern. (2024, November 29). In Wikipedia. https://en.wikipedia.org/wiki/Silver_fern",
-            "word": "Ponga, Kaponga, Katote"
+            "photo_attribution": "Silver fern. (2024, November 29). In Wikipedia. https://en.wikipedia.org/wiki/Silver_fern"
         },
         {
             "index": 348,
+            "word": "pīkao/pīngao",
+            "meaning": "Golden sand sedge. Pīkao or pīngao, the golden sand sedge (Ficinia), is a native sand-binding sedge that plays an important role in New Zealand's dune ecosystems.",
             "link": "https://www.doc.govt.nz/nature/native-plants/golden-sand-sedge-pikao-pingao/",
-            "meaning": "Golden sand sedge. P\u012bkao or p\u012bngao, the golden sand sedge (Ficinia), is a native sand-binding sedge that plays an important role in New Zealand's dune ecosystems.",
             "photo": "pingao-hero.jpeg",
-            "photo_attribution": "Newly planted pingao Image:\u00a0Eamonn Ganley",
-            "word": "p\u012bkao/p\u012bngao"
+            "photo_attribution": "Newly planted pingao Image: Eamonn Ganley"
         },
         {
             "index": 349,
-            "link": "https://www.doc.govt.nz/nature/native-plants/harakeke-flax/",
+            "word": "harakeke/wharariki",
             "meaning": "Common flax (harakeke) and mountain flax (wharariki) - There are two identified species of flax in New Zealand.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/harakeke-flax/",
             "photo": "red-flax-flowers-phormium-tenax-1920.jpeg",
-            "photo_attribution": "Common flax/harakeke Image:\u00a0Jimmy Johnson",
-            "word": "harakeke/wharariki"
+            "photo_attribution": "Common flax/harakeke Image: Jimmy Johnson"
         },
         {
             "index": 350,
+            "word": "Kākābeak/ngutukākā",
+            "meaning": "Ngutukākā is a plant of special significance to New Zealand. Ngutukākā is named for its beautiful red flowers, which hang in clusters of 15-20 blooms and are shaped liked kaka's a beak. Hence Ngutu meaning beak/lips and Kākā meaning the native parrot of the same name.",
             "link": "https://www.doc.govt.nz/nature/native-plants/kakabeak/",
-            "meaning": "Ngutuk\u0101k\u0101 is a plant of special significance to New Zealand. Ngutuk\u0101k\u0101 is named for its beautiful red flowers, which hang in clusters of 15-20 blooms and are shaped liked kaka's a beak. Hence Ngutu meaning beak/lips and K\u0101k\u0101 meaning the native parrot of the same name.",
             "photo": "kakabeak-1920.jpg",
-            "photo_attribution": "K\u0101k\u0101beak Image:\u00a0Dick Veitch",
-            "word": "K\u0101k\u0101beak/ngutuk\u0101k\u0101"
+            "photo_attribution": "Kākābeak Image: Dick Veitch"
         },
         {
             "index": 351,
-            "link": "https://www.doc.govt.nz/nature/native-plants/kauri/",
+            "word": "Kauri",
             "meaning": "Kauri are among the world's mightiest trees, growing to over 50 m tall, with trunk girths up to 16 m, and living for over 2,000 years.",
+            "link": "https://www.doc.govt.nz/nature/native-plants/kauri/",
             "photo": "tane-mahuta-hero.jpeg",
-            "photo_attribution": "T\u0101ne Mahuta, also called 'God of the Forest', is a giant kauri tree (Agathis australis) in the Waipoua Forest of Northland Region, New Zealand. Image:\u00a0Scott Benjamin",
-            "word": "Kauri"
+            "photo_attribution": "Tāne Mahuta, also called 'God of the Forest', is a giant kauri tree (Agathis australis) in the Waipoua Forest of Northland Region, New Zealand. Image: Scott Benjamin"
         },
         {
             "index": 352,
+            "word": "Kōwhai",
+            "meaning": "The kōwhai is one of the best known native trees in New Zealand and it’s our unofficial national flower.",
             "link": "https://www.doc.govt.nz/nature/native-plants/kowhai/",
-            "meaning": "The k\u014dwhai is one of the best known native trees in New Zealand and it\u2019s our unofficial national flower.",
             "photo": "kowhai-flowers-alex-schwab-1920.jpeg",
-            "photo_attribution": "K\u014dwhai flowers Image:\u00a0Alex Schwab",
-            "word": "K\u014dwhai"
+            "photo_attribution": "Kōwhai flowers Image: Alex Schwab"
         },
         {
             "index": 353,
-            "link": "",
+            "word": "renetia",
             "meaning": "reindeer",
+            "link": "",
             "photo": "reindeer.jpg",
-            "photo_attribution": "The reindeer on fresh green pasture. Are G Nilsen, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons",
-            "word": "renetia"
+            "photo_attribution": "The reindeer on fresh green pasture. Are G Nilsen, CC BY-SA 3.0 \u003chttps://creativecommons.org/licenses/by-sa/3.0\u003e, via Wikimedia Commons"
         },
         {
             "index": 354,
-            "link": "",
+            "word": "Hana Kōkō",
             "meaning": "Santa Claus",
+            "link": "",
             "photo": "santa.jpg",
-            "photo_attribution": "Coloured postcard of the Farmers Trading Company, 1970s, Sir George Grey Special Collections, Auckland Libraries, 9-1.",
-            "word": "Hana K\u014dk\u014d"
+            "photo_attribution": "Coloured postcard of the Farmers Trading Company, 1970s, Sir George Grey Special Collections, Auckland Libraries, 9-1."
         },
         {
             "index": 355,
-            "link": "",
+            "word": "kāri Kirihimete",
             "meaning": "Christmas card",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "k\u0101ri Kirihimete"
+            "photo_attribution": ""
         },
         {
             "index": 356,
+            "word": "hutukawa",
+            "meaning": "pōhutukawa, New Zealand Christmas tree",
             "link": "https://en.wikipedia.org/wiki/Metrosideros_excelsa",
-            "meaning": "p\u014dhutukawa, New Zealand Christmas tree",
             "photo": "PohutukawaCornwallis.jpg",
-            "photo_attribution": "p\u014dhutukawa, New Zealand Christmas tree. Image: Ed323 at English Wikipedia, Public domain, via Wikimedia Commons",
-            "word": "hutukawa"
+            "photo_attribution": "pōhutukawa, New Zealand Christmas tree. Image: Ed323 at English Wikipedia, Public domain, via Wikimedia Commons"
         },
         {
             "index": 357,
-            "link": "",
+            "word": "Kirihimete",
             "meaning": "Christmas",
+            "link": "",
             "photo": "",
-            "photo_attribution": "",
-            "word": "Kirihimete"
+            "photo_attribution": ""
         },
         {
             "index": 358,
-            "link": "",
+            "word": "Rākau Kirihimete",
             "meaning": "Christmas tree, with rākau meaning tree and Kirihimete meaning Christmas.",
+            "link": "",
             "photo": "xmastree.png",
-            "photo_attribution": "AI-Generated: A beautifully decorated Christmas tree (Rākau Kirihimete) in a cozy living room, featuring Māori-inspired ornaments, red pōhutukawa-style flowers, and a woven flax (raranga) star topper.",
-            "word": "Rākau Kirihimete"
+            "photo_attribution": "AI-Generated: A beautifully decorated Christmas tree (Rākau Kirihimete) in a cozy living room, featuring Māori-inspired ornaments, red pōhutukawa-style flowers, and a woven flax (raranga) star topper."
         },
         {
             "index": 359,
-            "link": "",
+            "word": "Meri Kirihimete",
             "meaning": "Merry Christmas",
+            "link": "",
             "photo": "xmas.png",
-            "photo_attribution": "Digital art of a flowering Pōhutukawa tree on a white sand beach in Aotearoa New Zealand, set under a bright summer sun and clear blue sky.",
-            "word": "Meri Kirihimete"
+            "photo_attribution": "Digital art of a flowering Pōhutukawa tree on a white sand beach in Aotearoa New Zealand, set under a bright summer sun and clear blue sky."
         },
         {
             "index": 360,
-            "link": "",
+            "word": "Raumati",
             "meaning": "Summer",
+            "link": "",
             "photo": "the_mount.jpeg",
-            "photo_attribution": "Mount Maunganui (PHOTO: New Zealand at the Beach by Terry Moyle)",
-            "word": "Raumati"
+            "photo_attribution": "Mount Maunganui (PHOTO: New Zealand at the Beach by Terry Moyle)"
         },
         {
             "index": 361,
-            "link": "",
+            "word": "tuatara",
             "meaning": "reptiles endemic to New Zealand and which, although resembling most lizards, are part of a distinct lineage, the order Rhynchocephalia",
+            "link": "",
             "photo": "tuatara.jpg",
-            "photo_attribution": "Tuatara, a reptile endemic to New Zealand. By Sid Mosdell - Tuatara, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=70735190",
-            "word": "tuatara"
+            "photo_attribution": "Tuatara, a reptile endemic to New Zealand. By Sid Mosdell - Tuatara, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=70735190"
         },
         {
             "index": 362,
-            "link": "",
+            "word": "pounamu",
             "meaning": "greenstone, jade",
+            "link": "",
             "photo": "pounamu.jpg",
-            "photo_attribution": "Picture of pounamu, greenstone or jade by L Maule - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=95142442",
-            "word": "pounamu"
+            "photo_attribution": "Picture of pounamu, greenstone or jade by L Maule - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=95142442"
         },
         {
             "index": 363,
-            "link": "",
+            "word": "moa",
             "meaning": "extinct large flightless bird",
+            "link": "",
             "photo": "moa.png",
-            "photo_attribution": "",
-            "word": "moa"
+            "photo_attribution": ""
         },
         {
             "index": 364,
-            "link": "",
+            "word": "maunga",
             "meaning": "mountain",
+            "link": "",
             "photo": "mount_taranaki.jpg",
-            "photo_attribution": "Mount Taranaki by Doc Searls from Santa Barbara, USA - 2015_05_17_ewr-lax-akl-wlg_018, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=45161366",
-            "word": "maunga"
+            "photo_attribution": "Mount Taranaki by Doc Searls from Santa Barbara, USA - 2015_05_17_ewr-lax-akl-wlg_018, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=45161366"
         },
         {
             "index": 365,
-            "link": "",
+            "word": "hararei",
             "meaning": "to have a holiday, go on holiday",
+            "link": "",
             "photo": "holiday.jpeg",
-            "photo_attribution": "AI-Generated: a retro Volkswagen with a surfboard and bicycles around it. A family on holiday has BBQ while their golden retriever dog is napping.",
-            "word": "hararei"
+            "photo_attribution": "AI-Generated: a retro Volkswagen with a surfboard and bicycles around it. A family on holiday has BBQ while their golden retriever dog is napping."
         },
         {
-            "index": 1,
+            "index": 366,
+            "word": "Hōngongoi",
+            "meaning": "July (month of)",
             "link": "",
-            "meaning": "happy new year, greetings for the new year",
-            "photo": "fireworks.jpeg",
-            "photo_attribution": "Skycity's fireworks display at midnight. Photo/Jason Oxenham",
-            "word": "ng\u0101 mihi o te tau hou"
+            "photo": "",
+            "photo_attribution": ""
         }
     ]
 }

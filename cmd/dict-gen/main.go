@@ -225,11 +225,7 @@ func runMigrate() {
 
 		if len(missing) > 0 {
 			logInfo("\n   WARNING: Missing day indexes: %d\n", len(missing))
-			if len(missing) <= 20 {
-				logInfo("      Missing: %v\n", missing)
-			} else {
-				logInfo("      First 20 missing: %v\n", missing[:20])
-			}
+			logInfo("      Missing: %v\n", missing)
 		}
 
 		if len(duplicates) == 0 && len(missing) == 0 {
@@ -359,11 +355,7 @@ func runGenerate() {
 			logInfo("   - Total words: %d (expected 366)\n", report.TotalWords)
 			if len(report.MissingIndexes) > 0 {
 				logInfo("   - Missing indexes: %d\n", len(report.MissingIndexes))
-				if len(report.MissingIndexes) <= 20 {
-					logInfo("     %v\n", report.MissingIndexes)
-				} else {
-					logInfo("     First 20: %v\n", report.MissingIndexes[:20])
-				}
+				logInfo("     %v\n", report.MissingIndexes)
 			}
 			logInfo("\n Fix: Ensure all days 1-366 have exactly one word assigned\n")
 			os.Exit(1)
@@ -480,11 +472,7 @@ func runValidate() {
 
 		if len(report.MissingIndexes) > 0 {
 			logInfo("   - Missing indexes: %d\n", len(report.MissingIndexes))
-			if len(report.MissingIndexes) <= 20 {
-				logInfo("     %v\n", report.MissingIndexes)
-			} else {
-				logInfo("     First 20: %v\n", report.MissingIndexes[:20])
-			}
+			logInfo("     %v\n", report.MissingIndexes)
 		}
 
 		if len(report.DuplicateIndexes) > 0 {

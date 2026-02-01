@@ -30,6 +30,17 @@ build-static:
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .
 
+.PHONY: build-dict-gen
+build-dict-gen:
+	@echo "+ $@"
+	cd ./cmd/dict-gen/ && $(GO) build \
+        -tags "$(BUILDTAGS)" \
+        -o $(OUTDIR)/dict-gen .
+
+.PHONY: build
+build: build-static build-dict-gen
+	@echo "+ Built server and dict-gen"
+
 .PHONY: clean
 clean:
 	@echo "+ $@"
@@ -87,7 +98,9 @@ help:
 	@echo "Te Reo Bot - Makefile Commands"
 	@echo ""
 	@echo "Build Commands:"
-	@echo "  make build-static    - Build static binary"
+	@echo "  make build          - Build both server and dict-gen"
+	@echo "  make build-static   - Build server static binary"
+	@echo "  make build-dict-gen - Build dict-gen tool"
 	@echo "  make clean          - Remove build artifacts"
 	@echo ""
 	@echo "Database Commands:"

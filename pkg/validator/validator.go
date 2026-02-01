@@ -77,14 +77,8 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 
 	if len(report.MissingIndexes) > 0 {
 		report.IsValid = false
-		if len(report.MissingIndexes) <= 20 {
-			report.Errors = append(report.Errors,
-				fmt.Sprintf("Missing day indexes: %v", report.MissingIndexes))
-		} else {
-			report.Errors = append(report.Errors,
-				fmt.Sprintf("Missing %d day indexes (showing first 20): %v",
-					len(report.MissingIndexes), report.MissingIndexes[:20]))
-		}
+		report.Errors = append(report.Errors,
+			fmt.Sprintf("Missing day indexes: %v", report.MissingIndexes))
 		v.logger.Error(nil, "Missing day indexes", logger.Int("count", len(report.MissingIndexes)))
 	}
 
@@ -104,38 +98,6 @@ func (v *Validator) Validate() (*ValidationReport, error) {
 	}
 
 	return report, nil
-}
-
-// ValidateAndReport validates and returns a human-readable summary
-func (v *Validator) ValidateAndReport() (string, error) {
-	report, err := v.Validate()
-	if err != nil {
-		return "", err
-	}
-
-	if report.IsValid {
-		return fmt.Sprintf("✓ Validation passed: %d words with unique day indexes (1-366)",
-			report.TotalWords), nil
-	}
-
-	summary := fmt.Sprintf("✗ Validation failed:\n")
-	summary += fmt.Sprintf("  Total words: %d (expected %d)\n",
-		report.TotalWords, requiredWordCount)
-
-	if len(report.MissingIndexes) > 0 {
-		summary += fmt.Sprintf("  Missing indexes: %d\n", len(report.MissingIndexes))
-		if len(report.MissingIndexes) <= 20 {
-			summary += fmt.Sprintf("    %v\n", report.MissingIndexes)
-		} else {
-			summary += fmt.Sprintf("    First 20: %v\n", report.MissingIndexes[:20])
-		}
-	}
-
-	if len(report.DuplicateIndexes) > 0 {
-		summary += fmt.Sprintf("  Duplicate indexes: %v\n", report.DuplicateIndexes)
-	}
-
-	return summary, nil
 }
 
 // GetMissingIndexesRange returns missing indexes in a more compact format
