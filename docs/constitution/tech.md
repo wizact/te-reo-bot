@@ -27,10 +27,10 @@
 - Sufficient performance for read-heavy workload
 
 **Cons**:
-- Single writer limitation (acceptable for CLI use)
-- No network access (not needed)
+- Single writer limitation (acceptable for low-write workload)
+- Requires CGO for go-sqlite3 driver
 
-**Alternatives Considered**: PostgreSQL (overkill), JSON files (completed, insufficient for word bank)
+**Alternatives Considered**: PostgreSQL (overkill), JSON files (deprecated: insufficient for word bank, required separate migration step)
 
 ### Gorilla Mux v1.7.4
 **Why**: Battle-tested HTTP routing with clean API.
@@ -100,7 +100,7 @@
 ```go
 type WordRepository interface {
     GetAllWords() ([]Word, error)
-    GetWordsByDayIndex() (map[int]Word, error)
+    GetWordsByDayIndex() (map[int]wotd.Word, error)
     AddWord(tx *sql.Tx, word *Word) error
     UpdateWord(word *Word) error
     DeleteWord(tx *sql.Tx, id int) error
@@ -112,36 +112,7 @@ type WordRepository interface {
 - Abstract data access from business logic
 - Enable testing with mock implementations
 - Isolate SQLite specifics to one package
-
-### Command Pattern (CLI)
-**Implementation**: `cmd/dict-gen/main.go`
-
-Subcommands: `migrate`, `generate`, `validate`
-
-**Rationale**:
-- Single binary with multiple operations
-- Clear separation of concerns per command
-- Easy to add new dictionary operations
-
-### Generator Pattern
-**Implementation**: `pkg/generator/generator.go`
-
-Transforms SQLite records → dictionary.json
-
-**Rationale**:
-- Single responsibility (format transformation)
-- Testable in isolation
-- Enables future format variations
-
-### Validator Pattern
-**Implementation**: `pkg/validator/validator.go`
-
-Ensures 366 unique words with complete data
-
-**Rationale**:
-- Data integrity before generation
-- Clear error messages for corrections
-- Prevents runtime failures from invalid data
+- Returns domain models directly (no intermediate mapping layer)
 
 ### Middleware Chain (HTTP)
 **Implementation**: `pkg/handlers/http-server.go`
@@ -162,19 +133,14 @@ Ensures 366 unique words with complete data
 
 ```
 ┌─────────────┐
-│   SQLite    │ ← Source of truth (data/words.db)
+│   SQLite    │ ← Single source of truth (data/words.db)
 │  words.db   │
 └──────┬──────┘
        │
-       ↓ dict-gen generate
-┌─────────────────┐
-│ dictionary.json │ ← Generated artifact
-└──────┬──────────┘
-       │
-       ↓ Read on startup
+       ↓ Read via repository (O(1) map lookup)
 ┌─────────────────┐
 │  HTTP Server    │
-│  (in-memory)    │
+│ (connection pool)│
 └──────┬──────────┘
        │
        ↓ Calculate day, select word
@@ -191,27 +157,24 @@ Ensures 366 unique words with complete data
 **cmd/server**:
 - Starts HTTP server via Gorilla Mux
 - Initializes global logger
-- Loads dictionary.json into memory
+- Opens SQLite connection with connection pooling
+- Auto-initializes database schema on startup
 - Serves API endpoints: `/api/v1/messages`, `/healthcheck`
-
-**cmd/dict-gen**:
-- Standalone CLI tool
-- Opens SQLite connection
-- Executes subcommands (migrate/generate/validate)
-- Minimal logging (fmt.Printf)
-- No HTTP server
 
 **pkg/wotd**:
 - Business logic for word selection
+- O(1) map-based word lookup by day (1-366)
+- O(1) word lookup by index
 - Social media client adapters
 - Image acquisition from GCS
 - Day-of-year calculation (1-366)
 
 **pkg/repository**:
-- SQLite connection management
+- SQLite connection management with pooling
 - Transaction support
 - CRUD operations
 - Prepared statements (SQL injection prevention)
+- Returns domain models (wotd.Word) directly
 
 ## Database Design
 
@@ -248,25 +211,30 @@ CREATE INDEX idx_active ON words(is_active);
 
 **Daily Word Selection** (HTTP server):
 ```go
-// In-memory lookup from dictionary.json
-word := wordMap[dayOfYear]
+// O(1) map lookup from repository
+words, _ := repo.GetWordsByDayIndex()  // map[int]wotd.Word
+word := words[dayOfYear]
 ```
 
-**Dictionary Generation** (dict-gen):
+**All Words Query** (repository):
 ```sql
-SELECT * FROM words
+SELECT id, day_index, word, meaning, link, photo, photo_attribution
+FROM words
 WHERE day_index IS NOT NULL AND is_active = 1
 ORDER BY day_index
 ```
 
-**Word Migration** (dict-gen):
+**Word CRUD** (repository):
 ```sql
-BEGIN TRANSACTION;
-UPDATE words SET day_index = NULL WHERE day_index IS NOT NULL;
--- For each word in dictionary.json:
-SELECT * FROM words WHERE word = ?;
--- If exists: UPDATE, else: INSERT
-COMMIT;
+-- Create
+INSERT INTO words (day_index, word, meaning, link, photo, photo_attribution)
+VALUES (?, ?, ?, ?, ?, ?)
+
+-- Update
+UPDATE words SET word = ?, meaning = ?, ... WHERE id = ?
+
+-- Delete (soft)
+UPDATE words SET is_active = 0 WHERE id = ?
 ```
 
 ## Testing Requirements
@@ -304,14 +272,10 @@ pkg/
 ## Performance Targets
 
 ### HTTP Server
-- **Request latency**: <10ms for word selection (in-memory lookup)
-- **Startup time**: <1s (dictionary.json load)
-- **Memory**: <50MB resident (small JSON file, no caching needed)
-
-### dict-gen CLI
-- **Generate command**: <500ms for 366 words
-- **Validate command**: <100ms
-- **Migrate command**: <1s for full dictionary import
+- **Request latency**: <10ms for word selection (O(1) map lookup)
+- **Startup time**: <1s (database initialization + connection pool)
+- **Memory**: <50MB resident (connection pool + map cache)
+- **Connection pooling**: Reuses SQLite connection across requests
 
 ### Database
 - **SQLite file size**: <1MB for 1000 words
@@ -374,20 +338,19 @@ See [../conventions.md](../conventions.md) for complete logging and error handli
 
 **Container Contents**:
 - Go binary (te-reo-bot)
-- dictionary.json (baked into image)
-- Certificates for TLS (if self-hosted)
+- SQLite database (data/words.db)
+- CGO runtime dependencies (sqlite-libs)
 
 **Stateless Design**:
-- No persistent storage in container
-- dictionary.json read on startup (immutable)
+- Read-only database in container
 - Images served from GCS (external)
-- Horizontal scaling possible
+- Horizontal scaling possible (read-only workload)
 
 **CI/CD** (GitHub Actions):
 - Automated tests on PR
-- Docker image build
+- Docker image build with CGO support
 - Deployment to Cloud Run
-- Validation checks (dictionary integrity)
+- Pre-commit hooks validate database (366 words)
 
 ### Configuration Management
 
@@ -398,6 +361,9 @@ PORT=8080
 ADDRESS=0.0.0.0
 TLS_ENABLED=true
 API_KEY=<secret>
+
+# Database
+DB_PATH=/app/data/words.db
 
 # Logging
 LOG_LEVEL=info

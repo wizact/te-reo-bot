@@ -14,24 +14,20 @@ M\u0101ori word-of-the-day social media bot. Posts daily M\u0101ori words with m
 ```
 te-reo-bot/
 ├── cmd/
-│   ├── server/          # HTTP server (posts words via API)
-│   └── dict-gen/        # CLI tool (manage SQLite dictionary)
+│   └── server/          # HTTP server (posts words via API)
 ├── pkg/
 │   ├── wotd/           # Word-of-the-day logic
 │   ├── repository/     # SQLite data access
-│   ├── generator/      # JSON generation
-│   ├── validator/      # Data validation
-│   ├── migration/      # Dict import/export
 │   ├── handlers/       # HTTP handlers
 │   ├── logger/         # Structured logging
 │   ├── storage/        # GCS image storage
 │   └── entities/       # Domain models
 ├── data/
 │   └── words.db        # SQLite database (source of truth)
-└── specs/              # Architecture documents
+└── docs/               # Architecture & feature documentation
 ```
 
-**Data Flow**: SQLite → dict-gen generate → dictionary.json → HTTP server → Social media APIs
+**Data Flow**: SQLite (words.db) → HTTP server → Social media APIs
 
 See [tech.md](docs/constitution/tech.md) for detailed architecture.
 
@@ -48,10 +44,10 @@ make test-integration
 # Run server
 ./te-reo-bot start-server -address="localhost" -port="8080"
 
-# Manage dictionary
-./dict-gen migrate --input=dictionary.json    # Import to SQLite
-./dict-gen validate                            # Check integrity (366 words)
-./dict-gen generate --output=dictionary.json  # Export from SQLite
+# Database
+# - Database schema auto-initializes on server startup
+# - Production database: data/words.db (366 words)
+# - Uses SQLite 3 with connection pooling
 ```
 
 ## Key Technologies
@@ -69,22 +65,20 @@ See [tech.md](docs/constitution/tech.md) for technology decisions and rationale.
 
 **cmd/server**: HTTP API server
 - Scheduled posts via GitHub Actions
-- Reads dictionary.json (generated artifact)
+- Reads from SQLite database (words.db)
 - Posts to social media with images
-
-**cmd/dict-gen**: Dictionary management CLI
-- Import/export dictionary.json ↔ SQLite
-- Validate data integrity (366 unique words)
-- Manage word lifecycle
+- Auto-initializes database schema on startup
 
 **pkg/repository**: Data access layer
 - SQLite operations with Repository pattern
-- Transaction support for migrations
+- Connection pooling for performance
 - CRUD operations for words
+- Returns domain models (wotd.Word)
 
 **pkg/wotd**: Word-of-the-day business logic
-- Day-based word selection (1-366)
-- Social media client adapters
+- O(1) map-based word selection by day (1-366)
+- O(1) word selection by index
+- Social media client adapters (Twitter, Mastodon)
 - Image acquisition and posting
 
 See [tech.md](docs/constitution/tech.md) for detailed component architecture.

@@ -1,0 +1,22 @@
+# SQLite database files - treat as binary
+*.db binary
+*.db-shm binary
+*.db-wal binary
+
+# Ensure consistent line endings
+*.go text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.txt text eol=lf
+Makefile text eol=lf
+
+# Binary files
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary

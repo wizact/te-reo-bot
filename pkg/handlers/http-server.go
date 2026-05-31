@@ -1,16 +1,20 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/kelseyhightower/envconfig"
+	_ "github.com/mattn/go-sqlite3"
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/logger"
+	repo "github.com/wizact/te-reo-bot/pkg/repository"
 )
 
 const (
@@ -46,6 +50,13 @@ func StartServer(address, port string, tls bool) {
 		return
 	}
 
+	dr, err := (&EnvironmentConfig{}).IsDryRun()
+	if err != nil {
+		configFields := append(serverFields, logger.Field{Key: "config_type", Value: "environment_config"})
+		getLogger().Fatal(err, "Cannot load environment configuration", configFields...)
+		return
+	}
+
 	// Load storage configuration once at startup
 	bn, err := (&StorageConfig{}).GetBucketName()
 	if err != nil {
@@ -54,9 +65,18 @@ func StartServer(address, port string, tls bool) {
 		return
 	}
 
+	// Load database connection and initialize schema
+	db, err := initDBConnection()
+	if err != nil {
+		getLogger().Fatal(err, "Failed to initialize database connection")
+		return
+	}
+	defer db.Close()
+
 	getLogger().Info("Server configuration loaded successfully",
 		logger.String("bucket_name", bn),
-		logger.Bool("has_api_key", serverConfig.ApiKey != ""))
+		logger.Bool("has_api_key", serverConfig.ApiKey != ""),
+		logger.Bool("dryrun", dr))
 
 	router := mux.NewRouter()
 	router.Use(panicRecoveryMiddleware)
@@ -67,7 +87,7 @@ func StartServer(address, port string, tls bool) {
 	hcr.SetupRoutes(healthCheckRoute, router)
 
 	// MessageRoute route setup
-	mr := MessagesRoute{bucketName: bn}
+	mr := MessagesRoute{bucketName: bn, dryRun: dr, db: db}
 	mr.SetupRoutes(messagesRoute, router)
 
 	// Start server with enhanced error logging and contextual information
@@ -92,6 +112,29 @@ func StartServer(address, port string, tls bool) {
 			getLogger().Fatal(err, "HTTP server failed to start", serverFields...)
 		}
 	}
+}
+
+func initDBConnection() (*sql.DB, error) {
+	var dbPath string
+	var db *sql.DB
+	var err error
+	if dp := os.Getenv("DB_PATH"); dp != "" {
+		dbPath = dp
+	} else {
+		dbPath = "./words.db"
+	}
+	if db, err = sql.Open("sqlite3", dbPath); err != nil {
+		getLogger().ErrorWithStack(err, "Failed to open database connection", logger.String("db_path", dbPath))
+		return nil, err
+	}
+
+	// Initialize database schema
+	getLogger().Info("Initializing database schema...", logger.String("db_path", dbPath))
+	if err := repo.InitializeDatabase(db); err != nil {
+		getLogger().ErrorWithStack(err, "Database initialization failed", logger.String("db_path", dbPath))
+		return nil, err
+	}
+	return db, nil
 }
 
 // authMiddleware provides authentication middleware using pre-loaded configuration
@@ -253,4 +296,17 @@ func (s *StorageConfig) GetBucketName() (string, error) {
 	}
 
 	return s.BucketName, nil
+}
+
+type EnvironmentConfig struct {
+	DryRun bool
+}
+
+func (e *EnvironmentConfig) IsDryRun() (bool, error) {
+	err := envconfig.Process("tereobot", e)
+	if err != nil {
+		return false, err
+	}
+
+	return e.DryRun, nil
 }

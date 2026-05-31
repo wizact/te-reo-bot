@@ -79,7 +79,7 @@ func (mclient *MastodonClient) client() *mastodon.Client {
 	return c
 }
 
-func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName string) *ent.AppError {
+func (mclient *MastodonClient) Toot(wo Word, w http.ResponseWriter, bucketName string) *ent.AppError {
 	var att *mastodon.Attachment
 	mids := []mastodon.ID{}
 	tc := mclient.client()
@@ -93,8 +93,8 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		}
 
 		var e error
-		if wo.Attribution != "" {
-			att, e = tc.UploadMediaFromMedia(context.Background(), &mastodon.Media{File: bytes.NewReader(media), Description: wo.Attribution})
+		if wo.PhotoAttribution != "" {
+			att, e = tc.UploadMediaFromMedia(context.Background(), &mastodon.Media{File: bytes.NewReader(media), Description: wo.PhotoAttribution})
 		} else {
 			att, e = tc.UploadMediaFromBytes(context.Background(), media)
 		}
@@ -102,12 +102,12 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		if e != nil {
 			// Create enhanced AppError with context
 			appErr := ent.NewAppErrorWithContexts(e, 500, "Failed sending the toot with media", map[string]interface{}{
-				"word":         wo.Word,
-				"toot_content": tootContent,
-				"bucket_name":  bucketName,
-				"photo":        wo.Photo,
-				"attribution":  wo.Attribution,
-				"operation":    "mastodon_media_upload",
+				"word":              wo.Word,
+				"toot_content":      tootContent,
+				"bucket_name":       bucketName,
+				"photo":             wo.Photo,
+				"photo_attribution": wo.PhotoAttribution,
+				"operation":         "mastodon_media_upload",
 			})
 
 			// Log the error with stack trace and context
@@ -116,7 +116,7 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 				logger.String("toot_content", tootContent),
 				logger.String("bucket_name", bucketName),
 				logger.String("photo", wo.Photo),
-				logger.String("attribution", wo.Attribution),
+				logger.String("photo_attribution", wo.PhotoAttribution),
 				logger.String("operation", "mastodon_media_upload"),
 			)
 
@@ -127,7 +127,7 @@ func (mclient *MastodonClient) Toot(wo *Word, w http.ResponseWriter, bucketName 
 		mclient.getLogger().Debug("Successfully uploaded media to Mastodon",
 			logger.String("word", wo.Word),
 			logger.String("photo", wo.Photo),
-			logger.String("attribution", wo.Attribution),
+			logger.String("photo_attribution", wo.PhotoAttribution),
 			logger.String("attachment_id", string(att.ID)),
 			logger.String("operation", "mastodon_media_upload"),
 		)
@@ -235,7 +235,7 @@ func acquireMedia(bucketName, objectName string) ([]byte, *ent.AppError) {
 	return media, nil
 }
 
-func hasMedia(wo *Word) bool {
+func hasMedia(wo Word) bool {
 	return len(wo.Photo) > 0
 }
 

@@ -1,15 +1,13 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
 	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
-
-	"database/sql"
-	"os"
 
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/logger"
@@ -20,6 +18,8 @@ import (
 
 type MessagesRoute struct {
 	bucketName string
+	dryRun     bool
+	db         *sql.DB
 }
 
 func (m MessagesRoute) SetupRoutes(routePath string, router *mux.Router) {
@@ -37,51 +37,10 @@ func (m MessagesRoute) PostMessage() appHandler {
 
 		// Create WordSelector
 		ws := wotd.NewWordSelector()
-		var dbPath string
-		var db *sql.DB
-		if dp := os.Getenv("DB_PATH"); dp != "" {
-			dbPath = dp
-		} else {
-			dbPath = "./words.db"
-		}
-		if db, err = sql.Open("sqlite3", dbPath); err != nil {
-			if appErr, ok := err.(*ent.AppError); ok {
-				appErr.WithContext("request_id", reqCtx.RequestID)
-				appErr.WithContext("request_method", reqCtx.Method)
-				appErr.WithContext("request_path", reqCtx.Path)
-				appErr.WithContext("db_path", dbPath)
-				return appErr
-			}
-			return ent.NewAppErrorWithContexts(err, 500, "Failed to open database", map[string]interface{}{
-				"request_id":     reqCtx.RequestID,
-				"request_method": reqCtx.Method,
-				"request_path":   reqCtx.Path,
-				"db_path":        dbPath,
-			})
-		}
-		defer db.Close()
-
-		// Initialize database schema
-		log.Info("Initializing database schema...", reqCtx.ToFields()...)
-		if err := repo.InitializeDatabase(db); err != nil {
-			if appErr, ok := err.(*ent.AppError); ok {
-				appErr.WithContext("request_id", reqCtx.RequestID)
-				appErr.WithContext("request_method", reqCtx.Method)
-				appErr.WithContext("request_path", reqCtx.Path)
-				appErr.WithContext("db_path", dbPath)
-				return appErr
-			}
-			return ent.NewAppErrorWithContexts(err, 500, "Failed to initialize database schema", map[string]interface{}{
-				"request_id":     reqCtx.RequestID,
-				"request_method": reqCtx.Method,
-				"request_path":   reqCtx.Path,
-				"db_path":        dbPath,
-			})
-		}
 
 		// Create repository instance
-		var wordsByDay map[int]repo.Word
-		wr := repo.NewSQLiteRepository(db)
+		var wordsByDay map[int]wotd.Word
+		wr := repo.NewSQLiteRepository(m.db)
 
 		// Get words indexed by day_index
 		wordsByDay, err = wr.GetWordsByDayIndex()
@@ -90,44 +49,24 @@ func (m MessagesRoute) PostMessage() appHandler {
 				appErr.WithContext("request_id", reqCtx.RequestID)
 				appErr.WithContext("request_method", reqCtx.Method)
 				appErr.WithContext("request_path", reqCtx.Path)
-				appErr.WithContext("db_path", dbPath)
 				return appErr
 			}
 			return ent.NewAppErrorWithContexts(err, 500, "Failed to get words", map[string]interface{}{
 				"request_id":     reqCtx.RequestID,
 				"request_method": reqCtx.Method,
 				"request_path":   reqCtx.Path,
-				"db_path":        dbPath,
 			})
-		}
-		// Mapping to expected format for WordSelector
-		wordDic := &wotd.Dictionary{
-
-			Words: make([]wotd.Word, 0, len(wordsByDay)),
-		}
-
-		for _, word := range wordsByDay {
-			// Map repository word to WordSelector format
-			wsWord := wotd.Word{
-				Index:       *word.DayIndex,
-				Word:        word.Word,
-				Meaning:     word.Meaning,
-				Link:        word.Link,
-				Photo:       word.Photo,
-				Attribution: word.PhotoAttribution,
-			}
-			wordDic.Words = append(wordDic.Words, wsWord)
 		}
 
 		wordIndex := r.URL.Query().Get("wordIndex")
-		var wo *wotd.Word
+		var wo wotd.Word
 		if wind, eind := strconv.Atoi(wordIndex); eind == nil {
 			log.Debug("Selecting word by index", logger.Int("index", wind))
-			wo, err = ws.SelectWordByIndex(wordDic.Words, wind)
+			wo, err = ws.SelectWordByIndex(wordsByDay, wind)
 
 		} else {
 			log.Debug("Selecting word by day")
-			wo, err = ws.SelectWordByDay(wordDic.Words)
+			wo, err = ws.SelectWordByDay(wordsByDay)
 		}
 
 		if err != nil {
@@ -147,6 +86,13 @@ func (m MessagesRoute) PostMessage() appHandler {
 
 		dest := r.URL.Query().Get("dest")
 		log.Info("Posting message", logger.String("destination", dest), logger.String("word", wo.Word))
+
+		if m.dryRun {
+			log.Info("Dry run enabled - not posting to destination", logger.String("destination", dest))
+			json.NewEncoder(w).Encode(&ent.PostResponse{Message: "Dry run - message not posted to destination"})
+			return nil
+		}
+
 		if strings.ToLower(dest) == "twitter" {
 			return wotd.Tweet(wo, w)
 		} else if strings.ToLower(dest) == "mastodon" {

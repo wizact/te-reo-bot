@@ -30,16 +30,9 @@ build-static:
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .
 
-.PHONY: build-dict-gen
-build-dict-gen:
-	@echo "+ $@"
-	cd ./cmd/dict-gen/ && $(GO) build \
-        -tags "$(BUILDTAGS)" \
-        -o $(OUTDIR)/dict-gen .
-
 .PHONY: build
-build: build-static build-dict-gen
-	@echo "+ Built server and dict-gen"
+build: build-static 
+	@echo "+ Built server"
 
 .PHONY: clean
 clean:
@@ -69,45 +62,14 @@ docker-rmi:
 		docker rmi $$DOCKERIMAGEID; \
 	done;
 
-# Database commands
-.PHONY: backup-all
-backup-all:
-	@echo "+ Backing up ALL words from database to JSON"
-	@$(GO) run cmd/dict-gen/main.go generate --all --output=backup-all.json
-	@echo "Backup complete: backup-all.json"
-
-.PHONY: backup
-backup:
-	@echo "+ Backing up 366 words (with day_index) from database to JSON"
-	@$(GO) run cmd/dict-gen/main.go generate --output=backup-366.json
-	@echo "Backup complete: backup-366.json"
-
-.PHONY: migrate
-migrate:
-	@echo "+ Migrating dictionary.json to database"
-	@$(GO) run cmd/dict-gen/main.go migrate --input=cmd/server/dictionary.json
-	@echo "Migration complete"
-
-.PHONY: validate
-validate:
-	@echo "+ Validating database"
-	@$(GO) run cmd/dict-gen/main.go validate
-
 .PHONY: help
 help:
 	@echo "Te Reo Bot - Makefile Commands"
 	@echo ""
 	@echo "Build Commands:"
-	@echo "  make build          - Build both server and dict-gen"
+	@echo "  make build          - Build server binary"
 	@echo "  make build-static   - Build server static binary"
-	@echo "  make build-dict-gen - Build dict-gen tool"
 	@echo "  make clean          - Remove build artifacts"
-	@echo ""
-	@echo "Database Commands:"
-	@echo "  make backup-all     - Export ALL words to backup-all.json (includes extras)"
-	@echo "  make backup         - Export 366 words to backup-366.json (day_index only)"
-	@echo "  make migrate        - Import dictionary.json into database"
-	@echo "  make validate       - Validate database integrity"
 	@echo ""
 	@echo "Docker Commands:"
 	@echo "  make docker-build   - Build Docker image"

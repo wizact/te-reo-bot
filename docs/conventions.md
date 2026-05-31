@@ -397,15 +397,14 @@ logger.Info("API key", logger.String("api_key", apiKey))
 ```
 te-reo-bot/
 ├── cmd/                    # Entrypoints
-│   ├── server/            # HTTP server
-│   └── dict-gen/          # CLI tool
+│   └── server/            # HTTP server
 ├── pkg/                    # Public libraries
 │   ├── wotd/
 │   ├── logger/
 │   └── repository/
 ├── internal/               # Private code (if needed)
-├── data/                   # Runtime data
-└── specs/                  # Architecture docs
+├── data/                   # Runtime data (words.db)
+└── docs/                   # Architecture docs
 ```
 
 ### Package Scope
@@ -582,43 +581,6 @@ func TestBlueskyClient_PostWord(t *testing.T) {
 - Add to README.md
 - Update docs/constitution/product.md (product feature)
 - Update docs/constitution/tech.md (technical details)
-
-### Adding a New dict-gen Command
-
-**Step-by-step**:
-
-1. **Add command** to `cmd/dict-gen/main.go`:
-```go
-case "export-csv":
-    exportCSV(flags)
-```
-
-2. **Implement handler**:
-```go
-func exportCSV(flags *Flags) {
-    // Validate flags
-    // Open database
-    // Query words
-    // Generate CSV
-    // Write file
-}
-```
-
-3. **Add to usage**:
-```go
-func printUsage() {
-    fmt.Println("  export-csv   Export dictionary to CSV format")
-}
-```
-
-4. **Write tests**:
-```go
-func TestExportCSV(t *testing.T) {
-    // Test CSV generation
-}
-```
-
-5. **Update documentation** in CLAUDE.md
 
 ## Reference Files
 
