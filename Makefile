@@ -22,7 +22,11 @@ ifeq ($(GITCOMMIT),)
 endif
 
 CTIMEVAR=-X $(PKG)/version.GITCOMMIT=$(GITCOMMIT) -X $(PKG)/version.VERSION=$(VERSION)
+GO_LDFLAGS=-ldflags "-w $(CTIMEVAR)"
 GO_LDFLAGS_STATIC=-ldflags "-w $(CTIMEVAR) -extldflags -static"
+
+# Detect OS for build target selection
+UNAME_S := $(shell uname -s)
 
 .PHONY: build-static
 build-static:
@@ -30,9 +34,21 @@ build-static:
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .
 
+.PHONY: build-dynamic
+build-dynamic:
+	@mkdir -p $(OUTDIR)
+	cd ./cmd/server/ && $(GO) build \
+        -tags "$(BUILDTAGS)" \
+        ${GO_LDFLAGS} -o $(OUTDIR)/$(NAME) .
+
 .PHONY: build
-build: build-static 
-	@echo "+ Built server"
+ifeq ($(UNAME_S),Darwin)
+build: build-dynamic
+	@echo "+ Built server (dynamic - macOS)"
+else
+build: build-static
+	@echo "+ Built server (static - Linux)"
+endif
 
 .PHONY: clean
 clean:
@@ -67,8 +83,9 @@ help:
 	@echo "Te Reo Bot - Makefile Commands"
 	@echo ""
 	@echo "Build Commands:"
-	@echo "  make build          - Build server binary"
-	@echo "  make build-static   - Build server static binary"
+	@echo "  make build          - Build server binary (auto-detects OS)"
+	@echo "  make build-static   - Build static binary (Linux only)"
+	@echo "  make build-dynamic  - Build dynamic binary (macOS/dev)"
 	@echo "  make clean          - Remove build artifacts"
 	@echo ""
 	@echo "Docker Commands:"
