@@ -29,7 +29,7 @@ func (tc *TwitterClient) getLogger() logger.Logger {
 	return logger.GetGlobalLogger()
 }
 
-func Tweet(wo *Word, w http.ResponseWriter) *ent.AppError {
+func Tweet(wo Word, w http.ResponseWriter) *ent.AppError {
 	var c TwitterCredential
 	log := logger.GetGlobalLogger()
 

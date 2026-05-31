@@ -2,13 +2,16 @@ package wotd_test
 
 import (
 	"bytes"
+	"database/sql"
 	"net/http/httptest"
 	"os"
 	"testing"
 
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/logger"
+	"github.com/wizact/te-reo-bot/pkg/repository"
 	"github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
@@ -21,64 +24,6 @@ func TestWordSelectorIntegrationErrors(t *testing.T) {
 		expectedError    string
 		logShouldContain []string
 	}{
-		{
-			name: "ReadFile - non-existent file",
-			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
-				var logBuffer bytes.Buffer
-				config := &logger.LoggerConfig{
-					EnableStackTraces: true,
-					LogLevel:          "debug",
-					Environment:       "test",
-					LogFormat:         "json",
-				}
-				testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
-				logger.SetGlobalLogger(testLogger)
-				ws := wotd.NewWordSelector()
-				return ws, &logBuffer
-			},
-			testOperation: func(ws *wotd.WordSelector) error {
-				_, err := ws.ReadFile("/non/existent/path/dictionary.json")
-				return err
-			},
-			expectedError: "Failed to read dictionary file",
-			logShouldContain: []string{
-				"Failed to read dictionary file",
-				"stack_trace",
-				"file_path",
-				"/non/existent/path/dictionary.json",
-				"operation",
-				"file_read",
-			},
-		},
-		{
-			name: "ParseFile - invalid JSON",
-			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
-				var logBuffer bytes.Buffer
-				config := &logger.LoggerConfig{
-					EnableStackTraces: true,
-					LogLevel:          "debug",
-					Environment:       "test",
-					LogFormat:         "json",
-				}
-				testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
-				logger.SetGlobalLogger(testLogger)
-				ws := wotd.NewWordSelector()
-				return ws, &logBuffer
-			},
-			testOperation: func(ws *wotd.WordSelector) error {
-				invalidJSON := []byte(`{"dictionary": [{"index": 1, "word": "test" // invalid}`)
-				_, err := ws.ParseFile(invalidJSON, "test-invalid.json")
-				return err
-			},
-			expectedError: "Failed to parse dictionary file",
-			logShouldContain: []string{
-				"Failed to parse dictionary JSON file",
-				"stack_trace",
-				"file_path",
-				"test-invalid.json",
-				"file_size",
-			},
-		},
 		{
 			name: "SelectWordByDay - empty dictionary",
 			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
@@ -95,7 +40,7 @@ func TestWordSelectorIntegrationErrors(t *testing.T) {
 				return ws, &logBuffer
 			},
 			testOperation: func(ws *wotd.WordSelector) error {
-				emptyWords := []wotd.Word{}
+				emptyWords := make(map[int]wotd.Word)
 				_, err := ws.SelectWordByDay(emptyWords)
 				return err
 			},
@@ -109,7 +54,7 @@ func TestWordSelectorIntegrationErrors(t *testing.T) {
 			},
 		},
 		{
-			name: "SelectWordByIndex - invalid index",
+			name: "SelectWordByDay - word not found for day",
 			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
 				var logBuffer bytes.Buffer
 				config := &logger.LoggerConfig{
@@ -124,13 +69,133 @@ func TestWordSelectorIntegrationErrors(t *testing.T) {
 				return ws, &logBuffer
 			},
 			testOperation: func(ws *wotd.WordSelector) error {
-				words := []wotd.Word{{Index: 1, Word: "test", Meaning: "test meaning"}}
+				// Create map with only one word at index 100
+				words := map[int]wotd.Word{
+					100: {
+						ID:       1,
+						DayIndex: intPtr(100),
+						Word:     "test",
+						Meaning:  "test meaning",
+					},
+				}
+				// Current day won't match index 100
+				_, err := ws.SelectWordByDay(words)
+				return err
+			},
+			expectedError: "No word found for current day of year",
+			logShouldContain: []string{
+				"No word found for current day of year",
+				"stack_trace",
+				"day_of_year",
+				"word_count",
+				"operation",
+				"select_word_by_day",
+			},
+		},
+		{
+			name: "SelectWordByIndex - invalid index (zero)",
+			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
+				var logBuffer bytes.Buffer
+				config := &logger.LoggerConfig{
+					EnableStackTraces: true,
+					LogLevel:          "debug",
+					Environment:       "test",
+					LogFormat:         "json",
+				}
+				testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
+				logger.SetGlobalLogger(testLogger)
+				ws := wotd.NewWordSelector()
+				return ws, &logBuffer
+			},
+			testOperation: func(ws *wotd.WordSelector) error {
+				words := map[int]wotd.Word{
+					1: {
+						ID:       1,
+						DayIndex: intPtr(1),
+						Word:     "test",
+						Meaning:  "test meaning",
+					},
+				}
+				_, err := ws.SelectWordByIndex(words, 0)
+				return err
+			},
+			expectedError: "Invalid word index: must be greater than 0",
+			logShouldContain: []string{
+				"Invalid word index provided",
+				"stack_trace",
+				"requested_index",
+				"word_count",
+				"operation",
+				"select_word_by_index",
+			},
+		},
+		{
+			name: "SelectWordByIndex - invalid index (negative)",
+			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
+				var logBuffer bytes.Buffer
+				config := &logger.LoggerConfig{
+					EnableStackTraces: true,
+					LogLevel:          "debug",
+					Environment:       "test",
+					LogFormat:         "json",
+				}
+				testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
+				logger.SetGlobalLogger(testLogger)
+				ws := wotd.NewWordSelector()
+				return ws, &logBuffer
+			},
+			testOperation: func(ws *wotd.WordSelector) error {
+				words := map[int]wotd.Word{
+					1: {
+						ID:       1,
+						DayIndex: intPtr(1),
+						Word:     "test",
+						Meaning:  "test meaning",
+					},
+				}
 				_, err := ws.SelectWordByIndex(words, -1)
 				return err
 			},
 			expectedError: "Invalid word index: must be greater than 0",
 			logShouldContain: []string{
 				"Invalid word index provided",
+				"stack_trace",
+				"requested_index",
+				"word_count",
+				"operation",
+				"select_word_by_index",
+			},
+		},
+		{
+			name: "SelectWordByIndex - word not found for index",
+			setupTest: func() (*wotd.WordSelector, *bytes.Buffer) {
+				var logBuffer bytes.Buffer
+				config := &logger.LoggerConfig{
+					EnableStackTraces: true,
+					LogLevel:          "debug",
+					Environment:       "test",
+					LogFormat:         "json",
+				}
+				testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
+				logger.SetGlobalLogger(testLogger)
+				ws := wotd.NewWordSelector()
+				return ws, &logBuffer
+			},
+			testOperation: func(ws *wotd.WordSelector) error {
+				words := map[int]wotd.Word{
+					1: {
+						ID:       1,
+						DayIndex: intPtr(1),
+						Word:     "test",
+						Meaning:  "test meaning",
+					},
+				}
+				_, err := ws.SelectWordByIndex(words, 100) // Index 100 doesn't exist
+				return err
+			},
+			expectedError: "No word found for requested index",
+			logShouldContain: []string{
+				"No word found for requested index",
 				"stack_trace",
 				"requested_index",
 				"word_count",
@@ -215,10 +280,14 @@ func TestTwitterClientIntegrationErrors(t *testing.T) {
 				}()
 
 				// Create test word
-				testWord := &wotd.Word{
-					Index:   1,
-					Word:    "test",
-					Meaning: "test meaning",
+				testWord := wotd.Word{
+					ID:               1,
+					DayIndex:         intPtr(1),
+					Word:             "test",
+					Meaning:          "test meaning",
+					Link:             "https://example.com",
+					Photo:            "test.jpg",
+					PhotoAttribution: "test attribution",
 				}
 
 				// Create response recorder
@@ -318,10 +387,14 @@ func TestMastodonClientIntegrationErrors(t *testing.T) {
 				}()
 
 				// Create test word
-				testWord := &wotd.Word{
-					Index:   1,
-					Word:    "test",
-					Meaning: "test meaning",
+				testWord := wotd.Word{
+					ID:               1,
+					DayIndex:         intPtr(1),
+					Word:             "test",
+					Meaning:          "test meaning",
+					Link:             "https://example.com",
+					Photo:            "test.jpg",
+					PhotoAttribution: "test attribution",
 				}
 
 				// Create response recorder
@@ -376,7 +449,7 @@ func TestMastodonClientIntegrationErrors(t *testing.T) {
 	}
 }
 
-// TestEndToEndWordProcessing tests the complete word processing flow with error handling
+// TestEndToEndWordProcessing tests the complete word processing flow with database
 func TestEndToEndWordProcessing(t *testing.T) {
 	// Create logger for testing
 	var logBuffer bytes.Buffer
@@ -388,65 +461,109 @@ func TestEndToEndWordProcessing(t *testing.T) {
 	}
 	testLogger := logger.NewLoggerWithWriter(config, &logBuffer)
 
-	// Test complete flow: read file -> parse -> select word
-	t.Run("Successful word processing flow", func(t *testing.T) {
+	// Test complete flow: database -> select word
+	t.Run("Successful word processing flow from database", func(t *testing.T) {
 		logger.SetGlobalLogger(testLogger)
 		defer logger.ResetGlobalLogger()
+
+		// Create in-memory test database
+		db, err := sql.Open("sqlite3", ":memory:")
+		assert.Nil(t, err, "Should create in-memory database")
+		defer db.Close()
+
+		// Initialize schema
+		err = repository.InitializeDatabase(db)
+		assert.Nil(t, err, "Should initialize database schema")
+
+		// Create repository and add test words
+		repo := repository.NewSQLiteRepository(db)
+		tx, err := repo.BeginTx()
+		assert.Nil(t, err, "Should begin transaction")
+
+		// Add test words with various day indices
+		testWords := []wotd.Word{
+			{
+				DayIndex:         intPtr(1),
+				Word:             "kia ora",
+				Meaning:          "hello, hi",
+				Link:             "https://maoridictionary.co.nz/search?idiom=&phrase=&proverb=&loan=&histLoanWords=&keywords=kia+ora",
+				Photo:            "kia-ora.jpg",
+				PhotoAttribution: "Test Attribution",
+			},
+			{
+				DayIndex:         intPtr(2),
+				Word:             "tēnā koe",
+				Meaning:          "hello (to one person)",
+				Link:             "https://maoridictionary.co.nz/search?idiom=&phrase=&proverb=&loan=&histLoanWords=&keywords=tena+koe",
+				Photo:            "tena-koe.jpg",
+				PhotoAttribution: "Test Attribution",
+			},
+			{
+				DayIndex:         intPtr(150),
+				Word:             "whānau",
+				Meaning:          "family",
+				Link:             "https://maoridictionary.co.nz/search?idiom=&phrase=&proverb=&loan=&histLoanWords=&keywords=whanau",
+				Photo:            "whanau.jpg",
+				PhotoAttribution: "Test Attribution",
+			},
+		}
+
+		for _, word := range testWords {
+			wordCopy := word
+			err = repo.AddWord(tx, &wordCopy)
+			assert.Nil(t, err, "Should add word to database")
+		}
+
+		err = repo.CommitTx(tx)
+		assert.Nil(t, err, "Should commit transaction")
+
+		// Get words from repository
+		wordsByDay, err := repo.GetWordsByDayIndex()
+		assert.Nil(t, err, "Should get words by day index")
+		assert.Equal(t, 3, len(wordsByDay), "Should have 3 words")
+
+		// Create word selector and test
 		ws := wotd.NewWordSelector()
 
-		// Read actual dictionary file
-		content, err := ws.ReadFile("../../cmd/server/dictionary.json")
-		assert.Nil(t, err, "Should successfully read dictionary file")
-
-		// Parse the content
-		dictionary, err := ws.ParseFile(content, "../../cmd/server/dictionary.json")
-		assert.Nil(t, err, "Should successfully parse dictionary file")
-		assert.NotNil(t, dictionary, "Dictionary should not be nil")
-		assert.True(t, len(dictionary.Words) > 0, "Dictionary should contain words")
-
-		// Select word by day
-		wordByDay, err := ws.SelectWordByDay(dictionary.Words)
-		assert.Nil(t, err, "Should successfully select word by day")
-		assert.NotNil(t, wordByDay, "Selected word should not be nil")
-
 		// Select word by index
-		wordByIndex, err := ws.SelectWordByIndex(dictionary.Words, 1)
+		wordByIndex, err := ws.SelectWordByIndex(wordsByDay, 1)
 		assert.Nil(t, err, "Should successfully select word by index")
-		assert.NotNil(t, wordByIndex, "Selected word should not be nil")
+		assert.Equal(t, "kia ora", wordByIndex.Word, "Should select correct word")
+
+		// Select another word by different index
+		wordByIndex2, err := ws.SelectWordByIndex(wordsByDay, 150)
+		assert.Nil(t, err, "Should successfully select word by index 150")
+		assert.Equal(t, "whānau", wordByIndex2.Word, "Should select correct word")
 
 		// Verify logging for successful operations
 		logOutput := logBuffer.String()
-		assert.Contains(t, logOutput, "Successfully read dictionary file", "Should log successful file read")
-		assert.Contains(t, logOutput, "Successfully parsed dictionary file", "Should log successful file parse")
-		assert.Contains(t, logOutput, "Selected word by day", "Should log word selection by day")
 		assert.Contains(t, logOutput, "Selected word by index", "Should log word selection by index")
 	})
 
-	t.Run("Error propagation in word processing flow", func(t *testing.T) {
+	t.Run("Error handling with empty database", func(t *testing.T) {
 		// Reset log buffer
 		logBuffer.Reset()
 
 		logger.SetGlobalLogger(testLogger)
 		defer logger.ResetGlobalLogger()
+
+		// Create empty word map
+		emptyWords := make(map[int]wotd.Word)
+
 		ws := wotd.NewWordSelector()
 
-		// Try to read non-existent file
-		_, err := ws.ReadFile("/non/existent/file.json")
-		assert.NotNil(t, err, "Should fail to read non-existent file")
+		// Try to select from empty dictionary
+		_, err := ws.SelectWordByDay(emptyWords)
+		assert.NotNil(t, err, "Should fail with empty dictionary")
 
 		// Verify error is properly logged with stack trace
 		logOutput := logBuffer.String()
-		assert.Contains(t, logOutput, "Failed to read dictionary file", "Should log file read error")
+		assert.Contains(t, logOutput, "Cannot select word from empty dictionary", "Should log empty dictionary error")
 		assert.Contains(t, logOutput, "stack_trace", "Should include stack trace in error log")
 
 		// Verify it's an AppError with context
 		appErr, ok := err.(*entities.AppError)
 		assert.True(t, ok, "Error should be an AppError")
 		assert.True(t, appErr.HasStackTrace(), "AppError should have stack trace")
-
-		// Check context
-		filePath, exists := appErr.GetContext("file_path")
-		assert.True(t, exists, "Context should contain file_path")
-		assert.Equal(t, "/non/existent/file.json", filePath)
 	})
 }

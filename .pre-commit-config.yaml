@@ -39,23 +39,18 @@ repos:
         name: Check for case conflicts
         description: Checks for files with case conflicts
 
-  # Custom Te Reo Māori dictionary validation
+  # SQLite database validation
   - repo: local
     hooks:
-      - id: validate-dictionary
-        name: Validate Te Reo Dictionary
-        description: Validates the structure and content of dictionary.json
-        entry: node scripts/validate-dictionary.js
+      - id: validate-database
+        name: Validate SQLite Database
+        description: Validates the structure and integrity of words.db
+        entry: bash -c
+        args:
+          - -c
+          - 'sqlite3 data/words.db "SELECT COUNT(*) FROM words WHERE day_index IS NOT NULL;" | grep -q "^366$" && echo "✓ Database valid: 366 words with day_index" || (echo "✗ Database validation failed: Expected 366 words" && exit 1)'
         language: system
-        files: ^cmd/server/dictionary\.json$
-        pass_filenames: false
-
-      - id: dictionary-lint
-        name: Dictionary JSON Lint
-        description: Additional JSON linting specifically for dictionary.json
-        entry: node scripts/validate-dictionary-structure.js
-        language: system
-        files: ^cmd/server/dictionary\.json$
+        files: ^data/words\.db$
         pass_filenames: false
 
 # Global settings
@@ -63,8 +58,8 @@ default_language_version:
   node: system
 
 # Configure which files to include/exclude
-files: ^(cmd/server/dictionary\.json|scripts/.*\.js|\..*\.ya?ml)$
-exclude: ^(\.git/|node_modules/|out/|\.vscode/|\.devcontainer/)
+files: ^(data/words\.db|\..*\.ya?ml)$
+exclude: ^(\.git/|node_modules/|out/|\.vscode/|\.devcontainer/|data/.*\.db-.*)
 
 # Fail fast - stop running hooks after first failure
 fail_fast: false

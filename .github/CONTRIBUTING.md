@@ -42,62 +42,46 @@ This repository uses pre-commit hooks to ensure code quality and data integrity.
    pre-commit run --all-files
    ```
 
-### Dictionary Validation
+### Dictionary Management
 
-The dictionary.json file has automated validation to ensure data integrity:
+The word dictionary is stored in SQLite database (`data/words.db`) as the single source of truth.
 
-#### Manual Validation
+#### Database Schema
 
-Run the validation script manually:
+Words are stored with the following structure:
+- **id**: Auto-incrementing primary key
+- **day_index**: Integer (1-366) for word-of-the-day selection
+- **word**: Māori word text
+- **meaning**: English translation
+- **link**: Reference URL (optional)
+- **photo**: Image filename (optional)
+- **photo_attribution**: Photo credit (optional)
+- **created_at**: Timestamp
+- **updated_at**: Timestamp
+- **is_active**: Boolean flag
+
+#### Adding/Updating Words
+
+Words should be managed directly in the SQLite database:
+
 ```bash
-# Validate the dictionary structure and content
-npm run validate-dictionary
+# Access the database
+sqlite3 data/words.db
 
-# Or run directly
-node scripts/validate-dictionary.js
+# Example: Add a new word
+INSERT INTO words (day_index, word, meaning, link, photo, photo_attribution)
+VALUES (367, 'aroha', 'love, compassion', 'https://maoridictionary.co.nz/...', 'aroha.jpg', 'Photo credit');
+
+# Example: Update existing word
+UPDATE words SET meaning = 'updated meaning' WHERE word = 'kia ora';
 ```
 
-#### Validation Rules
+#### Validation
 
-The dictionary validation checks for:
-
-- **Structure**: Must have a "dictionary" array at the root level
-- **Required fields**: Each entry must have `index`, `word`, and `meaning`
-- **Data types**: 
-  - `index` must be a unique positive integer
-  - `word` and `meaning` must be non-empty strings (duplicates allowed)
-- **Optional fields**: `link`, `photo`, and `photo_attribution` can be empty strings
-- **Uniqueness**: Index values must be unique across all entries
-
-#### Troubleshooting
-
-**Common Issues:**
-
-1. **"Dictionary file not found"**
-   - Ensure you're running the command from the repository root
-   - Check that `cmd/server/dictionary.json` exists
-
-2. **"Invalid JSON syntax"**
-   - Use a JSON validator or formatter to fix syntax errors
-   - Run `npm run format-json` to auto-format the file
-
-3. **"Missing required field"**
-   - Ensure all entries have `index`, `word`, and `meaning` fields
-   - Check for null or undefined values
-
-4. **"Field must be a string/number"**
-   - Verify data types match the requirements
-   - Numbers should not be quoted, strings should be quoted
-
-5. **"Duplicate index found"**
-   - Each entry must have a unique index value
-   - Find the highest existing index and use the next sequential number
-   - Words and meanings can be duplicates
-
-6. **Pre-commit hooks failing**
-   - Run `npm run validate-dictionary` to see detailed errors
-   - Fix validation issues before committing
-   - Use `git commit --no-verify` only in emergencies (not recommended)
+Database constraints ensure data integrity:
+- **Unique day_index**: Each day (1-366) can only have one word
+- **Required fields**: word and meaning are mandatory
+- **Schema validation**: Auto-runs on server startup
 
 **Getting Help:**
 - Check the validation output for specific error messages
@@ -112,30 +96,26 @@ The dictionary validation checks for:
    variables, exposed ports, useful file locations and container parameters.
 3. Increase the version numbers in any examples files and the VERSION.md to the new version that this
    Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. **For adding new words, or amend any existing ones, please update the `dictionary.json` file. Add the words to the end of the list.**
+4. **For adding new words or amending existing ones, please update the SQLite database (`data/words.db`). See the Dictionary Management section above for details.**
 5. **Ensure all pre-commit hooks pass** before submitting your pull request.
 
 ## Dictionary Contributions
 
 When contributing to the Te Reo Māori dictionary:
 
-1. **Add new entries at the end** of the dictionary array
-2. **Use the next available index number**
-3. **Include all required fields**: `index`, `word`, `meaning`
+1. **Directly modify the SQLite database** (`data/words.db`)
+2. **Use the next available day_index** (currently 1-366 for leap year coverage)
+3. **Include all required fields**: `word`, `meaning`
 4. **Māori characters** are fully supported (ā, ē, ī, ō, ū, etc.)
 5. **Optional fields** can be left as empty strings if not available:
    - `link`: External reference URL
    - `photo`: Image filename
    - `photo_attribution`: Photo credit/description
 
-**Example new entry:**
-```json
-{
-    "index": 366,
-    "word": "whakatōhea",
-    "meaning": "to make brave, encourage",
-    "link": "",
-    "photo": "",
-    "photo_attribution": ""
-}
+**Example SQL insert:**
+```sql
+INSERT INTO words (day_index, word, meaning, link, photo, photo_attribution)
+VALUES (367, 'whakatōhea', 'to make brave, encourage', '', '', '');
 ```
+
+**Note**: The database is tracked in Git as a binary file via `.gitattributes`.

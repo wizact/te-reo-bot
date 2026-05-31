@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/wizact/te-reo-bot/pkg/repository"
+	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
 func setupTestRepository(t *testing.T) (*sql.DB, repository.WordRepository) {
@@ -26,7 +27,7 @@ func TestAddWord(t *testing.T) {
 	defer db.Close()
 
 	dayIndex := 1
-	word := &repository.Word{
+	word := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Kia ora",
 		Meaning:  "Hello, be well",
@@ -47,7 +48,7 @@ func TestAddWordWithoutDayIndex(t *testing.T) {
 	db, repo := setupTestRepository(t)
 	defer db.Close()
 
-	word := &repository.Word{
+	word := &wotd.Word{
 		Word:    "Unassigned",
 		Meaning: "A word not yet assigned to a day",
 	}
@@ -68,7 +69,7 @@ func TestGetWordByID(t *testing.T) {
 
 	// Add a word first
 	dayIndex := 5
-	originalWord := &repository.Word{
+	originalWord := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Test word",
 		Meaning:  "Test meaning",
@@ -104,7 +105,7 @@ func TestGetWordByDayIndex(t *testing.T) {
 
 	// Add a word with day_index
 	dayIndex := 10
-	originalWord := &repository.Word{
+	originalWord := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Day 10 word",
 		Meaning:  "Day 10 meaning",
@@ -130,7 +131,7 @@ func TestGetAllWords(t *testing.T) {
 	// Add multiple words
 	dayIndex1 := 1
 	dayIndex2 := 2
-	words := []*repository.Word{
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex1, Word: "Word1", Meaning: "Meaning1"},
 		{DayIndex: &dayIndex2, Word: "Word2", Meaning: "Meaning2"},
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index
@@ -158,7 +159,7 @@ func TestGetWordsByDayIndex(t *testing.T) {
 	// Add words with and without day_index
 	dayIndex1 := 1
 	dayIndex2 := 2
-	words := []*repository.Word{
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex1, Word: "Word1", Meaning: "Meaning1"},
 		{DayIndex: &dayIndex2, Word: "Word2", Meaning: "Meaning2"},
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index - should not be in map
@@ -189,7 +190,7 @@ func TestUpdateWord(t *testing.T) {
 
 	// Add a word
 	dayIndex := 7
-	word := &repository.Word{
+	word := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Original",
 		Meaning:  "Original meaning",
@@ -224,7 +225,7 @@ func TestDeleteWord(t *testing.T) {
 
 	// Add a word
 	dayIndex := 15
-	word := &repository.Word{
+	word := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "To be deleted",
 		Meaning:  "Will be removed",
@@ -260,7 +261,7 @@ func TestGetWordCount(t *testing.T) {
 
 	// Add words
 	dayIndex := 1
-	words := []*repository.Word{
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex, Word: "Word1", Meaning: "Meaning1"},
 		{Word: "Word2", Meaning: "Meaning2"},
 	}
@@ -286,7 +287,7 @@ func TestGetWordCountByDayIndex(t *testing.T) {
 	// Add words with and without day_index
 	dayIndex1 := 1
 	dayIndex2 := 2
-	words := []*repository.Word{
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex1, Word: "Word1", Meaning: "Meaning1"},
 		{DayIndex: &dayIndex2, Word: "Word2", Meaning: "Meaning2"},
 		{Word: "Word3", Meaning: "Meaning3"}, // No day_index
@@ -312,7 +313,7 @@ func TestDuplicateDayIndexError(t *testing.T) {
 
 	// Add first word with day_index 1
 	dayIndex := 1
-	word1 := &repository.Word{
+	word1 := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Word1",
 		Meaning:  "Meaning1",
@@ -325,7 +326,7 @@ func TestDuplicateDayIndexError(t *testing.T) {
 	require.NoError(t, err)
 
 	// Try to add another word with the same day_index
-	word2 := &repository.Word{
+	word2 := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Word2",
 		Meaning:  "Meaning2",
@@ -346,7 +347,7 @@ func TestRequiredFieldsValidation(t *testing.T) {
 	// Here we test that we can add words with required fields present
 
 	dayIndex := 1
-	word := &repository.Word{
+	word := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "Valid word",
 		Meaning:  "Valid meaning",
@@ -359,6 +360,7 @@ func TestRequiredFieldsValidation(t *testing.T) {
 	require.NoError(t, err)
 	assert.NotZero(t, word.ID)
 }
+
 // Tests for preserve migration words feature
 
 func TestDeduplicateWords_NoDuplicates(t *testing.T) {
@@ -372,8 +374,8 @@ func TestDeduplicateWords_NoDuplicates(t *testing.T) {
 	dayIndex1 := 1
 	dayIndex2 := 2
 	dayIndex3 := 3
-	
-	words := []*repository.Word{
+
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex1, Word: "kia ora", Meaning: "hello"},
 		{DayIndex: &dayIndex2, Word: "aroha", Meaning: "love"},
 		{DayIndex: &dayIndex3, Word: "whānau", Meaning: "family"},
@@ -392,7 +394,7 @@ func TestDeduplicateWords_NoDuplicates(t *testing.T) {
 
 	// Verify: No duplicates removed, all 3 words remain
 	assert.Equal(t, 0, duplicatesRemoved, "Should remove 0 duplicates")
-	
+
 	count, err := repo.GetWordCount()
 	require.NoError(t, err)
 	assert.Equal(t, 3, count, "Should have 3 words remaining")
@@ -413,22 +415,22 @@ func TestDeduplicateWords_WithDuplicates(t *testing.T) {
 	require.NoError(t, err)
 
 	// Add first "kia ora" (ID will be 1)
-	word1 := &repository.Word{DayIndex: &dayIndex1, Word: "kia ora", Meaning: "hello 1"}
+	word1 := &wotd.Word{DayIndex: &dayIndex1, Word: "kia ora", Meaning: "hello 1"}
 	err = repo.AddWord(tx, word1)
 	require.NoError(t, err)
 
 	// Add "aroha" (ID will be 2)
-	word2 := &repository.Word{DayIndex: &dayIndex2, Word: "aroha", Meaning: "love"}
+	word2 := &wotd.Word{DayIndex: &dayIndex2, Word: "aroha", Meaning: "love"}
 	err = repo.AddWord(tx, word2)
 	require.NoError(t, err)
 
 	// Add second "kia ora" (ID will be 3)
-	word3 := &repository.Word{DayIndex: &dayIndex3, Word: "kia ora", Meaning: "hello 2"}
+	word3 := &wotd.Word{DayIndex: &dayIndex3, Word: "kia ora", Meaning: "hello 2"}
 	err = repo.AddWord(tx, word3)
 	require.NoError(t, err)
 
 	// Add third "kia ora" (ID will be 4)
-	word4 := &repository.Word{DayIndex: &dayIndex4, Word: "kia ora", Meaning: "hello 3"}
+	word4 := &wotd.Word{DayIndex: &dayIndex4, Word: "kia ora", Meaning: "hello 3"}
 	err = repo.AddWord(tx, word4)
 	require.NoError(t, err)
 
@@ -440,7 +442,7 @@ func TestDeduplicateWords_WithDuplicates(t *testing.T) {
 
 	// Verify: 2 duplicates removed (IDs 3 and 4), only IDs 1 and 2 remain
 	assert.Equal(t, 2, duplicatesRemoved, "Should remove 2 duplicate 'kia ora' entries")
-	
+
 	count, err := repo.GetWordCount()
 	require.NoError(t, err)
 	assert.Equal(t, 2, count, "Should have 2 unique words remaining")
@@ -454,7 +456,7 @@ func TestDeduplicateWords_WithDuplicates(t *testing.T) {
 	// Verify duplicate IDs are deleted
 	_, err = repo.GetWordByID(word3.ID)
 	assert.Equal(t, sql.ErrNoRows, err, "Duplicate ID 3 should be deleted")
-	
+
 	_, err = repo.GetWordByID(word4.ID)
 	assert.Equal(t, sql.ErrNoRows, err, "Duplicate ID 4 should be deleted")
 }
@@ -471,7 +473,7 @@ func TestUnsetAllDayIndexes(t *testing.T) {
 	dayIndex2 := 2
 	dayIndex3 := 3
 
-	words := []*repository.Word{
+	words := []*wotd.Word{
 		{DayIndex: &dayIndex1, Word: "word1", Meaning: "meaning1"},
 		{DayIndex: &dayIndex2, Word: "word2", Meaning: "meaning2"},
 		{DayIndex: &dayIndex3, Word: "word3", Meaning: "meaning3"},
@@ -498,7 +500,7 @@ func TestUnsetAllDayIndexes(t *testing.T) {
 	allWords, err := repo.GetAllWords()
 	require.NoError(t, err)
 	assert.Len(t, allWords, 5, "Should have 5 words")
-	
+
 	for _, word := range allWords {
 		assert.Nil(t, word.DayIndex, "All words should have NULL day_index")
 	}
@@ -518,7 +520,7 @@ func TestGetWordByText_Found(t *testing.T) {
 	require.NoError(t, err)
 
 	dayIndex := 1
-	originalWord := &repository.Word{
+	originalWord := &wotd.Word{
 		DayIndex:         &dayIndex,
 		Word:             "kia ora",
 		Meaning:          "hello, be well",
@@ -555,7 +557,7 @@ func TestGetWordByText_NotFound(t *testing.T) {
 	defer db.Close()
 
 	// Setup: Empty database (no words)
-	
+
 	// Execute: Get non-existent word
 	tx, err := repo.BeginTx()
 	require.NoError(t, err)
@@ -576,7 +578,7 @@ func TestGetWordByText_CaseSensitive(t *testing.T) {
 	require.NoError(t, err)
 
 	dayIndex := 1
-	word := &repository.Word{
+	word := &wotd.Word{
 		DayIndex: &dayIndex,
 		Word:     "kia ora",
 		Meaning:  "hello",
@@ -615,7 +617,7 @@ func TestUpdateWordDayIndex(t *testing.T) {
 	require.NoError(t, err)
 
 	dayIndex := 1
-	originalWord := &repository.Word{
+	originalWord := &wotd.Word{
 		DayIndex:         &dayIndex,
 		Word:             "kia ora",
 		Meaning:          "hello, be well",
@@ -647,7 +649,7 @@ func TestUpdateWordDayIndex(t *testing.T) {
 	// Verify: day_index changed, other fields preserved
 	updatedWord, err := repo.GetWordByID(originalID)
 	require.NoError(t, err)
-	
+
 	assert.Equal(t, 5, *updatedWord.DayIndex, "day_index should be updated to 5")
 	assert.Equal(t, originalID, updatedWord.ID, "ID should not change")
 	assert.Equal(t, "kia ora", updatedWord.Word, "Word text should not change")

@@ -1,125 +1,14 @@
 package wotd_test
 
 import (
-	"bytes"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/testutils"
 	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
-
-func TestParseFile(t *testing.T) {
-	assert := assert.New(t)
-
-	cleanup := testutils.SetupGlobalTestLogger()
-	defer cleanup()
-	ws := wotd.NewWordSelector()
-
-	jc := `{
-			"dictionary": [
-				{ "index":	1	, "word": "āe", "meaning": "yes", "link": "", "photo": ""},
-				{ "index":	2	, "word": "aha", "meaning": "what?", "link": "", "photo": ""}
-		]}`
-
-	a, e := ws.ParseFile(bytes.NewBufferString(jc).Bytes(), "test-dictionary.json")
-
-	assert.Nil(e, "Failed parsing dictionary")
-	assert.NotNil(a)
-	assert.True(a != nil && a.Words != nil && len(a.Words) > 0)
-}
-
-func TestReadFile(t *testing.T) {
-	assert := assert.New(t)
-
-	cleanup := testutils.SetupGlobalTestLogger()
-	defer cleanup()
-	ws := wotd.NewWordSelector()
-
-	f, e := ws.ReadFile("../../cmd/server/dictionary.json")
-
-	assert.Nil(e, "Failed reading dictionary file")
-	assert.NotNil(f)
-	assert.True(len(f) > 0)
-}
-
-// Error scenario tests
-
-func TestParseFile_InvalidJSON(t *testing.T) {
-	assert := assert.New(t)
-
-	cleanup := testutils.SetupGlobalTestLogger()
-	defer cleanup()
-	ws := wotd.NewWordSelector()
-
-	// Invalid JSON content
-	invalidJSON := `{
-		"dictionary": [
-			{ "index": 1, "word": "āe", "meaning": "yes" // Missing closing brace
-		]
-	}`
-
-	dictionary, err := ws.ParseFile([]byte(invalidJSON), "invalid-dictionary.json")
-
-	assert.NotNil(err, "Expected error for invalid JSON")
-	assert.Nil(dictionary, "Dictionary should be nil on parse error")
-
-	// Check if it's an AppError with proper context
-	appErr, ok := err.(*entities.AppError)
-	assert.True(ok, "Error should be an AppError")
-	assert.Equal("Failed to parse dictionary file", appErr.Message)
-	assert.Equal(500, appErr.Code)
-
-	// Check context
-	filePath, exists := appErr.GetContext("file_path")
-	assert.True(exists, "Context should contain file_path")
-	assert.Equal("invalid-dictionary.json", filePath)
-
-	fileSize, exists := appErr.GetContext("file_size")
-	assert.True(exists, "Context should contain file_size")
-	assert.Equal(len(invalidJSON), fileSize)
-
-	operation, exists := appErr.GetContext("operation")
-	assert.True(exists, "Context should contain operation")
-	assert.Equal("json_unmarshal", operation)
-
-	// Check stack trace
-	assert.True(appErr.HasStackTrace(), "AppError should have stack trace")
-}
-
-func TestReadFile_NonExistentFile(t *testing.T) {
-	assert := assert.New(t)
-
-	cleanup := testutils.SetupGlobalTestLogger()
-	defer cleanup()
-	ws := wotd.NewWordSelector()
-
-	// Try to read a non-existent file
-	nonExistentFile := "/path/to/non-existent-file.json"
-	content, err := ws.ReadFile(nonExistentFile)
-
-	assert.NotNil(err, "Expected error for non-existent file")
-	assert.Nil(content, "Content should be nil on read error")
-
-	// Check if it's an AppError with proper context
-	appErr, ok := err.(*entities.AppError)
-	assert.True(ok, "Error should be an AppError")
-	assert.Equal("Failed to read dictionary file", appErr.Message)
-	assert.Equal(500, appErr.Code)
-
-	// Check context
-	filePath, exists := appErr.GetContext("file_path")
-	assert.True(exists, "Context should contain file_path")
-	assert.Equal(nonExistentFile, filePath)
-
-	operation, exists := appErr.GetContext("operation")
-	assert.True(exists, "Context should contain operation")
-	assert.Equal("file_read", operation)
-
-	// Check stack trace
-	assert.True(appErr.HasStackTrace(), "AppError should have stack trace")
-}
 
 func TestSelectWordByDay_EmptyDictionary(t *testing.T) {
 	assert := assert.New(t)
@@ -129,12 +18,12 @@ func TestSelectWordByDay_EmptyDictionary(t *testing.T) {
 	ws := wotd.NewWordSelector()
 
 	// Empty words slice
-	emptyWords := []wotd.Word{}
+	emptyWords := map[int]wotd.Word{}
 
 	word, err := ws.SelectWordByDay(emptyWords)
 
 	assert.NotNil(err, "Expected error for empty dictionary")
-	assert.Nil(word, "Word should be nil on error")
+	assert.Equal(wotd.Word{}, word, "Word should be empty on error")
 
 	// Check if it's an AppError with proper context
 	appErr, ok := err.(*entities.AppError)
@@ -163,12 +52,12 @@ func TestSelectWordByIndex_EmptyDictionary(t *testing.T) {
 	ws := wotd.NewWordSelector()
 
 	// Empty words slice
-	emptyWords := []wotd.Word{}
+	emptyWords := make(map[int]wotd.Word)
 
 	word, err := ws.SelectWordByIndex(emptyWords, 1)
 
 	assert.NotNil(err, "Expected error for empty dictionary")
-	assert.Nil(word, "Word should be nil on error")
+	assert.Equal(wotd.Word{}, word, "Word should be empty on error")
 
 	// Check if it's an AppError with proper context
 	appErr, ok := err.(*entities.AppError)
@@ -201,9 +90,9 @@ func TestSelectWordByIndex_InvalidIndex(t *testing.T) {
 	ws := wotd.NewWordSelector()
 
 	// Valid words slice
-	words := []wotd.Word{
-		{Index: 1, Word: "āe", Meaning: "yes"},
-		{Index: 2, Word: "aha", Meaning: "what?"},
+	words := map[int]wotd.Word{
+		1: {ID: 1, DayIndex: intPtr(1), Word: "āe", Meaning: "yes"},
+		2: {ID: 2, DayIndex: intPtr(2), Word: "aha", Meaning: "what?"},
 	}
 
 	// Test with invalid indices
@@ -213,7 +102,7 @@ func TestSelectWordByIndex_InvalidIndex(t *testing.T) {
 		word, err := ws.SelectWordByIndex(words, invalidIndex)
 
 		assert.NotNil(err, "Expected error for invalid index %d", invalidIndex)
-		assert.Nil(word, "Word should be nil on error for index %d", invalidIndex)
+		assert.Equal(wotd.Word{}, word, "Word should be empty on error for index %d", invalidIndex)
 
 		// Check if it's an AppError with proper context
 		appErr, ok := err.(*entities.AppError)
@@ -247,16 +136,16 @@ func TestSelectWordByIndex_ValidIndex(t *testing.T) {
 	ws := wotd.NewWordSelector()
 
 	// Valid words slice
-	words := []wotd.Word{
-		{Index: 1, Word: "āe", Meaning: "yes"},
-		{Index: 2, Word: "aha", Meaning: "what?"},
+	words := map[int]wotd.Word{
+		1: {ID: 1, DayIndex: intPtr(1), Word: "āe", Meaning: "yes"},
+		2: {ID: 2, DayIndex: intPtr(2), Word: "aha", Meaning: "what?"},
 	}
 
 	// Test with valid index
 	word, err := ws.SelectWordByIndex(words, 1)
 
 	assert.Nil(err, "Should not have error for valid index")
-	assert.NotNil(word, "Word should not be nil for valid index")
+	assert.NotEqual(wotd.Word{}, word, "Word should not be empty for valid index")
 	assert.Equal("āe", word.Word)
 	assert.Equal("yes", word.Meaning)
 }
@@ -268,44 +157,18 @@ func TestSelectWordByDay_ValidWords(t *testing.T) {
 	defer cleanup()
 	ws := wotd.NewWordSelector()
 
-	// Valid words slice
-	words := []wotd.Word{
-		{Index: 1, Word: "āe", Meaning: "yes"},
-		{Index: 2, Word: "aha", Meaning: "what?"},
+	// Get current day of year to use as test data key
+	doy := time.Now().YearDay()
+
+	// Valid words map - include word for current day
+	words := map[int]wotd.Word{
+		doy: {ID: 1, DayIndex: intPtr(doy), Word: "āe", Meaning: "yes"},
 	}
 
 	// Test with valid words
 	word, err := ws.SelectWordByDay(words)
 
 	assert.Nil(err, "Should not have error for valid words")
-	assert.NotNil(word, "Word should not be nil for valid words")
-	assert.True(word.Word == "āe" || word.Word == "aha", "Should select one of the available words")
-}
-
-// Test integration scenario: read and parse file with error handling
-func TestReadAndParseFile_Integration(t *testing.T) {
-	assert := assert.New(t)
-
-	cleanup := testutils.SetupGlobalTestLogger()
-	defer cleanup()
-	ws := wotd.NewWordSelector()
-
-	// Test successful read and parse
-	content, err := ws.ReadFile("../../cmd/server/dictionary.json")
-	assert.Nil(err, "Should successfully read dictionary file")
-	assert.NotNil(content, "Content should not be nil")
-
-	dictionary, err := ws.ParseFile(content, "../../cmd/server/dictionary.json")
-	assert.Nil(err, "Should successfully parse dictionary file")
-	assert.NotNil(dictionary, "Dictionary should not be nil")
-	assert.True(len(dictionary.Words) > 0, "Dictionary should contain words")
-
-	// Test word selection with parsed dictionary
-	word, err := ws.SelectWordByIndex(dictionary.Words, 1)
-	assert.Nil(err, "Should successfully select word by index")
-	assert.NotNil(word, "Selected word should not be nil")
-
-	wordByDay, err := ws.SelectWordByDay(dictionary.Words)
-	assert.Nil(err, "Should successfully select word by day")
-	assert.NotNil(wordByDay, "Selected word by day should not be nil")
+	assert.NotEqual(wotd.Word{}, word, "Word should not be empty for valid words")
+	assert.Equal("āe", word.Word, "Should select the word for current day")
 }

@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Build artifacts
+out/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test files
+*_test.go
+test_*.go
+**/test_helpers_test.go
+**/*_test.db
+**/*_test.db-*
+
+# Documentation
+*.md
+!README.md
+docs/
+specs/
+
+# CI/CD
+.github/
+.circleci/
+
+# Local dev files
+.env
+.env.local
+*.log
+
+# Data backups (keep production words.db)
+data/*.backup.*
+data/test_*.db*
+data/*.dd*
+data/insert_missing_words.sql
+data/test_duplicates.json
+
+# Dependencies (will be downloaded in build)
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db

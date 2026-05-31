@@ -6,6 +6,7 @@ import (
 
 	"github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/logger"
+	wotd "github.com/wizact/te-reo-bot/pkg/wotd"
 )
 
 // SQLiteRepository implements the WordRepository interface using SQLite
@@ -65,7 +66,7 @@ func (r *SQLiteRepository) RollbackTx(tx *sql.Tx) error {
 }
 
 // GetAllWords returns all words from the database
-func (r *SQLiteRepository) GetAllWords() ([]Word, error) {
+func (r *SQLiteRepository) GetAllWords() ([]wotd.Word, error) {
 	query := `
 		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
 		       created_at, updated_at, is_active
@@ -84,7 +85,7 @@ func (r *SQLiteRepository) GetAllWords() ([]Word, error) {
 	}
 	defer rows.Close()
 
-	var words []Word
+	var words []wotd.Word
 	for rows.Next() {
 		word, err := scanWord(rows)
 		if err != nil {
@@ -110,7 +111,7 @@ func (r *SQLiteRepository) GetAllWords() ([]Word, error) {
 }
 
 // GetWordsByDayIndex returns words indexed by their day_index (1-366)
-func (r *SQLiteRepository) GetWordsByDayIndex() (map[int]Word, error) {
+func (r *SQLiteRepository) GetWordsByDayIndex() (map[int]wotd.Word, error) {
 	query := `
 		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
 		       created_at, updated_at, is_active
@@ -130,7 +131,7 @@ func (r *SQLiteRepository) GetWordsByDayIndex() (map[int]Word, error) {
 	}
 	defer rows.Close()
 
-	wordsByDay := make(map[int]Word)
+	wordsByDay := make(map[int]wotd.Word)
 	for rows.Next() {
 		word, err := scanWord(rows)
 		if err != nil {
@@ -157,7 +158,7 @@ func (r *SQLiteRepository) GetWordsByDayIndex() (map[int]Word, error) {
 }
 
 // GetWordByID retrieves a single word by its ID
-func (r *SQLiteRepository) GetWordByID(id int) (*Word, error) {
+func (r *SQLiteRepository) GetWordByID(id int) (*wotd.Word, error) {
 	query := `
 		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
 		       created_at, updated_at, is_active
@@ -183,7 +184,7 @@ func (r *SQLiteRepository) GetWordByID(id int) (*Word, error) {
 }
 
 // GetWordByDayIndex retrieves a word by its day_index
-func (r *SQLiteRepository) GetWordByDayIndex(dayIndex int) (*Word, error) {
+func (r *SQLiteRepository) GetWordByDayIndex(dayIndex int) (*wotd.Word, error) {
 	query := `
 		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
 		       created_at, updated_at, is_active
@@ -210,7 +211,7 @@ func (r *SQLiteRepository) GetWordByDayIndex(dayIndex int) (*Word, error) {
 
 // GetWordByText retrieves a word by exact text match (case-sensitive)
 // Can be called with or without transaction - if tx is nil, uses direct DB query
-func (r *SQLiteRepository) GetWordByText(tx *sql.Tx, word string) (*Word, error) {
+func (r *SQLiteRepository) GetWordByText(tx *sql.Tx, word string) (*wotd.Word, error) {
 	query := `
 		SELECT id, day_index, word, meaning, link, photo, photo_attribution,
 		       created_at, updated_at, is_active
@@ -242,7 +243,7 @@ func (r *SQLiteRepository) GetWordByText(tx *sql.Tx, word string) (*Word, error)
 }
 
 // AddWord inserts a new word into the database
-func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *Word) error {
+func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *wotd.Word) error {
 	query := `
 		INSERT INTO words (day_index, word, meaning, link, photo, photo_attribution)
 		VALUES (?, ?, ?, ?, ?, ?)
@@ -286,7 +287,7 @@ func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *Word) error {
 }
 
 // UpdateWord updates an existing word in the database
-func (r *SQLiteRepository) UpdateWord(word *Word) error {
+func (r *SQLiteRepository) UpdateWord(word *wotd.Word) error {
 	query := `
 		UPDATE words
 		SET day_index = ?, word = ?, meaning = ?, link = ?, photo = ?,
@@ -469,8 +470,8 @@ type scanner interface {
 }
 
 // scanWord scans a database row into a Word struct
-func scanWord(s scanner) (Word, error) {
-	var word Word
+func scanWord(s scanner) (wotd.Word, error) {
+	var word wotd.Word
 	var dayIndex sql.NullInt64
 	var link, photo, photoAttribution sql.NullString
 	var createdAt, updatedAt sql.NullTime
@@ -489,7 +490,7 @@ func scanWord(s scanner) (Word, error) {
 		&isActive,
 	)
 	if err != nil {
-		return Word{}, err
+		return wotd.Word{}, err
 	}
 
 	// Convert sql.Null types to appropriate Go types

@@ -1,6 +1,10 @@
 package repository
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"github.com/wizact/te-reo-bot/pkg/wotd"
+)
 
 // WordRepository defines the interface for word data access operations
 type WordRepository interface {
@@ -14,23 +18,23 @@ type WordRepository interface {
 	RollbackTx(tx *sql.Tx) error
 
 	// GetAllWords returns all words from the database
-	GetAllWords() ([]Word, error)
+	GetAllWords() ([]wotd.Word, error)
 
 	// GetWordsByDayIndex returns words indexed by their day_index (1-366)
 	// Only includes words with non-null day_index
-	GetWordsByDayIndex() (map[int]Word, error)
+	GetWordsByDayIndex() (map[int]wotd.Word, error)
 
 	// GetWordByID retrieves a single word by its ID
-	GetWordByID(id int) (*Word, error)
+	GetWordByID(id int) (*wotd.Word, error)
 
 	// GetWordByDayIndex retrieves a word by its day_index
-	GetWordByDayIndex(dayIndex int) (*Word, error)
+	GetWordByDayIndex(dayIndex int) (*wotd.Word, error)
 
 	// AddWord inserts a new word into the database
-	AddWord(tx *sql.Tx, word *Word) error
+	AddWord(tx *sql.Tx, word *wotd.Word) error
 
 	// UpdateWord updates an existing word in the database
-	UpdateWord(word *Word) error
+	UpdateWord(word *wotd.Word) error
 
 	// DeleteWord removes a word from the database (hard delete)
 	DeleteWord(tx *sql.Tx, id int) error
@@ -47,7 +51,7 @@ type WordRepository interface {
 	// GetWordByText retrieves a word by exact text match (case-sensitive)
 	// Returns sql.ErrNoRows if word doesn't exist
 	// Can be called with or without transaction - if tx is nil, uses direct DB query
-	GetWordByText(tx *sql.Tx, word string) (*Word, error)
+	GetWordByText(tx *sql.Tx, word string) (*wotd.Word, error)
 
 	// UpdateWordDayIndex updates only the day_index field for an existing word
 	// Preserves all other fields, updates updated_at timestamp
