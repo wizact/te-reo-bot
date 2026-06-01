@@ -4,7 +4,7 @@
   "description": "Te Reo Māori word of the day bot - SQLite database tools",
   "private": true,
   "scripts": {
-    "validate-database": "sqlite3 data/words.db 'SELECT COUNT(*) FROM words WHERE day_index IS NOT NULL;' | grep -q '^366$' && echo '✓ Database valid: 366 words' || echo '✗ Database validation failed'",
+    "validate-database": "sqlite3 data/words.db 'SELECT COUNT(*) FROM words WHERE day_index IS NOT NULL;' | grep -q '^366$' && echo '✓ Database valid: 366 words' || (echo '✗ Database validation failed' && exit 1)",
     "query-database": "sqlite3 data/words.db",
     "test": "echo 'No JavaScript tests - see Go test suite'"
   },
