@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine AS build
+FROM golang:1.25-alpine AS build
 
 # Install build dependencies including gcc for CGO (required by go-sqlite3)
 RUN apk add --no-cache \
