@@ -30,6 +30,7 @@ UNAME_S := $(shell uname -s)
 
 .PHONY: build-static
 build-static:
+	@mkdir -p $(OUTDIR)
 	cd ./cmd/server/ && $(GO) build \
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .

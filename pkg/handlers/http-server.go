@@ -121,10 +121,19 @@ func initDBConnection() (*sql.DB, error) {
 	if dp := os.Getenv("DB_PATH"); dp != "" {
 		dbPath = dp
 	} else {
-		dbPath = "./words.db"
+		dbPath = "./data/words.db"
 	}
 	if db, err = sql.Open("sqlite3", dbPath); err != nil {
 		getLogger().ErrorWithStack(err, "Failed to open database connection", logger.String("db_path", dbPath))
+		return nil, err
+	}
+
+	// Set connection pool limits for SQLite (single writer)
+	db.SetMaxOpenConns(1)
+
+	// Verify connection works
+	if err := db.Ping(); err != nil {
+		getLogger().ErrorWithStack(err, "Failed to ping database", logger.String("db_path", dbPath))
 		return nil, err
 	}
 
