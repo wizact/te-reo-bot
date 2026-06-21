@@ -1,142 +1,124 @@
-# Feature Requirements: Calendar View for Word Organization
+# Feature Requirements: Curator TUI
 
 **Related**: [Design](./design.md) | [Tasks](./tasks.md)
 **Type**: Feature
-**Priority**: Medium
+**Priority**: High
 **Created**: 2026-02-01
+**Updated**: 2026-06-21
 
 ## Overview
-Interactive calendar interface for organizing M\u0101ori words across 366 days of the year. Enables drag-and-drop assignment of words to calendar days, with word bank for unassigned words. Single-user local tool for content curation.
+
+Local terminal-based curator application for maintaining the Māori word database in `data/words.db`. The tool is table-centric, keyboard-first, and optimized for single-user curation on a local machine.
 
 ## Requirements
 
-### R1: Calendar Display
+### R1: Word Listing
 
-**User Story**: As a content curator, I want to view the current year in a calendar format with daily view, so that I can see all 366 days at a glance.
-
-**Acceptance Criteria**:
-- The system shall display a 12-month calendar view for the current year
-- The system shall show all 366 days including leap year day (Feb 29)
-- WHEN a day has an assigned word, the system shall display the word text on that calendar day
-- WHEN a day has no assigned word, the system shall display an empty state indicator
-- The system shall highlight the current day in the calendar
-
-### R2: Word Data Loading
-
-**User Story**: As a content curator, I want words loaded from words.db based on day_index, so that I see the current word assignments.
+**User Story**: As a curator, I want to list all words and their metadata in a terminal UI, so that I can review the current dataset quickly.
 
 **Acceptance Criteria**:
-- WHEN the calendar view initializes, the system shall read all words from words.db
-- The system shall map words to calendar days using the day_index field (1-366)
-- WHERE day_index IS NULL, the system shall place words in the unassigned word bank
-- The system shall load word metadata: id, word text, meaning, day_index
+- The system shall load all words from SQLite using the repository layer
+- The system shall display word ID, day index, word text, and meaning in the main table
+- The system shall show full metadata for the selected word in a details pane
+- The system shall support unassigned words where `day_index IS NULL`
 
-### R3: Drag and Drop Functionality
+### R2: Sorting and Filtering
 
-**User Story**: As a content curator, I want to drag words between calendar days, so that I can reorganize word assignments easily.
-
-**Acceptance Criteria**:
-- WHEN I drag a word from one day to another day, the system shall update the source day to empty and the target day to show the moved word
-- IF target day already has a word, THEN the system shall swap the two words (source word to target, target word to source)
-- The system shall support dragging words from calendar days to the word bank (sets day_index to NULL)
-- The system shall support dragging words from word bank to calendar days (sets day_index to target day number)
-- WHEN drag operation completes, the system shall update the UI immediately to reflect the change
-
-### R4: Unassigned Word Bank
-
-**User Story**: As a content curator, I want to see all words without day assignments in a sidebar, so that I can allocate them to specific days.
+**User Story**: As a curator, I want to sort and filter words from the keyboard, so that I can find records quickly.
 
 **Acceptance Criteria**:
-- The system shall display a sidebar showing all words where day_index IS NULL
-- The system shall show word text and meaning for each unassigned word
-- The system shall support scrolling when unassigned words exceed viewport height
-- WHEN a word is assigned to a day from the word bank, the system shall remove it from the sidebar
-- WHEN a word is unassigned from a day to the word bank, the system shall add it to the sidebar
+- The system shall support sorting by multiple columns including day index, word text, meaning, ID, and updated time
+- The system shall support ascending and descending sort order
+- The system shall support text filtering across word metadata
+- The system shall update the table without requiring a mouse
 
-### R5: Database Persistence
+### R3: Unicode and Macron Support
 
-**User Story**: As a content curator, I want changes saved to words.db, so that word assignments persist across sessions.
-
-**Acceptance Criteria**:
-- WHEN a word is moved to a different day, the system shall update the day_index field in words.db
-- WHEN a word is moved to the word bank, the system shall set day_index to NULL in words.db
-- WHEN a word is assigned from word bank to a day, the system shall set day_index to the target day number (1-366) in words.db
-- IF database update fails, THEN the system shall revert the UI to the previous state and display an error message
-- The system shall use existing Repository pattern methods (UpdateWordDayIndex)
-
-### R6: User Interface Technology (⚠️ PENDING USER APPROVAL)
-
-**Options**:
-
-1. **Web-based UI (Go templates + HTMX + Vanilla JS)**
-   - ✅ Pros: Minimal dependencies, integrates with existing Go server, browser-native drag-and-drop, lightweight
-   - ❌ Cons: Requires web server running, less polished UX than desktop apps
-
-2. **Web-based UI (Go + Tailwind CSS + Alpine.js)**
-   - ✅ Pros: Modern styling, reactive UI, still lightweight, good developer experience
-   - ❌ Cons: Additional build step for CSS, new dependency (Tailwind)
-
-3. **Desktop App (Electron + React/Vue)**
-   - ✅ Pros: Rich desktop UX, extensive drag-and-drop libraries, familiar to web developers
-   - ❌ Cons: Heavy dependencies, separate from Go ecosystem, larger binary size
-
-4. **Desktop App (Wails - Go + Web Frontend)**
-   - ✅ Pros: Go backend integration, native OS experience, single binary deployment
-   - ❌ Cons: New framework to learn, Go 1.18+ required (project uses 1.13)
-
-**Decision Required**: User must select preferred technology stack before design phase.
-
-### R7: Single-User Local Operation
-
-**User Story**: As a content curator, I want the tool to run on my local machine without server deployment, so that I can manage words offline.
+**User Story**: As a curator, I want Māori macrons and Unicode text to work correctly, so that I can curate words accurately.
 
 **Acceptance Criteria**:
-- The system shall run entirely on the local machine
-- The system shall access words.db directly from data/ directory
-- The system shall not require internet connectivity for core functionality
-- The system shall not require authentication or multi-user support
+- The system shall treat input and display text as UTF-8 end-to-end
+- The system shall support filtering words containing macrons
+- The system shall avoid ASCII-only assumptions in search and table rendering
 
-### R8: Manual Validation
+### R4: Word Creation and Editing
 
-**User Story**: As a content curator, I want to validate word assignments separately, so that I can verify data integrity when I choose.
+**User Story**: As a curator, I want to add and edit words from the terminal, so that I can maintain the dataset locally.
 
 **Acceptance Criteria**:
-- The system shall NOT perform automatic validation during drag-and-drop operations
-- The system shall allow me to run dict-gen validate command manually after organizing words
-- The system shall save changes immediately without validation checks
+- The system shall provide modal forms for adding and editing words
+- The system shall require non-empty word text and meaning
+- The system shall allow editing optional metadata fields including link, photo, and attribution
+- The system shall persist changes to SQLite immediately after save
+
+### R5: Day Assignment Workflow
+
+**User Story**: As a curator, I want to assign, clear, and reassign day indexes, so that I can organize the posting calendar from the terminal.
+
+**Acceptance Criteria**:
+- The system shall allow assigning a selected word to a specific day index from 1 to 366
+- The system shall allow clearing a selected word back to an unassigned state
+- The system shall auto-assign the next free day index when requested
+- IF a target day is already assigned during reassignment, THEN the system shall swap the two assignments predictably
+- IF a new word is created with explicit day assignment and that day is occupied, THEN the system shall reject the save with a curator-friendly error
+
+### R6: Validation and Linting
+
+**User Story**: As a curator, I want to validate the dataset, so that I can detect gaps before publishing.
+
+**Acceptance Criteria**:
+- The system shall report missing day indexes across 1..366
+- The system shall report assigned and unassigned word counts
+- The system shall report duplicate or invalid day assignments if encountered
+- The system shall report empty word or meaning fields if encountered
+- The system shall surface validation results inside the TUI and via a CLI validation mode
+
+### R7: Keyboard-First Dark UI
+
+**User Story**: As a curator, I want a dark terminal UI that works without the mouse, so that I can curate efficiently from the keyboard.
+
+**Acceptance Criteria**:
+- The system shall use a dark terminal theme by default
+- The system shall be fully operable with keyboard shortcuts
+- The system shall provide a persistent shortcut/status area
+- The system shall not require mouse interaction for any core workflow
+
+### R8: Local Operation
+
+**User Story**: As a curator, I want the tool to run locally against SQLite, so that I can work offline.
+
+**Acceptance Criteria**:
+- The system shall run as a local binary from `cmd/curator`
+- The system shall default to `./data/words.db` when no database path is provided
+- The system shall reuse the repository layer instead of embedding raw SQL in the TUI
+- The system shall provide a non-interactive `-validate` mode for scripting and CI checks
 
 ## Out of Scope
 
 ### Permanently Out of Scope
-- **Multi-user support**: Single curator only
-- **Real-time collaboration**: No concurrent editing
-- **Cloud synchronization**: Local database only
-- **Mobile interface**: Desktop/laptop only
-- **Word editing**: Only day assignment changes (use dict-gen for word CRUD)
-- **Automatic validation**: User runs validator manually
-- **Image preview**: Text-only display for words
-- **Undo/redo**: No history tracking (direct database updates)
-- **Search/filter**: All words visible at all times
+- Browser-based calendar UI
+- Drag-and-drop interaction
+- Mouse-only workflows
+- Multi-user collaboration
+- Cloud synchronization
+- Mobile UI
 
 ### Out of Scope (v1.0)
-- **Year selection**: Current year only (2026)
-- **Multiple calendar views**: Daily view only (no weekly/monthly variations)
-- **Keyboard shortcuts**: Mouse-only interaction
-- **Accessibility features**: Basic browser accessibility only
-- **Performance optimization**: < 1000 words only
-- **Batch operations**: One word at a time
+- Undo/redo history
+- Batch editing of multiple rows
+- Image preview rendering in the terminal
+- Monthly calendar visualization
 
 ## Success Criteria
 
-1. ✅ All requirements (R1-R8) pass acceptance tests
-2. ✅ Drag-and-drop works for all 366 days + word bank
-3. ✅ Database updates persist correctly (verified with dict-gen validate)
-4. ✅ UI loads in < 2 seconds for 366 words
-5. ✅ Single curator can reorganize entire year in < 30 minutes
-6. ✅ Works offline on macOS (primary platform)
+1. ✅ Curator can browse all words and metadata from the terminal
+2. ✅ Curator can sort, filter, add, edit, assign, and unassign without a mouse
+3. ✅ Auto-allocation finds the next free day index reliably
+4. ✅ Validation reports missing days and summary counts locally and in CLI mode
+5. ✅ Māori macrons work correctly in filtering and display
 
 ## References
-- [tech.md](../../constitution/tech.md) - Repository pattern
+- [tech.md](../../constitution/tech.md) - repository and application architecture
 - [conventions.md](../../conventions.md) - Go coding standards
-- [pkg/repository/interface.go](../../../pkg/repository/interface.go) - UpdateWordDayIndex method
-- [f001-preserve-migration-words](../f001-preserve-migration-words/) - Word bank pattern
+- [pkg/repository/interface.go](../../../pkg/repository/interface.go) - repository contract used by the curator app
+- [pkg/curator](../../../pkg/curator/) - curator service and TUI implementation

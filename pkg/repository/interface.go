@@ -36,6 +36,9 @@ type WordRepository interface {
 	// UpdateWord updates an existing word in the database
 	UpdateWord(word *wotd.Word) error
 
+	// UpdateWordTx updates an existing word inside the provided transaction
+	UpdateWordTx(tx *sql.Tx, word *wotd.Word) error
+
 	// DeleteWord removes a word from the database (hard delete)
 	DeleteWord(tx *sql.Tx, id int) error
 
@@ -57,6 +60,10 @@ type WordRepository interface {
 	// Preserves all other fields, updates updated_at timestamp
 	// Uses word text for lookup (not ID)
 	UpdateWordDayIndex(tx *sql.Tx, wordText string, dayIndex int) error
+
+	// UpdateWordDayIndexByID updates only the day_index field for an existing word by ID
+	// Preserves all other fields, updates updated_at timestamp
+	UpdateWordDayIndexByID(tx *sql.Tx, id int, dayIndex *int) error
 
 	// GetWordCount returns the total number of words in the database
 	GetWordCount() (int, error)

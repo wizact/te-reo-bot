@@ -30,6 +30,7 @@
 **Content Management**
 - SQLite database for word storage
 - Dictionary validation (366 unique entries)
+- Local keyboard-first curator TUI
 - JSON export for backward compatibility
 - Image storage via Google Cloud Storage
 
@@ -65,7 +66,7 @@
 - Daily automated posting
 - Mastodon and Twitter platforms
 - Image attachments with attribution
-- Word database management via CLI
+- Word database management via CLI and local curator TUI
 - Data validation and integrity checks
 
 **Future Considerations**

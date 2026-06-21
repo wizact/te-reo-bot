@@ -137,19 +137,21 @@ type WordRepository interface {
 │  words.db   │
 └──────┬──────┘
        │
-       ↓ Read via repository (O(1) map lookup)
-┌─────────────────┐
-│  HTTP Server    │
-│ (connection pool)│
-└──────┬──────────┘
-       │
-       ↓ Calculate day, select word
-┌─────────────────┐
-│  WordSelector   │
-└──────┬──────────┘
-       │
-       ├─→ Twitter API
-       └─→ Mastodon API
+       ↓ Shared repository layer
+┌─────────────────┐        ┌─────────────────┐
+│  HTTP Server    │        │  Curator TUI    │
+│ (connection pool)│       │ (local terminal)│
+└──────┬──────────┘        └──────┬──────────┘
+       │                           │
+       ↓ Calculate day, select word│
+┌─────────────────┐                │
+│  WordSelector   │                │
+└──────┬──────────┘                │
+       │                           │
+       ├─→ Twitter API             │
+       └─→ Mastodon API            │
+                                   ↓
+                           Curator service layer
 ```
 
 ### Component Interactions
@@ -160,6 +162,12 @@ type WordRepository interface {
 - Opens SQLite connection with connection pooling
 - Auto-initializes database schema on startup
 - Serves API endpoints: `/api/v1/messages`, `/healthcheck`
+
+**cmd/curator**:
+- Starts a local keyboard-first TUI for content curation
+- Reuses the repository layer and SQLite database directly
+- Supports listing, sorting, filtering, adding, editing, assigning, and validation
+- Provides a `-validate` CLI mode for curator lint checks
 
 **pkg/wotd**:
 - Business logic for word selection
@@ -175,6 +183,11 @@ type WordRepository interface {
 - CRUD operations
 - Prepared statements (SQL injection prevention)
 - Returns domain models (wotd.Word) directly
+
+**pkg/curator**:
+- Curator application service for filtering, sorting, allocation, swaps, and validation
+- Terminal UI built for keyboard-only operation
+- Unicode-safe filtering and display for Māori macrons
 
 ## Database Design
 
@@ -412,6 +425,7 @@ MASTODON_TOKEN=<secret>
 ```
 Direct:
 - gorilla/mux v1.7.4          # HTTP routing
+- jroimartin/gocui v0.5.0     # Curator TUI framework
 - mattn/go-sqlite3 v1.14.24   # SQLite driver (CGO)
 - stretchr/testify v1.8.1     # Testing
 - kelseyhightower/envconfig   # Config loading

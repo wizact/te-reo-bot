@@ -8,6 +8,7 @@ require (
 	github.com/dghubble/go-twitter v0.0.0-20190719072343-39e5462e111f
 	github.com/dghubble/oauth1 v0.6.0
 	github.com/gorilla/mux v1.7.4
+	github.com/jroimartin/gocui v0.5.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/mattn/go-mastodon v0.0.6
 	github.com/mattn/go-sqlite3 v1.14.24

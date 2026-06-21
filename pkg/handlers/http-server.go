@@ -11,7 +11,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/kelseyhightower/envconfig"
-	_ "github.com/mattn/go-sqlite3"
 	ent "github.com/wizact/te-reo-bot/pkg/entities"
 	"github.com/wizact/te-reo-bot/pkg/logger"
 	repo "github.com/wizact/te-reo-bot/pkg/repository"
@@ -116,30 +115,16 @@ func StartServer(address, port string, tls bool) {
 
 func initDBConnection() (*sql.DB, error) {
 	var dbPath string
-	var db *sql.DB
-	var err error
 	if dp := os.Getenv("DB_PATH"); dp != "" {
 		dbPath = dp
 	} else {
 		dbPath = "./data/words.db"
 	}
-	if db, err = sql.Open("sqlite3", dbPath); err != nil {
-		getLogger().ErrorWithStack(err, "Failed to open database connection", logger.String("db_path", dbPath))
-		return nil, err
-	}
-
-	// Set connection pool limits for SQLite (single writer)
-	db.SetMaxOpenConns(1)
-
-	// Verify connection works
-	if err := db.Ping(); err != nil {
-		getLogger().ErrorWithStack(err, "Failed to ping database", logger.String("db_path", dbPath))
-		return nil, err
-	}
 
 	// Initialize database schema
 	getLogger().Info("Initializing database schema...", logger.String("db_path", dbPath))
-	if err := repo.InitializeDatabase(db); err != nil {
+	db, err := repo.OpenSQLiteDB(dbPath)
+	if err != nil {
 		getLogger().ErrorWithStack(err, "Database initialization failed", logger.String("db_path", dbPath))
 		return nil, err
 	}
