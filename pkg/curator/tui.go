@@ -721,7 +721,7 @@ func (t *TUI) submitModal(g *gocui.Gui, v *gocui.View) error {
 		} else {
 			day, err := strconv.Atoi(value)
 			if err != nil {
-				return t.handleError(fmt.Errorf("day index must be an integer or auto"))
+				return t.handleError(fmt.Errorf("day index must be an integer or auto: %v", value))
 			}
 			if err := t.service.AssignDayIndex(word.ID, &day); err != nil {
 				return t.handleError(err)
