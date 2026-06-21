@@ -181,7 +181,9 @@ func (t *TUI) layoutList(g *gocui.Gui, x0, y0, x1, y1 int) error {
 	}
 
 	if t.modal.Mode == modalNone {
-		g.SetCurrentView(listViewName)
+		if _, err := g.SetCurrentView(listViewName); err != nil && err != gocui.ErrUnknownView {
+			return err
+		}
 	}
 
 	return nil
@@ -339,7 +341,9 @@ func (t *TUI) layoutMessageModal(g *gocui.Gui, maxX, maxY int) error {
 	}
 	fmt.Fprintln(v)
 	fmt.Fprintln(v, "Press Enter or Esc to close.")
-	g.SetCurrentView(messageViewName)
+	if _, err := g.SetCurrentView(messageViewName); err != nil && err != gocui.ErrUnknownView {
+		return err
+	}
 	return nil
 }
 
@@ -350,23 +354,23 @@ func (t *TUI) setKeybindings(g *gocui.Gui) error {
 		fn   func(*gocui.Gui, *gocui.View) error
 	}{
 		{"", gocui.KeyCtrlC, t.quit},
-		{"", 'q', t.quit},
-		{"", gocui.KeyArrowDown, t.moveDown},
-		{"", 'j', t.moveDown},
-		{"", gocui.KeyArrowUp, t.moveUp},
-		{"", 'k', t.moveUp},
-		{"", '/', t.openFilterForm},
-		{"", 'c', t.clearFilter},
-		{"", 's', t.cycleSort},
-		{"", 'g', t.toggleSortDirection},
-		{"", 'a', t.openAddForm},
-		{"", 'e', t.openEditForm},
-		{"", 'd', t.openAssignForm},
-		{"", 'u', t.clearDayIndex},
-		{"", 'n', t.autoAssign},
-		{"", 'v', t.validateAssignments},
-		{"", 'r', t.reloadHandler},
-		{"", '?', t.showHelp},
+		{listViewName, 'q', t.quit},
+		{listViewName, gocui.KeyArrowDown, t.moveDown},
+		{listViewName, 'j', t.moveDown},
+		{listViewName, gocui.KeyArrowUp, t.moveUp},
+		{listViewName, 'k', t.moveUp},
+		{listViewName, '/', t.openFilterForm},
+		{listViewName, 'c', t.clearFilter},
+		{listViewName, 's', t.cycleSort},
+		{listViewName, 'g', t.toggleSortDirection},
+		{listViewName, 'a', t.openAddForm},
+		{listViewName, 'e', t.openEditForm},
+		{listViewName, 'd', t.openAssignForm},
+		{listViewName, 'u', t.clearDayIndex},
+		{listViewName, 'n', t.autoAssign},
+		{listViewName, 'v', t.validateAssignments},
+		{listViewName, 'r', t.reloadHandler},
+		{listViewName, '?', t.showHelp},
 		{messageViewName, gocui.KeyEnter, t.closeModal},
 		{messageViewName, gocui.KeyEsc, t.closeModal},
 	}
