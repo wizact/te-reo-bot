@@ -181,7 +181,7 @@ func (t *TUI) layoutList(g *gocui.Gui, x0, y0, x1, y1 int) error {
 	}
 
 	if t.modal.Mode == modalNone {
-		if _, err := g.SetCurrentView(listViewName); err != nil && err != gocui.ErrUnknownView {
+		if _, err := g.SetCurrentView(listViewName); err != nil {
 			return err
 		}
 	}
@@ -341,7 +341,7 @@ func (t *TUI) layoutMessageModal(g *gocui.Gui, maxX, maxY int) error {
 	}
 	fmt.Fprintln(v)
 	fmt.Fprintln(v, "Press Enter or Esc to close.")
-	if _, err := g.SetCurrentView(messageViewName); err != nil && err != gocui.ErrUnknownView {
+	if _, err := g.SetCurrentView(messageViewName); err != nil {
 		return err
 	}
 	return nil
