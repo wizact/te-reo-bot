@@ -22,7 +22,9 @@ func main() {
 	// messages do not corrupt the terminal rendering managed by gocui.
 	if !validateOnly {
 		devNull, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0)
-		if err == nil {
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "warning: could not redirect stdout to /dev/null: %v\n", err)
+		} else {
 			defer devNull.Close()
 			os.Stdout = devNull
 		}
