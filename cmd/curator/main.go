@@ -18,6 +18,16 @@ func main() {
 	flag.BoolVar(&validateOnly, "validate", false, "run curator validation and exit")
 	flag.Parse()
 
+	// In TUI mode, route all log output to /dev/null so that background Info
+	// messages do not corrupt the terminal rendering managed by gocui.
+	if !validateOnly {
+		devNull, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0)
+		if err == nil {
+			defer devNull.Close()
+			os.Stdout = devNull
+		}
+	}
+
 	if err := logger.InitializeGlobalLogger(&logger.LoggerConfig{
 		EnableStackTraces: false,
 		LogLevel:          "fatal",
