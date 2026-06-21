@@ -22,4 +22,39 @@ māori -te reo- word of the day mastodon bot.
 ./te-reo-bot start-server -address="localhost" -port="8080" -tls="true"
 ```
 
+## Curator TUI
 
+Build the local curator tool:
+
+```bash
+make build-curator
+```
+
+Run the keyboard-first curator UI against the default database:
+
+```bash
+./out/te-reo-curator
+```
+
+Run validation only:
+
+```bash
+./out/te-reo-curator -validate
+```
+
+### Curator Shortcuts
+
+- `↑` / `↓` or `j` / `k` - move selection
+- `/` - filter by text
+- `c` - clear filter
+- `s` - cycle sort column
+- `g` - toggle ascending/descending sort
+- `a` - add a word
+- `e` - edit selected word metadata
+- `d` - assign a day index
+- `u` - clear selected day index
+- `n` - auto-assign next available day
+- `v` - run validation
+- `r` - reload from SQLite
+- `?` - show shortcut help
+- `q` - quit

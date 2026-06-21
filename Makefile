@@ -35,6 +35,13 @@ build-static:
         -tags "$(BUILDTAGS) static_build" \
         ${GO_LDFLAGS_STATIC} -o $(OUTDIR)/$(NAME) .
 
+.PHONY: build-curator
+build-curator:
+	@mkdir -p $(OUTDIR)
+	cd ./cmd/curator/ && $(GO) build \
+        -tags "$(BUILDTAGS)" \
+        -o $(OUTDIR)/te-reo-curator .
+
 .PHONY: build-dynamic
 build-dynamic:
 	@mkdir -p $(OUTDIR)
@@ -85,6 +92,7 @@ help:
 	@echo ""
 	@echo "Build Commands:"
 	@echo "  make build          - Build server binary (auto-detects OS)"
+	@echo "  make build-curator  - Build curator TUI binary"
 	@echo "  make build-static   - Build static binary (Linux only)"
 	@echo "  make build-dynamic  - Build dynamic binary (macOS/dev)"
 	@echo "  make clean          - Remove build artifacts"

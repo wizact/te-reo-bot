@@ -15,6 +15,10 @@ type SQLiteRepository struct {
 	logger logger.Logger
 }
 
+type sqlExecutor interface {
+	Exec(query string, args ...interface{}) (sql.Result, error)
+}
+
 // NewSQLiteRepository creates a new SQLite-based word repository
 func NewSQLiteRepository(db *sql.DB) WordRepository {
 	return &SQLiteRepository{
@@ -288,6 +292,15 @@ func (r *SQLiteRepository) AddWord(tx *sql.Tx, word *wotd.Word) error {
 
 // UpdateWord updates an existing word in the database
 func (r *SQLiteRepository) UpdateWord(word *wotd.Word) error {
+	return r.updateWord(r.db, word, "update_word")
+}
+
+// UpdateWordTx updates an existing word in the database within a transaction
+func (r *SQLiteRepository) UpdateWordTx(tx *sql.Tx, word *wotd.Word) error {
+	return r.updateWord(tx, word, "update_word_tx")
+}
+
+func (r *SQLiteRepository) updateWord(executor sqlExecutor, word *wotd.Word, operation string) error {
 	query := `
 		UPDATE words
 		SET day_index = ?, word = ?, meaning = ?, link = ?, photo = ?,
@@ -297,7 +310,7 @@ func (r *SQLiteRepository) UpdateWord(word *wotd.Word) error {
 
 	r.logger.Debug("Updating word in database", logger.Int("word_id", word.ID), logger.String("word", word.Word))
 
-	_, err := r.db.Exec(query,
+	_, err := executor.Exec(query,
 		word.DayIndex,
 		word.Word,
 		word.Meaning,
@@ -310,11 +323,11 @@ func (r *SQLiteRepository) UpdateWord(word *wotd.Word) error {
 
 	if err != nil {
 		appErr := entities.NewAppError(err, 500, "Failed to update word")
-		appErr.WithContext("operation", "update_word")
+		appErr.WithContext("operation", operation)
 		appErr.WithContext("table", "words")
 		appErr.WithContext("word_id", word.ID)
 		appErr.WithContext("word", word.Word)
-		r.logger.ErrorWithStack(err, "Update failed", logger.String("operation", "update_word"), logger.Int("word_id", word.ID))
+		r.logger.ErrorWithStack(err, "Update failed", logger.String("operation", operation), logger.Int("word_id", word.ID))
 		return appErr
 	}
 
@@ -347,6 +360,31 @@ func (r *SQLiteRepository) UpdateWordDayIndex(tx *sql.Tx, wordText string, dayIn
 	r.logger.Info("Word day_index updated",
 		logger.String("word", wordText),
 		logger.Int("day_index", dayIndex))
+	return nil
+}
+
+// UpdateWordDayIndexByID updates only the day_index field for an existing word by ID
+func (r *SQLiteRepository) UpdateWordDayIndexByID(tx *sql.Tx, id int, dayIndex *int) error {
+	query := `UPDATE words SET day_index = ?, updated_at = ? WHERE id = ?`
+
+	r.logger.Debug("Updating word day_index by id", logger.Int("word_id", id))
+
+	_, err := tx.Exec(query, dayIndex, time.Now(), id)
+	if err != nil {
+		appErr := entities.NewAppError(err, 500, "Failed to update word day_index by ID").
+			WithContext("operation", "update_word_day_index_by_id").
+			WithContext("table", "words").
+			WithContext("word_id", id)
+		if dayIndex != nil {
+			appErr.WithContext("day_index", *dayIndex)
+		}
+		r.logger.ErrorWithStack(err, "Update failed",
+			logger.String("operation", "update_word_day_index_by_id"),
+			logger.Int("word_id", id))
+		return appErr
+	}
+
+	r.logger.Info("Word day_index updated by id", logger.Int("word_id", id))
 	return nil
 }
 
