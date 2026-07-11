@@ -209,6 +209,9 @@ server.crt
 # Claude analysis files
 .claude/
 
+# opencode local config
+.opencode/
+
 # SQLite database files (generated, not committed)
 data/
 *.db
